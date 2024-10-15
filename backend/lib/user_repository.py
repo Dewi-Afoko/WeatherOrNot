@@ -1,4 +1,5 @@
 from lib.user import User
+from flask import jsonify
 
 class UserRepository:
     def __init__(self, connection):

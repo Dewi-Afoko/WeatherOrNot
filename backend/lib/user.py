@@ -9,3 +9,9 @@ class User:
 
     def __repr__(self):
         return f"User({self.id}, {self.username}, {self.password})"
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.username,
+            'password':self.password}
