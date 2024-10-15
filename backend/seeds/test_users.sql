@@ -8,3 +8,4 @@ CREATE TABLE users (
 
 INSERT INTO users (username, password) VALUES ('Dewi', 'password');
 INSERT INTO users (username, password) VALUES ('Edgar', 'Password');
+INSERT INTO users (username, password) VALUES ('Chris', 'Passwordd');
