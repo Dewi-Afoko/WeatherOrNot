@@ -12,3 +12,12 @@ class UserRepository:
             item = User(row["id"], row["username"],row['password'])
             users.append(item)
         return users
+    
+
+    def find_by_username(self, username):
+        rows = self._connection.execute("SELECT * from users WHERE username = %s",[username])
+        user = []
+        for row in rows:
+            item = User(row["id"], row["username"],row['password'])
+            user.append(item)
+        return user[0]
