@@ -8,6 +8,6 @@ class UserRepository:
         rows = self._connection.execute("SELECT * from users")
         users = []
         for row in rows:
-            item = User(row["id"], row["username"])
+            item = User(row["id"], row["username"],row['password'])
             users.append(item)
         return users
