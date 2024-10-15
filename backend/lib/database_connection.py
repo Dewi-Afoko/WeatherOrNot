@@ -11,7 +11,7 @@ from psycopg.rows import dict_row
 class DatabaseConnection:
     # VVV CHANGE BOTH OF THESE VVV
     DEV_DATABASE_NAME = "Activity_Tracker_TEST"
-
+    TEST_DATABASE_NAME = "Activity_Tracker_TEST_tEst"
 
     def __init__(self, test_mode=False):
         self.test_mode = test_mode
@@ -63,6 +63,9 @@ class DatabaseConnection:
 
     # This private method returns the name of the database we should use.
     def _database_name(self):
+        if self.test_mode:
+            return self.TEST_DATABASE_NAME
+        else:
             return self.DEV_DATABASE_NAME
 
 # This function integrates with Flask to create one database connection that
