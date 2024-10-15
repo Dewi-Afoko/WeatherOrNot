@@ -1,2 +1,3 @@
 backend/Elephant_venv/
 .env
+backend/lib/__pycache__
