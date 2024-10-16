@@ -1,4 +1,3 @@
-backend/Elephant_venv/
+.DS_Store
+.vscode
 .env
-backend/lib/__pycache__/
-backend/tests/__pycache__/

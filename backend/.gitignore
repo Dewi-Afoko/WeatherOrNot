@@ -1,0 +1,6 @@
+__pycache__
+.vscode
+screenshot.png
+.pytest_cache
+*venv*
+.env
