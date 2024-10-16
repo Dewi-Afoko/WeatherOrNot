@@ -24,6 +24,13 @@ def get_exercises():
 
     # print(response.json())
 
+@app.route('/get_muscle_options', methods=['GET']) 
+def get_muscle_options():
+    api_url = f'https://api.api-ninjas.com/v1/exercises'
+    response = requests.get(api_url, headers={'X-Api-Key': os.getenv('API_KEY')})
+
+    print("hello")
+    # return response.json(), response.status_code
 
 @app.route('/')
 def index():
