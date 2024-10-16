@@ -21,7 +21,10 @@ class UserRepository:
             item = User(row["id"], row["username"],row['password'])
             user.append(item)
             print(user)
-        return user[0]
+        if user : 
+            return user[0]
+        else : 
+            return None
     
     def create_user(self, user):
         password_bytes = user.password.encode('Utf-8')

@@ -4,24 +4,25 @@ import WeatherForeCast from "../../components/WeatherForecast";
 import { login } from "../../services/authentication";
 
 export function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const token = await login(email, password);
+      const token = await login(username, password);
       localStorage.setItem("token", token);
-      navigate("/posts");
+      localStorage.setItem("username", username);
+      navigate("/user");
     } catch (err) {
       console.error(err);
       navigate("/login");
     }
   }
 
-  function handleEmailChange(event) {
-    setEmail(event.target.value);
+  function handleUsernameChange(event) {
+    setUsername(event.target.value);
   }
 
   function handlePasswordChange(event) {
@@ -34,12 +35,12 @@ export function LoginPage() {
       <WeatherForeCast/>
       <br></br>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="username">Username:</label>
         <input
-          id="email"
+          id="username"
           type="text"
-          value={email}
-          onChange={handleEmailChange}
+          value={username}
+          onChange={handleUsernameChange}
         />
         <label htmlFor="password">Password:</label>
         <input

@@ -1,13 +1,19 @@
-from flask import Flask
+
 import os
-from flask import request, redirect, jsonify,  render_template, flash
+from flask import Flask,request, redirect, jsonify,  render_template, flash
 import psycopg2
 from lib.user_repository import UserRepository
 from lib.user import User
 from lib.database_connection import get_flask_database_connection
 from controllers.authentification import check_password
 from controllers.token_checker import token_checker
+from flask_cors import CORS  # Import flask_cors
+
 app = Flask(__name__)
+
+# Enable CORS for all routes, allowing requests from http://localhost:5173
+
+CORS(app, origins=["http://localhost:5173"])
 
 @app.route('/')
 def index():
@@ -30,13 +36,19 @@ def signup():
     data = request.get_json() 
     username = data.get('username')
     password = data.get('password')
+    print(username)
+    print(password)
     # Username and password backend validation
     if len(password) < 8:
         return jsonify({ "message": "Invalid Password"}), 401
     new_user = User(1, username, password)
-    if repository.find_by_username(username):
+    user = repository.find_by_username(username)
+    print(user)
+    if user:
         return jsonify({ "message": "Username already exists"}), 401
-    return jsonify(repository.create_user(new_user))
+    message = repository.create_user(new_user)
+    print(message)
+    return jsonify({'message':'User added'}),201
 
 
 @app.route('/users', methods=['PATCH'])
@@ -46,9 +58,9 @@ def update_user():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
     data = request.get_json()
-    username = request.headers.get('X-username') # Get username from header, added during successful login
-    repository.add_details(username, data.first_name, data.last_name, data.dob)
-    return f"{username}'s first name is {data.first_name}"
+    #data = data.payload
+    repository.add_details(data['username'], data['first_name'], data['last_name'], data['dob'])
+    return jsonify({'message':'Details added'}),201
 
 
 
