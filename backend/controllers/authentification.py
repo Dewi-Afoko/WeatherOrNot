@@ -17,7 +17,7 @@ def check_password(username, password):
         user = repository.find_by_username(username)
         
         if not user:
-            return jsonify({"message": f"Login Failed: User not found"}), 401
+            return jsonify({"message": f"Login Failed: User not found"}), 400
         input_password = password.encode('Utf-8')
         hashed_password = user.password
         hashed = hashed_password.encode('Utf-8')
@@ -29,8 +29,8 @@ def check_password(username, password):
             response.headers["X-username"] = username # Adds username to header if login successful... In theory
             return response
         
-        return jsonify({"message": "Login Failed: Invalid password"}), 401
+        return jsonify({"message": "Login Failed: Invalid password"}), 400
         
     
     except Exception as e:
-        return jsonify({"message": f"An error occurred during login {username} /// {password}"}), 500
+        return jsonify({"message": "An error occurred during login"}), 500

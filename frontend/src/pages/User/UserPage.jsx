@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { addDetails } from "../../services/adddetails";
-import Post from "../../components/Post";
 import LogoutButton from "../../components/LogoutButton";
-import WeatherForeCast from "../../components/WeatherForecast";
+import BackgroundAnimation from "../../components/BackgroundAnimation";
 
 export function UserPage() {
   const [firstname, setFirstName] = useState('')
@@ -68,6 +67,7 @@ export function UserPage() {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
+      <LogoutButton/>
     </>
   );
 }

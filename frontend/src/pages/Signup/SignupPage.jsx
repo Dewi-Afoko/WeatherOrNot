@@ -6,6 +6,7 @@ import { signup } from "../../services/authentication";
 export function SignupPage() {
   const [Username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("")
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -14,8 +15,11 @@ export function SignupPage() {
       await signup(Username, password);
       navigate("/login");
     } catch (err) {
+      setError(alert(err.message))
       console.error(err);
       navigate("/signup");
+      setUsername('')
+      setPassword('')
     }
   }
 
@@ -48,6 +52,8 @@ export function SignupPage() {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
+      {error && <div>
+        {error}</div>}
     </>
   );
 }

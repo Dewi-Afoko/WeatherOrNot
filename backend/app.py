@@ -40,14 +40,13 @@ def signup():
     print(password)
     # Username and password backend validation
     if len(password) < 8:
-        return jsonify({ "message": "Invalid Password"}), 401
+        return jsonify({ "message": "Password too short min. 8 characters"}), 400
     new_user = User(1, username, password)
     user = repository.find_by_username(username)
     print(user)
     if user:
-        return jsonify({ "message": "Username already exists"}), 401
-    message = repository.create_user(new_user)
-    print(message)
+        return jsonify({ "message": "Username already exists"}), 400
+    repository.create_user(new_user)
     return jsonify({'message':'User added'}),201
 
 
