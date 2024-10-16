@@ -2,28 +2,22 @@ import jwt
 import os
 from datetime import datetime, timedelta
 
-# Load the secret key from environment variable (similar to process.env.JWT_SECRET)
+# Load the secret key from environment variable 
 SECRET_KEY = os.getenv('JWT_SECRET', 'your_default_secret_key')
 
-# Function to generate a JWT token for a specific user
-def generate_token(user_id):
-    """
-    This function is used to generate a JWT token for a specific user.
-    The token will expire in 10 minutes.
-    """
+
+def generate_token(username):
     now = datetime.utcnow()
     payload = {
-        'user_id': user_id,
+        'user_id': username,
         'iat': now,  # Issued at time
-        'exp': now + timedelta(minutes=10)  # Expiry time (10 minutes from now)
+        'exp': now + timedelta(minutes=10)
     }
-    
     # Generate the token using the secret key
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
     
     return token
 
-# Function to decode a JWT token and extract its payload
 def decode_token(token):
     """
     This function decodes a JWT token and returns its payload.

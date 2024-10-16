@@ -10,12 +10,10 @@ def check_password(username, password):
     try:
         connection = get_flask_database_connection(app)
         if not connection:
-            print("Failed to get database connection")
             return jsonify({"message": "An error occurred during login"}), 500
         
         repository = UserRepository(connection)
         user = repository.find_by_username(username)
-        print(f"User found: {user}")  # Log the user found or None
         
         if not user:
             return jsonify({"message": "Login Failed: User not found"}), 401
@@ -28,5 +26,4 @@ def check_password(username, password):
         return jsonify({"message": "Login Failed: Invalid password"}), 401
     
     except Exception as e:
-        print(f"Exception occurred: aaa {e}")  # Log the exception
         return jsonify({"message": "An error occurred during login"}), 500
