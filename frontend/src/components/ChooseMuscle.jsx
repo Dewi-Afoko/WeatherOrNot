@@ -1,6 +1,8 @@
+import RadioSelector from "./RadioSelector";
+
 function ChooseMuscle() {
 
-  const muscle_options = [
+  const muscleOptions = [
     'abdominals', 
     'abductors',
     'adductors',
@@ -15,21 +17,33 @@ function ChooseMuscle() {
     'middle_back',
     'neck',
     'quadriceps',
+    'shoulders',
     'traps',
     'triceps'
   ]
 
-    return (
-      <div>
-        <h1>Muscle Options</h1>
-        <form>
-          {muscle_options.map(muscle => 
-          <div>
-            <input type="radio" id={muscle} name="muscle_group" value={muscle}></input>
-            <label htmlFor={muscle}>{muscle}</label></div>)}
-        </form>
-        </div>
-    );
-  };
+  const formattedMuscles = muscleOptions.map(
+    (muscle) => muscle.replace('_', ' ') // removes underscores
+  ).map(
+    (muscle) => muscle.replace(muscle[0], muscle[0].toUpperCase() //changes to title-case
+  ))
+
+
+  return (
+    <div>
+      <form>
+        {formattedMuscles.map((muscle, index) => {
+          return (
+            <RadioSelector
+              key={index}
+              id={muscle}
+              value={muscle}
+            />
+          )
+        })}
+      </form>
+    </div>
+  );
+}
   
-  export default ChooseMuscle;
+export default ChooseMuscle;

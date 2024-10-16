@@ -2,7 +2,7 @@ function GenerateButton() {
 
   return (
     <>
-  <button >Generate</button>
+  <button>Generate Workout</button>
   </>
   )
 }
