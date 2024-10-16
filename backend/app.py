@@ -30,20 +30,27 @@ def signup():
     data = request.get_json() 
     username = data.get('username')
     password = data.get('password')
-    return jsonify(repository.create_user(username, password))
+    # Username and password backend validation
+    if len(password) < 8:
+        return jsonify({ "message": "Invalid Password"}), 401
+    new_user = User(1, username, password)
+    if repository.find_by_username(username):
+        return jsonify({ "message": "Username already exists"}), 401
+    return jsonify(repository.create_user(new_user))
 
 
-
-
-@app.route('/users', methods=['GET'])
+@app.route('/users', methods=['PATCH'])
 @token_checker  #it makes sure there is a token sent in the get request from front end to activate all_user 
 #headers: {'Authorization': `Bearer ${token}`, ... 
-def all_users():
+def update_user():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
-    users = repository.all()
-    user_dict = [user.to_dict() for user in users] 
-    return jsonify(user_dict),200
+    data = request.get_json()
+    username = request.headers.get('X-username') # Get username from header, added during successful login
+    repository.add_details(username, data.first_name, data.last_name, data.dob)
+    return f"{username}'s first name is {data.first_name}"
+
+
 
 
 if __name__ == "__main__":

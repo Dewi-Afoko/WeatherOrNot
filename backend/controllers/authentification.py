@@ -24,7 +24,10 @@ def check_password(username, password):
         if bcrypt.checkpw(input_password, hashed):
             # If password matches, create and return a JWT token
             token = generate_token(username)
-            return jsonify({"token": token}), 200
+            response = jsonify({"token": token})
+            response.status_code = 200
+            response.headers["X-username"] = username # Adds username to header if login successful... In theory
+            return response
         
         return jsonify({"message": "Login Failed: Invalid password"}), 401
         
