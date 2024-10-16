@@ -1,6 +1,5 @@
 import os
 import jwt
-from functools import wraps
 from flask import request, jsonify
 
 # Load the secret key from environment variable

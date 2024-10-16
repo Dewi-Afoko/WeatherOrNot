@@ -5,7 +5,7 @@ import psycopg2
 from lib.user_repository import UserRepository
 from lib.user import User
 from lib.database_connection import get_flask_database_connection
-from controllers.authentiphication import check_password
+from controllers.authentification import check_password
 from controllers.token_checker import token_checker
 app = Flask(__name__)
 
@@ -22,6 +22,16 @@ def login():
     password = data.get('password')
     # then we check the password and send a token if its correct or an error message if its not 
     return check_password(username, password)
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json() 
+    username = data.get('username')
+    password = data.get('password')
+    return jsonify(repository.create_user(username, password))
+
 
 
 
