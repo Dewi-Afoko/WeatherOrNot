@@ -15,7 +15,32 @@ export async function addDetails(token, username, firstname, lastname, dob, heig
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-       Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(payload),
+  };
+
+  const response = await fetch(`${BACKEND_URL}/users`, requestOptions);
+
+  if (response.status !== 201) {
+    throw new Error("Unable to change details");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+
+export async function weight_details(username) {
+  const payload = {
+    username: username,
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: `Bearer ${token}` #TODO Integrate tokens
     },
     body: JSON.stringify(payload),
   };
