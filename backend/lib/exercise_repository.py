@@ -2,8 +2,10 @@ from lib.exercise import Exercise
 from flask import jsonify
 import requests
 from flask_sqlalchemy import SQLAlchemy
-
 db = SQLAlchemy()
+import os
+MY_API_KEY = os.getenv("API_KEY")
+
 
 class ExerciseRepository:
     def __init__(self, connection):
@@ -32,9 +34,9 @@ class ExerciseRepository:
             ]
         for muscle in muscles:
             url = f"https://api.api-ninjas.com/v1/exercises?muscle={muscle}"
-            headers = {"X-Api-Key": "Zt9ZBBcWOof0SqF9CldvBg==E5U6G0d3XwOWmfCl"}
+            headers = {"X-Api-Key": MY_API_KEY}
             response = requests.get(url, headers=headers)
-            print(response.json())
+            # print(response.json())
             if response.status_code == 200:
                 exercises = response.json()
                 self.save_data_to_db(exercises)
