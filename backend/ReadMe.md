@@ -34,3 +34,6 @@ JWT_SECRET= your_secret_key
 
 # Now visit http://localhost:5001/index in your browser
 ```
+#create .env file in frontend 
+
+# copy paste this into the .env file in the frontend : VITE_BACKEND_URL="http://localhost:5000"

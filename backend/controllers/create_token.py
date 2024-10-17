@@ -11,7 +11,7 @@ def generate_token(username):
     payload = {
         'user_id': username,
         'iat': now,  # Issued at time
-        'exp': now + timedelta(minutes=10)
+        'exp': now + timedelta(minutes=100)
     }
     # Generate the token using the secret key
     token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
