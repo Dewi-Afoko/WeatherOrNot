@@ -1,21 +1,49 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+// import { getPosts } from "../../services/posts";
+// import Post from "../../components/Post";
+
 import { weight_details } from "../../services/adddetails";
 import { addDetails } from "../../services/adddetails";
+
 import LogoutButton from "../../components/LogoutButton";
 import BackgroundAnimation from "../../components/BackgroundAnimation";
 import WeightLog from "../../components/WeightDetails";
 
 export function UserPage() {
+
+  // const [posts, setPosts] = useState([]);
+
   const [firstname, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dob, setDob] = useState('')
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState('')
+
   const navigate = useNavigate();
   
 
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const loggedIn = token !== null;
+  //   if (loggedIn) {
+  //     getPosts(token)
+  //       .then((data) => {
+  //         setPosts(data.posts);
+  //         localStorage.setItem("token", data.token);
+  //       })
+  //       .catch((err) => {
+  //         console.error(err);
+  //         navigate("/login");
+  //       });
+  //   }
+  // }, [navigate]);
+
+
   const username = localStorage.getItem("username")
+
   const token = localStorage.getItem("token");
   if (!token) {
     navigate("/login");
@@ -33,8 +61,6 @@ export function UserPage() {
       navigate("/login");
     }
   }
-
-
 
   function handlefirstnameChange(event) {
     setFirstName(event.target.value);

@@ -5,6 +5,7 @@ import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { UserPage } from "./pages/User/UserPage";
+import { GenerateExercises } from "./pages/GenerateExercises/GenerateExercises";
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
@@ -24,7 +25,12 @@ const router = createBrowserRouter([
     path: "/user",
     element: <UserPage />,
   },
+  {
+    path: "/generate_exercises",
+    element: <GenerateExercises />,
+  },
 ]);
+
 
 function App() {
   return (

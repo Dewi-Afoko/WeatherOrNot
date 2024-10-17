@@ -1,6 +1,11 @@
 
 import os
-from flask import Flask,request, redirect, jsonify,  render_template, flash
+
+import requests
+from dotenv import load_dotenv
+
+from flask import Flask,request, redirect, jsonify,  render_template, flash, session
+
 import psycopg2
 from lib.user_repository import UserRepository
 from lib.user import User
@@ -9,11 +14,35 @@ from controllers.authentification import check_password
 from controllers.token_checker import token_checker
 from flask_cors import CORS  # Import flask_cors
 
+load_dotenv()
+
 app = Flask(__name__)
+
+
+# @app.route('/get_exercises', methods=['GET']) 
+# def get_exercises():
+#     payload = {
+#     'muscle': 'biceps'
+#     }
+#     api_url = f'https://api.api-ninjas.com/v1/exercises'
+#     response = requests.get(api_url, params=payload, headers={'X-Api-Key': os.getenv('API_KEY')})
+
+#     return response.json(), response.status_code
+
+@app.route('/get_exercises', methods=['GET']) 
+def get_exercises():
+    muscle = request.args.get('muscle')
+    api_url = 'https://api.api-ninjas.com/v1/exercises' 
+    headers = {'X-Api-Key': os.getenv('API_KEY')} 
+
+    response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
+    print(response.json())
+    return response.json(), response.status_code
 
 # Enable CORS for all routes, allowing requests from http://localhost:5173
 
 CORS(app, origins=["http://localhost:5173"])
+
 
 @app.route('/')
 def index():
