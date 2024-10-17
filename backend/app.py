@@ -57,9 +57,10 @@ def update_user():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
     data = request.get_json()
-    #data = data.payload
-    repository.add_details(data['username'], data['first_name'], data['last_name'], data['dob'])
+    username = request.headers.get('X-username') # Get username from header, added during successful login
+    repository.add_details(username, data['first_name'], data['last_name'], data['dob'], data['height'], data['weight'])
     return jsonify({'message':'Details added'}),201
+
 
 
 
