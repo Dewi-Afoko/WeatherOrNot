@@ -1,6 +1,6 @@
 import { useState} from "react";
 import { useNavigate } from "react-router-dom";
-
+import './userdetails.css'
 import {addDetails} from '../services/addDetails'
 
 //import BackgroundAnimation from "../../components/BackgroundAnimation";
@@ -48,38 +48,37 @@ export function UserDetails() {
   }
 
   return (
-    <>
+    <div className="form-container">
       <h2>USER PROFILE DETAILS</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="First Name">First Name:</label>
+        <label htmlFor="FirstName">First Name:</label>
         <input
           id="FirstName"
           type="text"
           value={firstname}
           onChange={handlefirstnameChange}
         />
-        <label htmlFor="lastname">lastname:</label>
+        <label htmlFor="lastname">Last Name:</label>
         <input
           id="lastname"
           type="text"
           value={lastName}
           onChange={handlelastnameChange}
         />
-        <label htmlFor="dob">Dob:</label>
+        <label htmlFor="dob">Date of Birth:</label>
         <input
-          placeholder="dob"
           id="dob"
           type="dob"
           value={dob}
           onChange={handledobChange}
         />
-         <label htmlFor="height">Height:</label>
+        <label htmlFor="height">Height:</label>
         <input
           id="height"
           type="text"
           value={height}
           onChange={handleHeightChange}
-        /> 
+        />
         <label htmlFor="weight">Weight:</label>
         <input
           id="weight"
@@ -89,6 +88,6 @@ export function UserDetails() {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
-    </>
+    </div>
   );
 }
