@@ -1,14 +1,14 @@
 from flask import Flask
 import os
 import requests
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from flask import request, redirect, session, jsonify,  render_template, flash
 import psycopg2
 from lib.user_repository import UserRepository
 from lib.user import User
 from lib.database_connection import get_flask_database_connection
 
-# load_dotenv()
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -29,15 +29,8 @@ def get_exercises():
     headers = {'X-Api-Key': os.getenv('API_KEY')} 
 
     response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
+    print(response.json())
     return response.json(), response.status_code
-
-# @app.route('/get_muscle_options', methods=['GET']) 
-# def get_muscle_options():
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-    print("hello")
-    # return response.json(), response.status_code
 
 @app.route('/')
 def index():
