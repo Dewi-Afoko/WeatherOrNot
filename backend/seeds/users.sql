@@ -7,6 +7,8 @@ CREATE TABLE users (
     exercise_list text[],
     first_name text,
     last_name text,
-    dob text
+    dob text,
+    height text,
+    weight int[]
 );
 

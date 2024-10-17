@@ -47,8 +47,8 @@ def update_user():
     repository = UserRepository(connection)
     data = request.get_json()
     username = request.headers.get('X-username') # Get username from header, added during successful login
-    repository.add_details(username, data.first_name, data.last_name, data.dob)
-    return f"{username}'s first name is {data.first_name}"
+    repository.add_details(username, data['first_name'], data['last_name'], data['dob'], data['height'], data['weight'])
+    return f"{username}'s first name is {data['first_name']}"
 
 
 
