@@ -11,7 +11,6 @@
 (backend-venv); pip install -r requirements.txt
 
 
-
 # Create a test and development database
 (backend-venv); createdb Activity_Tracker_TEST
 (backend-venv); createdb Activity_Tracker_TEST_tEst
@@ -29,5 +28,5 @@
 # Run the app
 (backend-venv); python app.py
 
-# Now visit http://localhost:5001/index in your browser
+# Now visit http://localhost:5000/index in your browser
 ```

@@ -9,3 +9,19 @@ CREATE TABLE users (
 INSERT INTO users (username, password) VALUES ('Dewi', 'password');
 INSERT INTO users (username, password) VALUES ('Edgar', 'Password');
 INSERT INTO users (username, password) VALUES ('Chris', 'Passwordd');
+
+DROP TABLE IF EXISTS Exercise;
+
+CREATE TABLE Exercise (
+    id SERIAL PRIMARY KEY,
+    name text,
+    type text,
+    muscle text,
+    equipment text,
+    difficulty text,
+    instructions text
+);
+
+INSERT INTO Exercise (name, type, muscle, equipment, difficulty, instructions) VALUES ('Name_1', 'Type_1', 'Muscle_1', 'Equipment_1', 'Difficulty_1', 'Instructions_1');
+INSERT INTO Exercise (name, type, muscle, equipment, difficulty, instructions) VALUES ('Name_2', 'Type_2', 'Muscle_2', 'Equipment_2', 'Difficulty_2', 'Instructions_2');
+INSERT INTO Exercise (name, type, muscle, equipment, difficulty, instructions) VALUES ('Name_3', 'Type_3', 'Muscle_3', 'Equipment_3', 'Difficulty_3', 'Instructions_3');
