@@ -18,7 +18,13 @@ class UserRepository:
         rows = self._connection.execute("SELECT * from users WHERE username = %s",[username])
         user = []
         for row in rows:
-            item = User(row["id"], row["username"],row['password'],row['exercise_list'], row['first_name'],row['last_name'],row['dob'],row['height'], row['weight'])
+            item = User(row["id"], row["username"],row['password'])
+            item.exercise_list = row['exercise_list'] 
+            item.first_name = row['first_name']
+            item.last_name = row['last_name']
+            item.dob = row['dob']
+            item.height = row['height']
+            item.weight = row['weight']
             user.append(item)
         if user : 
             return user[0]
