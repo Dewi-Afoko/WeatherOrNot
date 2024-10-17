@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
-import { weight_details } from "../../services/adddetails";
-import { addDetails } from "../../services/adddetails";
-import LogoutButton from "../../components/LogoutButton";
-import BackgroundAnimation from "../../components/BackgroundAnimation";
-import WeightLog from "../../components/WeightDetails";
 
-export function UserPage() {
+import {addDetails} from '../services/addDetails'
+
+//import BackgroundAnimation from "../../components/BackgroundAnimation";
+
+export function UserDetails() {
   const [firstname, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dob, setDob] = useState('')
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState('')
   const navigate = useNavigate();
-  
 
   const username = localStorage.getItem("username")
   const token = localStorage.getItem("token");
@@ -25,16 +23,12 @@ export function UserPage() {
     event.preventDefault();
     try {
       await addDetails(token, username, firstname, lastName, dob, height, weight);
-      const data = await weight_details(username); // TODO Actually do something with this data
-      console.log(data);
       navigate(0);
     } catch (err) {
       console.error(err);
       navigate("/login");
     }
   }
-
-
 
   function handlefirstnameChange(event) {
     setFirstName(event.target.value);
@@ -79,7 +73,7 @@ export function UserPage() {
           value={dob}
           onChange={handledobChange}
         />
-        <label htmlFor="height">Height:</label>
+         <label htmlFor="height">Height:</label>
         <input
           id="height"
           type="text"
@@ -95,8 +89,6 @@ export function UserPage() {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
-      <WeightLog/>
-      <LogoutButton/>
     </>
   );
 }
