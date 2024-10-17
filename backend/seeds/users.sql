@@ -12,3 +12,17 @@ CREATE TABLE users (
     weight int[]
 );
 
+
+
+DROP TABLE IF EXISTS Exercise;
+
+CREATE TABLE Exercise (
+    id SERIAL PRIMARY KEY,
+    name text UNIQUE,
+    type text,
+    muscle text,
+    equipment text,
+    difficulty text,
+    instructions text
+);
+
