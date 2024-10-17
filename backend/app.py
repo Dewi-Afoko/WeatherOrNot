@@ -60,14 +60,14 @@ def update_user():
     repository.add_details(data['username'], data['first_name'], data['last_name'], data['dob'], data['height'], data['weight'])
     return jsonify({'message':'Details added'}),201
 
-@app.route('/users', methods=['GET'])
+@app.route('/users', methods=['POST']) #TODO Add TokenChecker
 def user_weight():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
     data = request.get_json()
     weight = repository.weight_details(data['username'])
     print(weight)
-    return  weight
+    return  jsonify(weight),201
 
 
 
