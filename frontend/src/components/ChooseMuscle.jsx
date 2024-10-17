@@ -1,6 +1,9 @@
 import RadioSelector from "./RadioSelector";
+// import { useEffect } from "react";
 
 function ChooseMuscle() {
+
+  // const useEffect()
 
   const muscleOptions = [
     'abdominals', 
