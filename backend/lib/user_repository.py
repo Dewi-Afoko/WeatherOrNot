@@ -18,7 +18,7 @@ class UserRepository:
         rows = self._connection.execute("SELECT * from users WHERE username = %s",[username])
         user = []
         for row in rows:
-            item = User(row["id"], row["username"],row['password'])
+            item = User(row["id"], row["username"],row['password'],row['exercise_list'], row['first_name'],row['last_name'],row['dob'],row['height'], row['weight'])
             user.append(item)
         if user : 
             return user[0]
@@ -49,10 +49,24 @@ class UserRepository:
             self._connection.execute("UPDATE users SET dob = %s WHERE username = %s", [dob, current_user.username])
         if len(dob) > 1:
             self._connection.execute("UPDATE users SET height = %s WHERE username = %s", [height, current_user.username])
-        if weight > 0:
-            self._connection.execute('UPDATE users SET weight = weight || %s WHERE username = %s', [weight, current_user.username])
+        if int(weight) > 0 :
+            self._connection.execute('UPDATE users SET weight = array_append(weight, %s) WHERE username = %s', [weight, current_user.username])
         return "Details Updated"
     
+    def weight_details(self,username):
+        user = self.find_by_username(username)
+        user_weight = user.weight
+        print(user)
+        print(user.weight)
+        if len(user_weight)==1 :
+            return [user_weight]
+        if len(user_weight)>1 :
+            average_weight = sum(user_weight)/len(user_weight)
+            weight_difference = user.weight[0] - user.weight[1]
+            max_weight = max(user_weight)
+            min_weight = min(user_weight)
+            return [average_weight, weight_difference,max_weight,min_weight]
+
 
 # NEW
 

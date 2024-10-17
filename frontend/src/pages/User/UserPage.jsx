@@ -9,6 +9,8 @@ export function UserPage() {
   const [firstname, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dob, setDob] = useState('')
+  const [height, setHeight] = useState('')
+  const [weight, setWeight] = useState('')
   const navigate = useNavigate();
 
   const username = localStorage.getItem("username")
@@ -20,8 +22,8 @@ export function UserPage() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await addDetails(token, username, firstname, lastName, dob);
-      navigate("/user");
+      await addDetails(token, username, firstname, lastName, dob, height, weight);
+      navigate(0);
     } catch (err) {
       console.error(err);
       navigate("/login");
@@ -37,6 +39,12 @@ export function UserPage() {
 
   function handledobChange(event) {
     setDob(event.target.value);
+  }
+  function handleHeightChange(event) {
+    setHeight(event.target.value);
+  }
+  function handleWeightChange(event) {
+    setWeight(event.target.value);
   }
 
   return (
@@ -64,6 +72,20 @@ export function UserPage() {
           type="dob"
           value={dob}
           onChange={handledobChange}
+        />
+         <label htmlFor="height">Height:</label>
+        <input
+          id="height"
+          type="text"
+          value={height}
+          onChange={handleHeightChange}
+        /> 
+        <label htmlFor="weight">Weight:</label>
+        <input
+          id="weight"
+          type="text"
+          value={weight}
+          onChange={handleWeightChange}
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>

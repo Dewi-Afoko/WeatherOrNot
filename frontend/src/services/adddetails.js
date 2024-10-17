@@ -1,12 +1,14 @@
 // docs: https://vitejs.dev/guide/env-and-mode.html
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export async function addDetails(token, username, firstname, lastname, dob) {
+export async function addDetails(token, username, firstname, lastname, dob, height, weight) {
   const payload = {
     username: username,
     first_name: firstname,
     last_name: lastname,
-    dob : dob
+    dob : dob,
+    height: height,
+    weight: weight 
   };
 
   const requestOptions = {
