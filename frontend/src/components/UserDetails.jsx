@@ -1,49 +1,19 @@
-// import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-// import { getPosts } from "../../services/posts";
-// import Post from "../../components/Post";
+import {addDetails} from '../services/addDetails'
 
-import { weight_details } from "../../services/adddetails";
-import { addDetails } from "../../services/adddetails";
+//import BackgroundAnimation from "../../components/BackgroundAnimation";
 
-import LogoutButton from "../../components/LogoutButton";
-import BackgroundAnimation from "../../components/BackgroundAnimation";
-import WeightLog from "../../components/WeightDetails";
-
-export function UserPage() {
-
-  // const [posts, setPosts] = useState([]);
-
+export function UserDetails() {
   const [firstname, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [dob, setDob] = useState('')
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState('')
-
   const navigate = useNavigate();
-  
-
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   const loggedIn = token !== null;
-  //   if (loggedIn) {
-  //     getPosts(token)
-  //       .then((data) => {
-  //         setPosts(data.posts);
-  //         localStorage.setItem("token", data.token);
-  //       })
-  //       .catch((err) => {
-  //         console.error(err);
-  //         navigate("/login");
-  //       });
-  //   }
-  // }, [navigate]);
-
 
   const username = localStorage.getItem("username")
-
   const token = localStorage.getItem("token");
   if (!token) {
     navigate("/login");
@@ -53,8 +23,6 @@ export function UserPage() {
     event.preventDefault();
     try {
       await addDetails(token, username, firstname, lastName, dob, height, weight);
-      const data = await weight_details(username); // TODO Actually do something with this data
-      console.log(data);
       navigate(0);
     } catch (err) {
       console.error(err);
@@ -105,7 +73,7 @@ export function UserPage() {
           value={dob}
           onChange={handledobChange}
         />
-        <label htmlFor="height">Height:</label>
+         <label htmlFor="height">Height:</label>
         <input
           id="height"
           type="text"
@@ -121,8 +89,6 @@ export function UserPage() {
         />
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
-      <WeightLog/>
-      <LogoutButton/>
     </>
   );
 }
