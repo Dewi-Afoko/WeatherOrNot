@@ -130,7 +130,7 @@ pointer={{
     );
 }
 
-      );}
+      
 
 
 export default WeightLog;
