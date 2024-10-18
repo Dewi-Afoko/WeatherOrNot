@@ -5,8 +5,9 @@ function RadioSelector(props) {
         <input
           type="radio"
           id={props.id}
-          name="muscle_group"
+          name={props.name}
           value={props.value}
+          onChange={props.onChange}
           />
         <label htmlFor={props.id}>
           {props.value}
