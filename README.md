@@ -5,6 +5,7 @@ Description on the project
 ## Table of Contents
 
 - [Features](#features)
+- [Structure](#structure)
 - [Installation](#installation)
 
 ## Features
@@ -13,6 +14,12 @@ Description on the project
 - A user can edit their details
 - Generate exercises based on a chosen muscle group
 - 
+
+## Structure 
+This repo contains two applications:
+
+A frontend React App  
+A backend api server built with Flask and links to a PostgreSQL database
 
 ## Installation
 
@@ -84,6 +91,9 @@ npm install
 
 # Run the app
 npm run dev
+
+# Run the tests
+npm test
 
 # Visit the url http://localhost:5173/ in your browser
 ```
