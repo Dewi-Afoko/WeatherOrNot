@@ -96,12 +96,14 @@ def post_exercises():
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
 
-// robs FE get exercise request
-@app.route('/get_exercise', methods=['GET']) 
-def get_exercise():
+# robs FE get exercise request
+@app.route('/get_new_exercises', methods=['GET']) 
+def get_new_exercises():
+
     payload = {
         'muscle': request.args.get('muscle'),
     }
+
     api_url = 'https://api.api-ninjas.com/v1/exercises' 
     headers = {'X-Api-Key': os.getenv('API_KEY')} 
     response = requests.get(api_url, params=payload, headers=headers)
@@ -110,7 +112,6 @@ def get_exercise():
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
 
-      
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)

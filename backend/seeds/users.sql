@@ -12,6 +12,11 @@ CREATE TABLE users (
     weight int[]
 );
 
+INSERT INTO users (username, password)
+VALUES
+    ('johndoe', 'P@ssword1324%6'),
+    ('janedoe', 'P@55word1324%6');
+
 
 
 DROP TABLE IF EXISTS Exercise;
