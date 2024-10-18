@@ -25,7 +25,7 @@ export async function getNewExercises(token, muscle) {
 
 
 // GET for exercises stored in DB (rather than API)
-export async function getbackEndExercises(token) {
+export async function getbackEndExercises(token, muscle) {
 
   const requestOptions = {
     method: "GET",
@@ -35,7 +35,7 @@ export async function getbackEndExercises(token) {
     },
   };
 
-  const response = await fetch(`${BACKEND_URL}/get_exercises`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/get_exercises?muscle=${muscle}`, requestOptions);
 
   if (response.status !== 200) {
     throw new Error("Unable to fetch exercises from backend");
