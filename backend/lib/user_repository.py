@@ -71,7 +71,7 @@ class UserRepository:
             weight_difference = user.weight[0] - user.weight[1]
             max_weight = max(user_weight)
             min_weight = min(user_weight)
-            return [average_weight, weight_difference,max_weight,min_weight]
+            return [user_weight[-1], average_weight, weight_difference,max_weight,min_weight] #Added user_weight[-1] to return most recent (shown as current) weight
 
 
 # NEW
