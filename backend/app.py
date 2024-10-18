@@ -115,13 +115,13 @@ def user_weight():
 
 
 
-@app.route('/get_exercises', methods=['GET'])
-def get_exercises():
-    connection = get_flask_database_connection(app)
-    repository = ExerciseRepository(connection)
-    exercises = repository.all()
-    exercise_dicts = [exercise.to_dict() for exercise in exercises]
-    return jsonify(exercise_dicts), 200
+# @app.route('/get_exercises', methods=['GET'])
+# def get_exercises():
+#     connection = get_flask_database_connection(app)
+#     repository = ExerciseRepository(connection)
+#     exercises = repository.all()
+#     exercise_dicts = [exercise.to_dict() for exercise in exercises]
+#     return jsonify(exercise_dicts), 200
 
 
 @app.route('/post_exercises', methods=['POST'])

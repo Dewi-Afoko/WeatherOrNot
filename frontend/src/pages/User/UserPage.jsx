@@ -1,8 +1,5 @@
-// import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
-// import { getPosts } from "../../services/posts";
-// import Post from "../../components/Post";
 
 import { weight_details } from "../../services/adddetails";
 import { addDetails } from "../../services/adddetails";
@@ -13,7 +10,6 @@ import WeightLog from "../../components/WeightDetails";
 
 export function UserPage() {
 
-  // const [posts, setPosts] = useState([]);
 
   const [firstname, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
