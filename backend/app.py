@@ -1,17 +1,9 @@
-
 import os
-
-import requests
-
-from flask_sqlalchemy import SQLAlchemy
-
-
-from dotenv import load_dotenv
-
-from flask import Flask,request, redirect, jsonify,  render_template, flash, session
-
-
 import psycopg2
+import requests
+from flask_sqlalchemy import SQLAlchemy
+from dotenv import load_dotenv
+from flask import Flask,request, redirect, jsonify,  render_template, flash, session
 from lib.user_repository import UserRepository
 from lib.user import User
 from lib.exercise import Exercise
@@ -21,40 +13,12 @@ from controllers.authentification import check_password
 from controllers.token_checker import token_checker
 from flask_cors import CORS  # Import flask_cors
 
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://127.0.01/exercise'
 db = SQLAlchemy(app)
 
 load_dotenv()
-
-
-
-# @app.route('/get_exercises', methods=['GET']) 
-# def get_exercises():
-#     payload = {
-#     'muscle': 'biceps'
-#     }
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, params=payload, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-#     return response.json(), response.status_code
-
-@app.route('/get_exercises', methods=['GET']) 
-def get_exercises():
-    muscle = request.args.get('muscle')
-    api_url = 'https://api.api-ninjas.com/v1/exercises' 
-    headers = {'X-Api-Key': os.getenv('API_KEY')} 
-
-    response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
-    print(response.json())
-    return response.json(), response.status_code
-
-# Enable CORS for all routes, allowing requests from http://localhost:5173
-
-CORS(app, origins=["http://localhost:5173"])
-
 
 
 @app.route('/')
@@ -102,6 +66,7 @@ def update_user():
     repository.add_details(data['username'], data['first_name'], data['last_name'], data['dob'], data['height'], data['weight'])
     return jsonify({'message':'Details added'}),201
 
+
 @app.route('/users', methods=['POST']) #TODO Add TokenChecker
 def user_weight():
     connection = get_flask_database_connection(app)
@@ -111,7 +76,22 @@ def user_weight():
     print(weight)
     return  jsonify(weight),201
 
-
+@app.route('/post_exercises', methods=['POST'])
+def post_exercises():
+    connection = get_flask_database_connection(app)
+    repository = ExerciseRepository(connection)
+    # Fetch data from the API
+    try:
+        data = repository.fetch_data_from_api()
+        if not data:
+            # Save the data to the database
+            return jsonify({"message": "Data fetched and stored successfully!"}), 200
+        else:
+            return jsonify({"error": "No data received from the API"}), 204  # No Content
+    except Exception as e:
+        # Log the exception or handle it as necessary
+        print(f"An error occurred: {e}")
+        return jsonify({"error": "Failed to fetch data from the API"}), 500
 
 
 
@@ -124,53 +104,5 @@ def get_exercises():
     return jsonify(exercise_dicts), 200
 
 
-@app.route('/post_exercises', methods=['POST'])
-def post_exercises():
-    repository = ExerciseRepository(app)
-    # Fetch data from the API
-    try:
-        data = repository.fetch_data_from_api()
-        if data:
-            # Save the data to the database
-            repository.save_data_to_db(data)
-            return jsonify({"message": "Data fetched and stored successfully!"}), 200
-        else:
-            return jsonify({"error": "No data received from the API"}), 204  # No Content
-    except Exception as e:
-        # Log the exception or handle it as necessary
-        print(f"An error occurred: {e}")
-        return jsonify({"error": "Failed to fetch data from the API"}), 500
-
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
-
-
-
-
-
-# @app.route('/get_exercises', methods=['GET']) 
-# def get_exercises():
-#     payload = {
-#     'muscle': 'biceps'
-#     }
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, params=payload, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-#     return response.json(), response.status_code
-
-# @app.route('/get_exercises', methods=['GET']) 
-# def get_exercises():
-#     muscle = request.args.get('muscle')
-#     api_url = 'https://api.api-ninjas.com/v1/exercises' 
-#     headers = {'X-Api-Key': os.getenv('API_KEY')} 
-
-#     response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
-#     return response.json(), response.status_code
-
-# @app.route('/get_muscle_options', methods=['GET']) 
-# def get_muscle_options():
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-    # print("hello")
-    # return response.json(), response.status_code

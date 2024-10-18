@@ -2,8 +2,10 @@ from lib.exercise import Exercise
 from flask import jsonify
 import requests
 from flask_sqlalchemy import SQLAlchemy
-
 db = SQLAlchemy()
+import os
+MY_API_KEY = os.getenv("API_KEY")
+
 
 class ExerciseRepository:
     def __init__(self, connection):
@@ -11,39 +13,46 @@ class ExerciseRepository:
 
 
     def fetch_data_from_api(self):
-        url = "https://api.api-ninjas.com/v1/exercises?muscle=biceps"
-        headers = {"Authorization": "Bearer Zt9ZBBcWOof0SqF9CldvBg==E5U6G0d3XwOWmfCl"}
-        response = requests.get(url, headers=headers)
+        muscles =[
+            "abdominals",
+            'abductors',
+            'adductors',
+            'biceps',
+            'calves',
+            'chest',
+            'forearms',
+            'glutes',
+            'hamstrings',
+            'lats',
+            'lower_back',
+            'middle_back',
+            'neck',
+            'quadriceps',
+            'traps',
+            'triceps',
+            'shoulders'
+            ]
+        for muscle in muscles:
+            url = f"https://api.api-ninjas.com/v1/exercises?muscle={muscle}"
+            headers = {"X-Api-Key": MY_API_KEY}
+            response = requests.get(url, headers=headers)
+            # print(response.json())
+            if response.status_code == 200:
+                exercises = response.json()
+                self.save_data_to_db(exercises)
+                # print(exercises)
+            # return None
+            else:
+                print("Failed to fetch data from API:", response.status_code)
 
-        if response.status_code == 200:
-            return response.json()  # Return data as a Python dictionary
-        else:
-            print("Failed to fetch data from API:", response.status_code)
-            return None
 
-    def save_data_to_db(self, data):
-        for item in data:
-            # Extract fields based on API response structure
-            name = item.get("name")
-            type = item.get("type")
-            muscle = item.get("muscle")
-            equipment = item.get("equipment")
-            difficulty = item.get("difficulty")
-            instructions = item.get("instructions")
-# db connect SQL
-
-            # Create a new Exercise object
-            exercise = Exercise(
-                name=name, type=type, muscle=muscle,
-                equipment=equipment, difficulty=difficulty,
-                instructions=instructions
-            )
-
-            # Add to the session
-            db.session.add(exercise)
-
-        # Commit the session to save data in the database
-        db.session.commit()
+    def save_data_to_db(self, exercises):
+       for exercise in exercises:
+            # print(exercise)
+            self._connection.execute(
+            "INSERT INTO Exercise (name, type, muscle, equipment, difficulty, instructions) VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT (name) DO NOTHING",
+            [exercise['name'], exercise['type'], exercise['muscle'], exercise['equipment'], exercise['difficulty'], exercise['instructions']])
+       
 
 
     def all(self):
