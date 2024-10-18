@@ -80,11 +80,13 @@ def user_weight():
 
 
 # robs FE get exercise request
-@app.route('/get_exercise', methods=['GET']) 
-def get_exercise():
+@app.route('/get_new_exercises', methods=['GET']) 
+def get_new_exercises():
+
     payload = {
         'muscle': request.args.get('muscle'),
     }
+
     api_url = 'https://api.api-ninjas.com/v1/exercises' 
     headers = {'X-Api-Key': os.getenv('API_KEY')} 
     response = requests.get(api_url, params=payload, headers=headers)
@@ -92,8 +94,6 @@ def get_exercise():
         return jsonify(response.json()), 200
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
-    
-
 
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():
@@ -112,7 +112,7 @@ def post_exercises():
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
-
+      
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)
