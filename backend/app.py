@@ -78,23 +78,6 @@ def user_weight():
     print(weight)
     return  jsonify(weight),201
 
-@app.route('/post_exercises', methods=['POST'])
-def post_exercises():
-    connection = get_flask_database_connection(app)
-    repository = ExerciseRepository(connection)
-    # Fetch data from the API
-    try:
-        data = repository.fetch_data_from_api()
-        if not data:
-            # Save the data to the database
-            return jsonify({"message": "Data fetched and stored successfully!"}), 200
-        else:
-            return jsonify({"error": "No data received from the API"}), 204  # No Content
-    except Exception as e:
-        # Log the exception or handle it as necessary
-        print(f"An error occurred: {e}")
-        return jsonify({"error": "Failed to fetch data from the API"}), 500
-
 
 # robs FE get exercise request
 @app.route('/get_new_exercises', methods=['GET']) 
@@ -112,6 +95,24 @@ def get_new_exercises():
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
 
+@app.route('/post_exercises', methods=['POST'])
+def post_exercises():
+    connection = get_flask_database_connection(app)
+    repository = ExerciseRepository(connection)
+    # Fetch data from the API
+    try:
+        data = repository.fetch_all_data()
+        if not data:
+            # Save the data to the database
+            return jsonify({"message": "Data fetched and stored successfully!"}), 200
+        else:
+            return jsonify({"error": "No data received from the API"}), 204  # No Content
+    except Exception as e:
+        # Log the exception or handle it as necessary
+        print(f"An error occurred: {e}")
+        return jsonify({"error": "Failed to fetch data from the API"}), 500
+
+      
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)
