@@ -26,6 +26,22 @@ export function WeightLog() {
         fetchWeightDetails();
     }, []); 
 
+    const getValueColor = (value) => {
+        const range = maxGauge - minGauge;
+        const sectionSize = range / 5; 
+    
+        if (value <= minGauge + sectionSize) {
+        return '#F58B19'; 
+        } else if (value <= minGauge + sectionSize * 2) {
+        return '#F5CD19'; 
+        } else if (value <= minGauge + sectionSize * 3) {
+        return '#00FF00'; 
+        } else if (value <= minGauge + sectionSize * 4) {
+        return '#F5CD19'; 
+        } else {
+        return '#F58B19'; 
+        }
+    };
 
 
     return (
@@ -37,44 +53,72 @@ export function WeightLog() {
             <h3>Max: {maxWeight !== null ? maxWeight : 'Loading...'}</h3>
 
             <GaugeComponent
-    arc={{
-    subArcs: [
-        {
-        length: 0,
-        color: '#F5CD19',
-        showTick: true
-        },
-        {
-        length: 20,
-        color: '#F58B19',
-        showTick: true
-        },
-        {
-        length: 40,
-        color: '#F5CD19',
-        showTick: true
-        },
-        {
-        length: 60,
-        color: '#F58B19',
-        showTick: true
-        },
-        {
-        length: 80,
-        color: '#F5CD19',
-        showTick: true
-        },
-        {
-        length: 100,
-        color: '#F58B19',
-        showTick: true
-        },
+value={currentWeight}
+type="radial"
+minValue={minGauge}
+maxValue={maxGauge}
+
+
+labels={{
+    tickLabels: {
+    type: "inner",
+    ticks: [
+        { value: 20, label: 'Low' },    
+        { value: 40, label: 'Moderate' },  
+        { value: 60, label: 'Optimal' },   
+        { value: 80, label: 'Moderate' },  
+        { value: 100, label: 'High' }    
     ]
-    }}
-    minValue={minGauge}
-    maxValue={maxGauge}
-    value={currentWeight}
+    }
+}}
+
+
+arc={{
+    subArcs: [
+    {
+        length: 20, 
+        color: '#F58B19', 
+        showTick: true
+    },
+    {
+        length: 20, 
+        color: '#F5CD19', 
+        showTick: true
+    },
+    {
+        length: 20, 
+        color: '#00FF00', 
+        showTick: true
+    },
+    {
+        length: 20, 
+        color: '#F5CD19', 
+        showTick: true
+    },
+    {
+        length: 20, 
+        color: '#F58B19', 
+        showTick: true
+    }
+    ],
+    padding: 0.02, 
+    width: 0.3 
+}}
+
+
+pointer={{
+    type: 'arrow', 
+    color: getValueColor(currentWeight), 
+    baseColor: '#464A4F', 
+    length: 0.7, 
+    animate: true, 
+    elastic: true, 
+    width: 20, 
+    animationDuration: 3000, 
+    animationDelay: 100 
+}}
 />
+
 
         </>
     );
