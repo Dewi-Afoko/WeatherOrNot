@@ -81,7 +81,7 @@ export function UserPage() {
     <>
       <h2>USER PROFILE DETAILS</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="First Name">First Name:</label>
+        <label htmlFor="FirstName">First Name:</label>
         <input
           id="FirstName"
           type="text"
