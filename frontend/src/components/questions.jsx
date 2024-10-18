@@ -1,5 +1,5 @@
 
-
+import { useState } from 'react';
 import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import { Survey } from 'survey-react-ui';
@@ -7,69 +7,161 @@ import { Survey } from 'survey-react-ui';
 const surveyJson = {
   title: "Workout Preferences",
   showProgressBar: "bottom",
-  showTimer: true,
-  timeLimitPerPage: 70,
-  timeLimit: 210,
-  firstPageIsStarted: true,
+  showTimer: false,
+  firstPageIsStarted: false,
   startSurveyText: "Start Test",
   pages: [{
     elements: [{
-      type: "html",
-      html: "You are about to start a workout preferences test. <br>You will around 60 seconds for every question and 30 seconds to end the quiz.<br>Enter your name below and click <b>Start Test</b> to begin."
-    }, {
-      type: "text",
-      name: "username",
-      titleLocation: "hidden",
-      isRequired: true
-    }]
-  }, {
-    elements: [{
       type: "radiogroup",
       name: "civilwar",
-      title: "When was the American Civil War?",
+      title: "How many days a week can you workout?",
       choices: [
-        "1796-1803", "1810-1814", "1861-1865", "1939-1945"
+        {"value": "begginer", 
+        "text" :"1-2"} ,
+        {"value": "intermediate", 
+        "text" :"3-4"} ,
+        {"value": "advanced", 
+        "text" :"5-6"} 
       ],
-      correctAnswer: "1861-1865"
+
     }]
   }, {
     elements: [{
       type: "radiogroup",
       name: "libertyordeath",
-      title: "Whose quote is this: \"Give me liberty, or give me death\"?",
+      title: "How comfortable are you with using gym equipment?",
       choicesOrder: "random",
       choices: [
-        "John Hancock", "James Madison", "Patrick Henry", "Samuel Adams"
+        {"value": "begginer", 
+          "text" :"Never use it"} ,
+          {"value": "intermediate", 
+          "text" :"I've tried some equipment"} ,
+          {"value": "advanced", 
+          "text" :"I'm comfortable with most equipment"} 
       ],
-      correctAnswer: "Patrick Henry"
+
     }]
   }, {
     elements: [{
       type: "radiogroup",
-      name: "magnacarta",
-      title: "What is Magna Carta?",
+      name: "q7",
+      title: "How would you rate your overall fitness level?",
       choicesOrder: "random",
       choices: [
-        "The foundation of the British parliamentary system",
-        "The Great Seal of the monarchs of England",
-        "The French Declaration of the Rights of Man",
-        "The charter signed by the Pilgrims on the Mayflower"
+        {"value": "begginer", 
+          "text" :"I'm just starting out"} ,
+          {"value": "intermediate", 
+          "text" :"I exercise consistently"} ,
+          {"value": "advanced", 
+          "text" :"I'm very experienced and fit"} 
       ],
-      correctAnswer: "The foundation of the British parliamentary system"
+
     }]
-  }],
-  completedHtml: "<h4>You got <b>{correctAnswers}</b> out of <b>{questionCount}</b> correct answers.</h4>",
-  completedHtmlOnCondition: [{
-    expression: "{correctAnswers} == 0",
-    html: "<h4>Unfortunately, none of your answers are correct. Please try again.</h4>"
+  },
+  {
+    elements: [{
+      type: "radiogroup",
+      name: "magnacarta",
+      title: "How much time can you dedicate to each workout?",
+      choicesOrder: "random",
+      choices: [
+        {"value": "begginer", 
+          "text" :"20-30 minutes"} ,
+          {"value": "intermediate", 
+          "text" :"30-45 minutes"} ,
+          {"value": "advanced", 
+          "text" :"45-60+ minutes"} 
+      ],
+
+    }]
   }, {
-    expression: "{correctAnswers} == {questionCount}",
-    html: "<h4>Congratulations! You answered all the questions correctly!</h4>"
-  }]
+    elements: [{
+      type: "radiogroup",
+      name: "intensity",
+      title: "How intense do you want your workouts to feel?",
+      choicesOrder: "random",
+      choices: [
+        {"value": "begginer", 
+          "text" :"Light, minimal workout"} ,
+          {"value": "intermediate", 
+          "text" :"Moderate"} ,
+          {"value": "advanced", 
+          "text" :"High intensity"} 
+      ],
+
+    }]
+  }, {
+    elements: [{
+      type: "radiogroup",
+      name: "strength",
+      title: "What is your current strength level?",
+      choicesOrder: "random",
+      choices: [
+        {"value": "begginer", 
+          "text" :"I can't lift heavy weights yet"} ,
+          {"value": "intermediate", 
+          "text" :"I can lift moderate weights for 8-12 reps"} ,
+          {"value": "advanced", 
+          "text" :"I can lift heavy weights for a few reps"} 
+      ],
+
+    }]
+  }, {
+    elements: [{
+      type: "radiogroup",
+      name: "type",
+      title: "What type of exercise are you comfortable with?",
+      choicesOrder: "random",
+      choices: [
+        {"value": "begginer", 
+          "text" :"Low impact"} ,
+          {"value": "intermediate", 
+          "text" :"A mix of low and high impact"} ,
+          {"value": "advanced", 
+          "text" :"High impact and intense"} 
+      ],
+
+    }]
+  },
+],
+  completedHtml: "Thank you for entering your preferences, we'll take them into account when recommeding exercises.",
 };
 
-function Questions() {
+function Questions()  {
+
+
   const survey = new Model(surveyJson);
+  survey.onComplete.add(function(sender){
+    let beginnerPoints = 0;
+    let intermediatePoints = 0;
+    let advancedPoints = 0;
+  
+    const answers = sender.data;
+    
+    for (let key in answers) {
+      const answer = answers[key];
+      if (answer === 'beginner') {
+        beginnerPoints++;
+      } else if (answer === 'intermediate') {
+        intermediatePoints++;
+      } else if (answer === 'advanced') {
+        advancedPoints++;
+      }
+    }
+  
+
+    let fitnessLevel = 'beginner';
+    if (intermediatePoints > beginnerPoints && intermediatePoints > advancedPoints) {
+      fitnessLevel = 'intermediate';
+    } else if (advancedPoints > beginnerPoints && advancedPoints > intermediatePoints) {
+      fitnessLevel = 'advanced';
+    }
+  
+
+      localStorage.setItem('preferences',fitnessLevel)
+    
+  });
+
 
   return (
       <Survey model={survey} id="surveyContainer" />      
