@@ -51,7 +51,6 @@ export function WeightLog() {
     return (
 
         <>
-     
             <GaugeComponent
 value={currentWeight}
 type="radial"
@@ -119,18 +118,18 @@ pointer={{
 }}
 />
         <div className="stats-container">
-           <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
-          <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
-          <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
-          <h3>Max weight: {maxWeight !== null ? maxWeight : 'Loading...'}kg</h3>
-          <h3>Min weight: {minWeight !== null ? minWeight : 'Loading...'}kg</h3>
+        <h4>WEIGHT TRACKER</h4>
+        <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
+        <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
+        <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
+        <h3>Max weight: {maxWeight !== null ? maxWeight : 'Loading...'}kg</h3>
+        <h3>Min weight: {minWeight !== null ? minWeight : 'Loading...'}kg</h3>
         </div>
 
         </>
     );
 }
 
-      
 
 
 export default WeightLog;
