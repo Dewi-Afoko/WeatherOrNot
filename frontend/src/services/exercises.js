@@ -4,12 +4,13 @@
 const API_URL = 'https://api.api-ninjas.com/v1/exercises'
 
 
-export async function getExercise(token, muscle) {
+export async function getExercises(token, muscle) {
 
   const requestOptions = {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json' //need to make sure correct content type here
     }
   };
 

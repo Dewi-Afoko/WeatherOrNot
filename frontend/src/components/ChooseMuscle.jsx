@@ -1,7 +1,7 @@
 import RadioSelector from "./RadioSelector";
 // import { useEffect } from "react";
 
-function ChooseMuscle() {
+function ChooseMuscle(props) {
 
   // const useEffect()
 
@@ -34,17 +34,19 @@ function ChooseMuscle() {
 
   return (
     <div>
-      <form>
+      {/* <form> */}
         {formattedMuscles.map((muscle, index) => {
           return (
             <RadioSelector
               key={index}
               id={muscle}
               value={muscle}
+              name="muscle_group"
+              onChange={() => props.setMuscle(muscle)}
             />
           )
         })}
-      </form>
+      {/* </form> */}
     </div>
   );
 }

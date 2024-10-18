@@ -29,28 +29,6 @@ db = SQLAlchemy(app)
 
 load_dotenv()
 
-
-
-# @app.route('/get_exercises', methods=['GET']) 
-# def get_exercises():
-#     payload = {
-#     'muscle': 'biceps'
-#     }
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, params=payload, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-#     return response.json(), response.status_code
-
-@app.route('/get_exercises', methods=['GET']) 
-def get_exercises():
-    muscle = request.args.get('muscle')
-    api_url = 'https://api.api-ninjas.com/v1/exercises' 
-    headers = {'X-Api-Key': os.getenv('API_KEY')} 
-
-    response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
-    print(response.json())
-    return response.json(), response.status_code
-
 # Enable CORS for all routes, allowing requests from http://localhost:5173
 
 CORS(app, origins=["http://localhost:5173"])
@@ -145,32 +123,16 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
 
 
-
-
-
-# @app.route('/get_exercises', methods=['GET']) 
-# def get_exercises():
-#     payload = {
-#     'muscle': 'biceps'
-#     }
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, params=payload, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-#     return response.json(), response.status_code
-
-# @app.route('/get_exercises', methods=['GET']) 
-# def get_exercises():
-#     muscle = request.args.get('muscle')
-#     api_url = 'https://api.api-ninjas.com/v1/exercises' 
-#     headers = {'X-Api-Key': os.getenv('API_KEY')} 
-
-#     response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
-#     return response.json(), response.status_code
-
-# @app.route('/get_muscle_options', methods=['GET']) 
-# def get_muscle_options():
-#     api_url = f'https://api.api-ninjas.com/v1/exercises'
-#     response = requests.get(api_url, headers={'X-Api-Key': os.getenv('API_KEY')})
-
-    # print("hello")
-    # return response.json(), response.status_code
+# GET REQUEST TO API FOR EXERCISES
+@app.route('/get_exercises', methods=['GET']) 
+def get_exercises():
+    payload = {
+        'muscle': request.args.get('muscle'),
+    }
+    api_url = 'https://api.api-ninjas.com/v1/exercises' 
+    headers = {'X-Api-Key': os.getenv('API_KEY')} 
+    response = requests.get(api_url, params=payload, headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json()), 200
+    else:
+        return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
