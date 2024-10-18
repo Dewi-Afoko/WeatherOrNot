@@ -89,14 +89,11 @@ export function GenerateExercises() {
     //         "difficulty": "beginner",
     //         "instructions": "Seat yourself on an incline bench with a dumbbell in each hand. You should pressed firmly against he back with your feet together. Allow the dumbbells to hang straight down at your side, holding them with a neutral grip. This will be your starting position. Initiate the movement by flexing at the elbow, attempting to keep the upper arm stationary. Continue to the top of the movement and pause, then slowly return to the start position."
     //     }
-    // ]
+    // ]    
 
     const navigate = useNavigate();
-    
     const [muscle, setMuscle] = useState("")
-
     const [exercises, setExercises] = useState([])
-
     // USING API
     const handleSubmit = (event) => {
         event.preventDefault();
