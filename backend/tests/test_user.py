@@ -21,15 +21,12 @@ def test_compares():
 """
 Spaces can be represented as strings
 """
-
-
 def test_string():
     user = User(1, "test_username", "test_password")
-    assert str(user) == "User(1, test_username, test_password, [], , , , )"
+    assert str(user) == "User(1, test_username, test_password, [], , , , , [])"
 
 def test_user_sets_all_properties():
     user = User(1, "Dewi", "password")
-    
     assert user.id == 1
     assert user.username == "Dewi"
     assert user.password == "password"
@@ -39,8 +36,8 @@ def test_user_sets_all_properties():
     assert user.dob == ""
     assert user.height == ""
 
+
 def test_repr():
     user = User(1, "Dewi", "password")
-    expected_repr = "User(1, Dewi, password, [], , , , )"
-    
+    expected_repr = "User(1, Dewi, password, [], , , , , [])"
     assert repr(user) == expected_repr

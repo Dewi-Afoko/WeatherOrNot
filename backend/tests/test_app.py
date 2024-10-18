@@ -2,14 +2,13 @@ from unittest.mock import patch
 import json
 
 # GET /get_exercises 
-def test_api_call_response_200(web_client):
+def test_api_call_response_200_get_exercises(web_client):
     response = web_client.get("/get_exercises")
-
     assert response.status_code == 200
+
 
 # GET /get_exercises mock data
 def test_api_call_gets_data(web_client):
-
     # Mock the data that we want
     mock_response_data = [
   {
@@ -91,25 +90,26 @@ def test_api_call_gets_data(web_client):
     "equipment": "dumbbell",
     "difficulty": "beginner",
     "instructions": "Hold the dumbbell towards the side farther from you so that you have more weight on the side closest to you. (This can be done for a good effect on all bicep dumbbell exercises). Now do a normal incline dumbbell curl, but keep your wrists as far back as possible so as to neutralize any stress that is placed on them. Sit on an incline bench that is angled at 45-degrees while holding a dumbbell on each hand. Let your arms hang down on your sides, with the elbows in, and turn the palms of your hands forward with the thumbs pointing away from the body. Tip: You will keep this hand position throughout the movement as there should not be any twisting of the hands as they come up. This will be your starting position. Curl up the two dumbbells at the same time until your biceps are fully contracted and exhale. Tip: Do not swing the arms or use momentum. Keep a controlled motion at all times. Hold the contracted position for a second at the top. As you inhale, slowly go back to the starting position. Repeat for the recommended amount of repetitions.  Caution: Do not extend your arms totally as you could injure your elbows if you hyperextend them. Also, make sure that on the way down you move slowly to avoid injury. Variations: You can use cables for this movement as well."
-  }
-]
-    
+  }]
     # Patch function replaces requests.get with a mock, it makes a fake HTTP request
     with patch('requests.get') as mock_get:
         mock_get.return_value.status_code = 200 # Sets the status code to 200
         mock_get.return_value.json.return_value = mock_response_data 
         # Defines the JSON data that the mock should return when response.json is called in the route
-
         #  Conftest.py file
         response = web_client.get("/get_exercises")
-
         assert response.status_code == 200
-
         # json.loads converts json data into a python dictionary
         response_data = json.loads(response.data)
-
         assert response_data[1]['name'] == "Wide-grip barbell curl"
         assert response_data[1]['muscle'] == "biceps"
         assert response_data[1]['type'] == "strength"
         assert response_data[1]['equipment'] == "barbell"
         assert response_data[1]['difficulty'] == "beginner"
+
+####################################################################################################
+
+    # GET /get_exercise 
+def test_api_call_response_200_get_exercise(web_client):
+    response = web_client.get("/get_exercise")
+    assert response.status_code == 200

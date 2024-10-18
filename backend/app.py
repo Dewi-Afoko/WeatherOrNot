@@ -78,6 +78,23 @@ def user_weight():
     print(weight)
     return  jsonify(weight),201
 
+
+#  robs FE get exercise request
+@app.route('/get_exercises', methods=['GET']) 
+def get_exercises():
+    payload = {
+        'muscle': request.args.get('muscle'),
+    }
+    api_url = 'https://api.api-ninjas.com/v1/exercises' 
+    headers = {'X-Api-Key': os.getenv('API_KEY')} 
+    response = requests.get(api_url, params=payload, headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json()), 200
+    else:
+        return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
+
+
+#######  Chris BE API Fetch 
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():
     connection = get_flask_database_connection(app)
@@ -95,24 +112,9 @@ def post_exercises():
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
-
-// robs FE get exercise request
-@app.route('/get_exercise', methods=['GET']) 
+#######  Chris BE API Save 
+@app.route('/get_exercise', methods=['GET'])
 def get_exercise():
-    payload = {
-        'muscle': request.args.get('muscle'),
-    }
-    api_url = 'https://api.api-ninjas.com/v1/exercises' 
-    headers = {'X-Api-Key': os.getenv('API_KEY')} 
-    response = requests.get(api_url, params=payload, headers=headers)
-    if response.status_code == 200:
-        return jsonify(response.json()), 200
-    else:
-        return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
-
-      
-@app.route('/get_exercises', methods=['GET'])
-def get_exercises():
     connection = get_flask_database_connection(app)
     repository = ExerciseRepository(connection)
     exercises = repository.all()
