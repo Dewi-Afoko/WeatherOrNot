@@ -95,7 +95,6 @@ def get_exercise():
     
 
 
-
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():
     connection = get_flask_database_connection(app)
