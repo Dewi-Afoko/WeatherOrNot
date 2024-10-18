@@ -51,8 +51,8 @@ export function WeightLog() {
     return (
 
         <>
-     
-            <GaugeComponent
+<div style={{ position: 'relative', display: 'inline-block' }}>
+<GaugeComponent
 value={currentWeight}
 type="radial"
 minValue={minGauge}
@@ -61,13 +61,13 @@ maxValue={maxGauge}
 
 labels={{
     tickLabels: {
-    type: "inner",
+    type: "outer",
     ticks: [
-        { value: 20, label: 'Low' },    
-        { value: 40, label: 'Moderate' },  
-        { value: 60, label: 'Optimal' },   
-        { value: 80, label: 'Moderate' },  
-        { value: 100, label: 'High' }    
+        {label: 'Low' },    
+        {label: 'Moderate' },  
+        {label: 'Optimal' },   
+        {label: 'Moderate' },  
+        {label: 'High' }    
     ]
     }
 }}
@@ -118,19 +118,26 @@ pointer={{
     animationDelay: 100 
 }}
 />
+</div>
+
+<div style={{ position: 'absolute', top: '60%', left: '40%', color: '#F58B19', fontSize: '14px' }}>Low</div>
+<div style={{ position: 'absolute', top: '40%', left: '38%', color: '#F5CD19', fontSize: '14px' }}>Moderate</div>
+<div style={{ position: 'absolute', top: '50%', left: '48.25%', color: '#00FF00', fontSize: '14px'}}>Optimal</div>
+<div style={{ position: 'absolute', top: '40%', left: '58%', color: '#F5CD19', fontSize: '14px' }}>Moderate</div>
+<div style={{ position: 'absolute', top: '60%', left: '58%', color: '#F58B19', fontSize: '14px' }}>High</div>
         <div className="stats-container">
-           <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
-          <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
-          <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
-          <h3>Max weight: {maxWeight !== null ? maxWeight : 'Loading...'}kg</h3>
-          <h3>Min weight: {minWeight !== null ? minWeight : 'Loading...'}kg</h3>
+        <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
+        <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
+        <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
+        <h3>Max weight: {maxWeight !== null ? maxWeight : 'Loading...'}kg</h3>
+        <h3>Min weight: {minWeight !== null ? minWeight : 'Loading...'}kg</h3>
         </div>
 
         </>
     );
 }
 
-      
+
 
 
 export default WeightLog;

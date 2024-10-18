@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BackgroundAnimation from "../../components/BackgroundAnimation";
 import { login } from "../../services/authentication";
 import './loginpage.css'
 export function LoginPage() {
+
+  
   const [username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const[error,setError]= useState("")
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+  
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -33,7 +37,12 @@ export function LoginPage() {
   function handlePasswordChange(event) {
     setPassword(event.target.value);
   }
+
+  useEffect(() => {
+    localStorage.clear()}, [])
+  
   return (
+    
     <>
       <div id="background">
         <BackgroundAnimation />
