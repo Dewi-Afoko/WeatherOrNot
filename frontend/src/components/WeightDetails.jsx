@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { weight_details } from "../services/adddetails";
+
 import GaugeComponent from 'react-gauge-component';
+
+
+import './weightdetails.css'
 
 export function WeightLog() {
     const [currentWeight, setCurrentWeight] = useState(null);
@@ -45,13 +49,9 @@ export function WeightLog() {
 
 
     return (
-        <>
-            <h3>Current: {currentWeight !== null ? currentWeight : 'Loading...'}</h3>
-            <h3>Average: {averageWeight !== null ? averageWeight : 'Loading...'}</h3>
-            <h3>Difference: {weightDifference !== null ? weightDifference : 'Loading...'}</h3>
-            <h3>Min: {minWeight !== null ? minWeight : 'Loading...'}</h3>
-            <h3>Max: {maxWeight !== null ? maxWeight : 'Loading...'}</h3>
 
+        <>
+     
             <GaugeComponent
 value={currentWeight}
 type="radial"
@@ -118,10 +118,19 @@ pointer={{
     animationDelay: 100 
 }}
 />
-
+        <div className="stats-container">
+           <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
+          <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
+          <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
+          <h3>Max weight: {maxWeight !== null ? maxWeight : 'Loading...'}kg</h3>
+          <h3>Min weight: {minWeight !== null ? minWeight : 'Loading...'}kg</h3>
+        </div>
 
         </>
     );
 }
+
+      );}
+
 
 export default WeightLog;

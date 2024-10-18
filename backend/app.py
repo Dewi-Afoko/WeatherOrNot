@@ -29,6 +29,7 @@ db = SQLAlchemy(app)
 
 load_dotenv()
 
+CORS(app, origins=["http://localhost:5173"])
 
 
 # @app.route('/get_exercises', methods=['GET']) 
@@ -41,7 +42,7 @@ load_dotenv()
 
 #     return response.json(), response.status_code
 
-@app.route('/get_exercises', methods=['GET']) 
+'''@app.route('/get_exercises', methods=['GET']) 
 def get_exercises():
     muscle = request.args.get('muscle')
     api_url = 'https://api.api-ninjas.com/v1/exercises' 
@@ -49,12 +50,9 @@ def get_exercises():
 
     response = requests.get(api_url, params={'muscle': muscle}, headers=headers)
     print(response.json())
-    return response.json(), response.status_code
+    return response.json(), response.status_code'''
 
 # Enable CORS for all routes, allowing requests from http://localhost:5173
-
-CORS(app, origins=["http://localhost:5173"])
-
 
 
 @app.route('/')

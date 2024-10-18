@@ -67,7 +67,7 @@ class UserRepository:
         if len(user_weight)==1 :
             return [user_weight]
         if len(user_weight)>1 :
-            average_weight = sum(user_weight)/len(user_weight)
+            average_weight = round(sum(user_weight)/len(user_weight))
             weight_difference = user.weight[0] - user.weight[1]
             max_weight = max(user_weight)
             min_weight = min(user_weight)
