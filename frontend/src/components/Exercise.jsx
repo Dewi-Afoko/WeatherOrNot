@@ -2,7 +2,7 @@ function Exercise(props) {
 
     return (
         <div>
-            <h2>name: {props.name}</h2>
+            <h2>{props.name}</h2>
             <ul>
                 <li>Type: {props.type}</li>
                 <li>Muscle: {props.muscle}</li>

@@ -4,7 +4,7 @@ import ChooseMuscle from "../../components/ChooseMuscle";
 import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getExercises } from "../../services/exercises";
+import { getNewExercises, getbackEndExercises } from "../../services/exercises";
 
 export function GenerateExercises() {
 
@@ -94,12 +94,12 @@ export function GenerateExercises() {
     const navigate = useNavigate();
     const [muscle, setMuscle] = useState("")
     const [exercises, setExercises] = useState([])
+    // USING API
     const handleSubmit = (event) => {
         event.preventDefault();
         const token = localStorage.getItem("token");
-
         if (muscle && token) {  // Make sure both muslce and token are set
-            getExercises(token, muscle)
+            getNewExercises(token, muscle)
             .then((data) => {
                 setExercises(data);  // Set exercises to onesfetched from API
             })
@@ -111,6 +111,25 @@ export function GenerateExercises() {
             console.error("Please select a muscle group and ensure you're logged in.");
         }
     };
+
+    // USING DB
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     const token = localStorage.getItem("token");
+    
+    //     if (muscle && token) {  // Make sure both muslce and token are set
+    //         getbackEndExercises(token, muscle)
+    //         .then((data) => {
+    //             setExercises(data);  // Set exercises to onesfetched from API
+    //         })
+    //         .catch((err) => {
+    //             console.error(err);
+    //             navigate("/login");
+    //         });
+    //     } else {
+    //         console.error("Please select a muscle group and ensure you're logged in.");
+    //     }
+    // };
 
     return (
         <>
@@ -125,7 +144,11 @@ export function GenerateExercises() {
                     <GenerateButton/>
                 </div>
             </form>
-
+            {/* {if (exercises) {
+                return (
+                    
+                )
+            }} */}
             <div>
                 <h1>Try these exercises:</h1>
                 {exercises.map((exercise, index) => {

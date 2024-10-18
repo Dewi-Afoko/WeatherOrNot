@@ -24,7 +24,7 @@ function ChooseMuscle(props) {
     'traps',
     'triceps'
   ]
-
+  //NEED TO HAVE FORMATTED MUSCLES ONLY FOR USER DISPLAY AND NOT FOR VALUES
   const formattedMuscles = muscleOptions.map(
     (muscle) => muscle.replace('_', ' ') // removes underscores
   ).map(
@@ -35,7 +35,7 @@ function ChooseMuscle(props) {
   return (
     <div>
       {/* <form> */}
-        {formattedMuscles.map((muscle, index) => {
+        {muscleOptions.map((muscle, index) => {
           return (
             <RadioSelector
               key={index}
