@@ -89,6 +89,7 @@ export function GenerateExercises() {
                             name={exercise.name}
                             type={exercise.type}
                             muscle={exercise.muscle}
+                            equipment={exercise.equipment}
                             difficulty={exercise.difficulty}
                             instructions={exercise.instructions}
                         />
