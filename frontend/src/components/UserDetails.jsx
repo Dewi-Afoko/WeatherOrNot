@@ -1,14 +1,18 @@
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import './userdetails.css'
 import {addDetails} from '../services/addDetails'
-
+import { user_details } from "../services/addDetails";
 //import BackgroundAnimation from "../../components/BackgroundAnimation";
 
 export function UserDetails() {
+  const [currentFirstName, setCurrentFirstName]=useState('')
   const [firstname, setFirstName] = useState('')
+  const [currentLastName, setCurrentLastName]=useState('')
   const [lastName, setLastName] = useState('')
+  const [currentDob, setCurrentDob]=useState('')
   const [dob, setDob] = useState('')
+  const [currentHeight, setCurrentHeight]=useState('')
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState(0)
   const [weighterror,setweighterror]=useState('')
@@ -17,10 +21,26 @@ export function UserDetails() {
 
   const username = localStorage.getItem("username")
   const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/login");
-    return;
-  }
+  
+
+useEffect(() => {
+  async function fetchUserDetails() {
+    const username = localStorage.getItem('username');
+    const data = await user_details(username);
+    setCurrentFirstName(data[0]);
+    setCurrentLastName(data[1]);
+    setCurrentDob(data[2]);
+    setCurrentHeight(data[3]);
+    
+  } 
+  fetchUserDetails();
+}, []); 
+
+if (!token) {
+  navigate("/login");
+  return;}
+
+
   async function handleSubmit(event) {
     event.preventDefault();
     try {
@@ -32,15 +52,19 @@ export function UserDetails() {
     }
   }
 
+
   function handlefirstnameChange(event) {
-    setFirstName(event.target.value);
+    const value = event.target.value
+    setFirstName(value);
   }
   function handlelastnameChange(event) {
-    setLastName(event.target.value);
+    const value = event.target.value
+    setLastName(value);
   }
 
   function handledobChange(event) {
-    setDob(event.target.value);
+    const value = event.target.value
+    setDob(value);
   }
   function handleHeightChange(event) {
     const value = Number(event.target.value); 
@@ -67,39 +91,42 @@ export function UserDetails() {
     <div className="form-container">
       <h2>USER PROFILE DETAILS</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="FirstName">First Name:</label>
+        <label htmlFor="FirstName">First Name: {currentFirstName}</label>
         <input
+        placeholder="Update First Name"
           id="FirstName"
           type="text"
           value={firstname}
           onChange={handlefirstnameChange}
         />
-        <label htmlFor="lastname">Last Name:</label>
+        <label htmlFor="lastname">Last Name: {currentLastName}</label>
         <input
+        placeholder="Update Last Name"
           id="lastname"
           type="text"
           value={lastName}
           onChange={handlelastnameChange}
         />
-        <label htmlFor="dob">Date of Birth:</label>
+        <label htmlFor="dob">Date of Birth: {currentDob}<br></br>(Update DoB below)</label>
         <input
-          placeholder="dd/mm/yyyy"
+      
+          placeholder="Update date of birth(dd/mm/yyyy)"
           id="dob"
-          type="dob"
+          type="date"
           value={dob}
           onChange={handledobChange}
         />
-        <label htmlFor="height">Height:</label>
+        <label htmlFor="height">Height: {currentHeight}</label>
         <input
-          placeholder="cm"
+          placeholder="Update height(cm)"
           id="height"
           type="number"
           value={height}
           onChange={handleHeightChange}
         />
-        <label htmlFor="weight">Weight:</label>
+        <label htmlFor="weight">Weight(kg):<br></br>(Update Weight below)</label>
         <input
-          placeholder="kg"
+          placeholder="Update weight(kg)"
           id="weight"
           type="number"
           value={weight}

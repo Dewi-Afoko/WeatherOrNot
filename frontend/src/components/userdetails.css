@@ -23,7 +23,7 @@ form label {
 
 /* Input field styles */
 form input[type="text"],
-form input[type="dob"] {
+form input[type="date"] {
   width: 100%; /* Full width of the container */
   padding: 8px; /* Inner padding for inputs */
   margin-bottom: 15px; /* Space below each input */

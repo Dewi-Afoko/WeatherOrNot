@@ -12,8 +12,7 @@ export function WeightLog() {
     const [weightDifference, setWeightDifference] = useState(null);
     const [maxWeight, setMaxWeight] = useState(null);
     const [minWeight, setMinWeight] = useState(null);
-    const maxGauge = (maxWeight*1.5)
-    const minGauge = (minWeight*0.5)
+
 
     useEffect(() => {
         async function fetchWeightDetails() {
@@ -30,93 +29,70 @@ export function WeightLog() {
         fetchWeightDetails();
     }, []); 
 
-    const getValueColor = (value) => {
-        const range = maxGauge - minGauge;
-        const sectionSize = range / 5; 
-    
-        if (value <= minGauge + sectionSize) {
-        return '#F58B19'; 
-        } else if (value <= minGauge + sectionSize * 2) {
-        return '#F5CD19'; 
-        } else if (value <= minGauge + sectionSize * 3) {
-        return '#00FF00'; 
-        } else if (value <= minGauge + sectionSize * 4) {
-        return '#F5CD19'; 
-        } else {
-        return '#F58B19'; 
-        }
-    };
 
+    const maxGauge = maxWeight ? (maxWeight * 1.5) : 100; 
+    const minGauge = minWeight ? (minWeight * 0.5) : 0;    
+    
+    // Ensure valid sub-arc limits
+    const subArcBaseLimit = maxWeight && minWeight ? (((maxWeight * 1.5) - (minWeight * 5)) / 5) : 20;  // Default to 20 if invalid
+    
 
     return (
-
-        <>
-            <GaugeComponent
-value={currentWeight}
-type="radial"
-minValue={minGauge}
-maxValue={maxGauge}
-
-
-labels={{
-    tickLabels: {
-    type: "inner",
-    ticks: [
-        { value: 20, label: 'Low' },    
-        { value: 40, label: 'Moderate' },  
-        { value: 60, label: 'Optimal' },   
-        { value: 80, label: 'Moderate' },  
-        { value: 100, label: 'High' }    
-    ]
-    }
-}}
-
-
-arc={{
-    subArcs: [
-    {
-        length: 20, 
-        color: '#F58B19', 
-        showTick: true
-    },
-    {
-        length: 20, 
-        color: '#F5CD19', 
-        showTick: true
-    },
-    {
-        length: 20, 
-        color: '#00FF00', 
-        showTick: true
-    },
-    {
-        length: 20, 
-        color: '#F5CD19', 
-        showTick: true
-    },
-    {
-        length: 20, 
-        color: '#F58B19', 
-        showTick: true
-    }
-    ],
-    padding: 0.02, 
-    width: 0.3 
-}}
-
-
-pointer={{
-    type: 'arrow', 
-    color: getValueColor(currentWeight), 
-    baseColor: '#464A4F', 
-    length: 0.7, 
-    animate: true, 
-    elastic: true, 
-    width: 20, 
-    animationDuration: 3000, 
-    animationDelay: 100 
-}}
-/>
+<>     <div className='weightRule'>
+       { currentWeight &&( <GaugeComponent
+          type="semicircle"
+          arc={{
+            width: 0.2,
+            padding: 0.005,
+            cornerRadius: 1,
+            subArcs: [
+              {
+                limit: subArcBaseLimit,
+                color: '#EA4228',
+                showTick: true,
+                tooltip: { text: 'Too low weight!' },
+              },
+              {
+                limit: subArcBaseLimit * 2,
+                color: '#F5CD19',
+                showTick: true,
+                tooltip: { text: 'Low weight!' }
+              },
+              {
+                limit: subArcBaseLimit * 3,
+                color: '#5BE12C',
+                showTick: true,
+                tooltip: { text: 'OK weight!' }
+              },
+              {
+                limit: subArcBaseLimit * 4,
+                color: '#F5CD19',
+                showTick: true,
+                tooltip: { text: 'High weight!' }
+              },
+              {
+                color: '#EA4228',
+                tooltip: { text: 'Too high weight!' }
+              }
+            ]
+          }}
+          pointer={{
+            color: '#345243',
+            length: 0.80,
+            width: 15,
+          }}
+          labels={{
+            valueLabel: { formatTextValue: value => value + 'Kg' },
+            tickLabels: {
+              type: 'outer',
+              valueConfig: { formatTextValue: value => value + 'Kg', fontSize: 10 },
+              
+            }
+          }}
+          value={currentWeight}
+          minValue={minGauge}
+          maxValue={maxGauge}
+        />)}</div>
         <div className="stats-container">
         <h4>WEIGHT TRACKER</h4>
         <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
