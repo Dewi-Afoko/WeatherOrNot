@@ -19,11 +19,11 @@ export function WeightLog() {
         async function fetchWeightDetails() {
             const username = localStorage.getItem('username');
             const data = await weight_details(username);
-            setCurrentWeight(data[0]);
-            setAverageWeight(data[1]);
-            setWeightDifference(data[2]);
-            setMaxWeight(data[3]);
-            setMinWeight(data[4]);
+            setCurrentWeight(data[2]);
+            setAverageWeight(data[3]);
+            setWeightDifference(data[4]);
+            setMaxWeight(data[5]);
+            setMinWeight(data[6]);
 
         }
 
