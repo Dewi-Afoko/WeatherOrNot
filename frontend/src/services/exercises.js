@@ -3,17 +3,30 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 // const API_URL = 'https://api.api-ninjas.com/v1/exercises'
 
-export async function getNewExercises(token, muscle) {
+export async function getNewExercises(token, muscle, difficulty) {
+// export async function getNewExercises(token, muscle, difficulty, type) { //includes type for randomising 
 
   const requestOptions = {
     method: "GET",
     headers: {
-      Authorization: `Bearer ${token}`, //currently makes no difference if token included or not...
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json' //need to make sure correct content type here
     },
   };
- 
-  const response = await fetch(`${BACKEND_URL}/get_new_exercises?muscle=${muscle}`, requestOptions);
+
+  let route;
+  if (muscle && difficulty) {
+    route = `muscle=${muscle}&difficulty=${difficulty}`
+  } else if (muscle) {
+    route = `muscle=${muscle}`
+  } else if (difficulty) {
+    route = `difficulty=${difficulty}`
+  }
+
+    const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}`, requestOptions);
+    // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}&type=${type}`, requestOptions); //includes type for randomising 
+
+
 
   if (response.status !== 200) {
     throw new Error("Unable to fetch exercises from API");
