@@ -13,6 +13,7 @@ import { UserDetails } from "../../components/UserDetails";
 import LogoutButton from "../../components/LogoutButton";
 import BackgroundAnimation from "../../components/BackgroundAnimation";
 import WeightLog from "../../components/WeightDetails";
+import WeightChart from "../../components/WeightChart";
 
 
 export function UserPage() {
@@ -35,6 +36,7 @@ export function UserPage() {
     <div className="main-container">
       <UserDetails />
       <WeightLog />
+      <WeightChart/>
       <button className='test-button' onClick={handleclick}>Workout Preferences Test </button>
       {test && (<PreferenceTest onClose={handleClose}/>)}
       <LogoutButton />
