@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { weight_details } from "../services/adddetails";
 
@@ -109,3 +110,4 @@ export function WeightLog() {
 
 
 export default WeightLog;
+
