@@ -85,16 +85,19 @@ def get_new_exercises():
 
     muscle = request.args.get('muscle')
     difficulty = request.args.get('difficulty')
+    # exercise_type = request.args.get('type')
 
     payload = {}
     if muscle:
         payload['muscle'] = muscle
     if difficulty:
         payload['difficulty'] = difficulty
+    # if exercise_type:
+    #     payload['type'] = exercise_type
 
     api_url = 'https://api.api-ninjas.com/v1/exercises' 
     headers = {'X-Api-Key': os.getenv('API_KEY')} 
-    
+
     response = requests.get(api_url, params=payload, headers=headers)
     if response.status_code == 200:
         return jsonify(response.json()), 200

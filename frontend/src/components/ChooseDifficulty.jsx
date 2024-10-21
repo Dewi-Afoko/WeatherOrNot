@@ -5,7 +5,7 @@ function ChooseDifficulty(props) {
   const difficultyOptions = [
     'beginner',
     'intermediate',
-    'advanced'
+    'expert'
   ]
 
   return (
