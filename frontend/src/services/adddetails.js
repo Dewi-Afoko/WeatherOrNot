@@ -54,3 +54,27 @@ export async function weight_details(username) {
   const data = await response.json();
   return data;
 }
+
+export async function user_details(username) {
+  const payload = {
+    username: username,
+  };
+
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: `Bearer ${token}` #TODO Integrate tokens
+    },
+    body: JSON.stringify(payload),
+  };
+
+  const response = await fetch(`${BACKEND_URL}/users_details`, requestOptions);
+
+  if (response.status !== 201) {
+    throw new Error("Unable to load user details");
+  }
+
+  const data = await response.json();
+  return data;
+}

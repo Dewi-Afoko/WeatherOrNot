@@ -1,59 +1,67 @@
 /* Container to position the form */
 .form-container {
-    position:absolute; /* Allows for absolute positioning within the nearest positioned ancestor */
-    top: 30px; /* Distance from the top */
-    left: 20px; /* Distance from the left */
-    width: 300px; /* Fixed width for the container */
-    padding: 20px; /* Inner padding */
-    background-color: #f9f9f9; /* Background color */
-    border: 1px solid #ddd; /* Border style */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  position:absolute; /* Allows for absolute positioning within the nearest positioned ancestor */
+  top: 30px; /* Distance from the top */
+  left: 20px; /* Distance from the left */
+  width: 300px; /* Fixed width for the container */
+  padding: 20px; /* Inner padding */
+  background-color: #f9f9f9; /* Background color */
+  border: 1px solid #ddd; /* Border style */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-  
-  /* Styling for form labels */
-  form label {
-    display: block;
-    margin-bottom: 5px; /* Space below label */
-    font-size: 14px; /* Label font size */
-    font-weight: bold; /* Bold labels */
-    color: #333; /* Label color */
-  }
-  
-  /* Input field styles */
-  form input[type="text"],
-  form input[type="dob"] {
-    width: 100%; /* Full width of the container */
-    padding: 8px; /* Inner padding for inputs */
-    margin-bottom: 15px; /* Space below each input */
-    border: 1px solid #ccc; /* Input border */
-    border-radius: 5px; /* Rounded input corners */
-    font-size: 14px; /* Input font size */
-  }
-  
-  /* Submit button styling */
-  form input[type="submit"] {
-    width: 100%; /* Full width for the button */
-    padding: 10px; /* Inner padding for button */
-    background-color: #4CAF50; /* Button background color */
-    color: white; /* Button text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded button corners */
-    font-size: 16px; /* Button font size */
-    cursor: pointer; /* Pointer cursor on hover */
-  }
-  
-  form input[type="submit"]:hover {
-    background-color: #45a049; /* Darker shade on hover */
-  }
-  
-  /* Optional: Adjust font and spacing for the heading */
-  h2 {
-    font-family: Arial, sans-serif; /* Font family */
-    font-size: 20px; /* Heading font size */
-    margin-bottom: 20px; /* Space below heading */
-    color: #333; /* Heading color */
-    text-align: center; /* Center align heading */
-  }
-  
+
+/* Styling for form labels */
+form label {
+  display: block;
+  margin-bottom: 5px; /* Space below label */
+  font-size: 14px; /* Label font size */
+  font-weight: bold; /* Bold labels */
+  color: #333; /* Label color */
+}
+
+/* Input field styles */
+form input[type="text"],
+form input[type="date"] {
+  width: 100%; /* Full width of the container */
+  padding: 8px; /* Inner padding for inputs */
+  margin-bottom: 15px; /* Space below each input */
+  border: 1px solid #ccc; /* Input border */
+  border-radius: 5px; /* Rounded input corners */
+  font-size: 14px; /* Input font size */
+}
+form input[type="number"],
+form input[type="height"] {
+  width: 100%; /* Full width of the container */
+  padding: 8px; /* Inner padding for inputs */
+  margin-bottom: 15px; /* Space below each input */
+  border: 1px solid #ccc; /* Input border */
+  border-radius: 5px; /* Rounded input corners */
+  font-size: 14px; /* Input font size */
+}
+
+/* Submit button styling */
+form input[type="submit"] {
+  width: 100%; /* Full width for the button */
+  padding: 10px; /* Inner padding for button */
+  background-color: #4CAF50; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded button corners */
+  font-size: 16px; /* Button font size */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+form input[type="submit"]:hover {
+  background-color: #45a049; /* Darker shade on hover */
+}
+
+/* Optional: Adjust font and spacing for the heading */
+h2 {
+  font-family: Arial, sans-serif; /* Font family */
+  font-size: 20px; /* Heading font size */
+  margin-bottom: 20px; /* Space below heading */
+  color: #333; /* Heading color */
+  text-align: center; /* Center align heading */
+}

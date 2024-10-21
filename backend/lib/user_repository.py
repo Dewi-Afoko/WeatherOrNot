@@ -47,6 +47,7 @@ class UserRepository:
 
     def add_details(self, username, first_name, last_name, dob, height, weight):
         current_user = self.find_by_username(username)
+        print(f'Hereeee{[ username, first_name, last_name, dob, height, weight]}')
         if len(first_name) > 1:
             self._connection.execute("UPDATE users SET first_name = %s WHERE username = %s", [first_name, current_user.username])
         if len(last_name) > 1:
@@ -62,8 +63,6 @@ class UserRepository:
     def weight_details(self,username):
         user = self.find_by_username(username)
         user_weight = user.weight
-        print(user)
-        print(user.weight)
         if len(user_weight)==1 :
             return [user_weight]
         if len(user_weight)>1 :
@@ -73,6 +72,9 @@ class UserRepository:
             min_weight = min(user_weight)
             return [user_weight, [num for num in range(len(user_weight))], user_weight[-1], average_weight, weight_difference, max_weight, min_weight] #Added user_weight[-1] to return most recent (shown as current) weight - # Return all weights as array and length of weight array
 
+    def user_details(self,username):
+        user = self.find_by_username(username)
+        return [user.first_name, user.last_name, user.dob, user.height]
 
 # NEW
 

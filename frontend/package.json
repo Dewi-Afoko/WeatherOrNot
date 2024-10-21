@@ -16,8 +16,11 @@
     "react-gauge-chart": "^0.5.1",
     "react-gauge-component": "^1.2.61",
     "react-router-dom": "^6.14.2",
-    "sass": "^1.80.1",
+
     "victory": "^37.2.0"
+
+    "survey-react-ui": "^1.12.6"
+
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.5.0",
