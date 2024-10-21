@@ -83,11 +83,18 @@ def user_weight():
 @app.route('/get_new_exercises', methods=['GET']) 
 def get_new_exercises():
 
-    payload = {
-        'muscle': request.args.get('muscle'),
-    }
+    muscle = request.args.get('muscle')
+    difficulty = request.args.get('difficulty')
+
+    payload = {}
+    if muscle:
+        payload['muscle'] = muscle
+    if difficulty:
+        payload['difficulty'] = difficulty
+
     api_url = 'https://api.api-ninjas.com/v1/exercises' 
     headers = {'X-Api-Key': os.getenv('API_KEY')} 
+    
     response = requests.get(api_url, params=payload, headers=headers)
     if response.status_code == 200:
         return jsonify(response.json()), 200

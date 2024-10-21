@@ -1,15 +1,12 @@
 import RadioSelector from "./RadioSelector";
-// import { useEffect } from "react";
 
-function ChooseMuscle(props) {
-
-  // const useEffect()
+function ChooseDifficulty(props) {
 
   const difficultyOptions = [
     'beginner',
-    'intermediate'
+    'intermediate',
+    'advanced'
   ]
-
 
   return (
     <div>
@@ -30,4 +27,4 @@ function ChooseMuscle(props) {
   );
 }
   
-export default ChooseMuscle;
+export default ChooseDifficulty;

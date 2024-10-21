@@ -1,6 +1,7 @@
 // import { useState } from "react";
 import GenerateButton from "../../components/GenerateButton";
 import ChooseMuscle from "../../components/ChooseMuscle";
+import ChooseDifficulty from "../../components/ChooseDifficulty";
 import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -92,44 +93,38 @@ export function GenerateExercises() {
     // ]    
 
     const navigate = useNavigate();
+
     const [muscle, setMuscle] = useState("")
+    const[difficulty, setDifficulty] = useState("")
+    // const[equipment, setEquipment] = useState([])
+
     const [exercises, setExercises] = useState([])
+
     // USING API
     const handleSubmit = (event) => {
         event.preventDefault();
+        setExercises([]);
         const token = localStorage.getItem("token");
-        if (muscle && token) {  // Make sure both muslce and token are set
-            getNewExercises(token, muscle)
+    
+        // setDifficulty(localStorage.getItem("difficulty")); // set difficulty to users preference in local storage    
+        if (!token) {
+            console.error("Please ensure you're logged in.");
+            navigate("/login");
+            return;
+        }
+        if (muscle || difficulty) {
+            getNewExercises(token, muscle, difficulty)
             .then((data) => {
-                setExercises(data);  // Set exercises to onesfetched from API
+                setExercises(data);  // 
             })
             .catch((err) => {
-                console.error(err);
-                navigate("/login");
-            });
+                console.error(err)
+            })
         } else {
-            console.error("Please select a muscle group and ensure you're logged in.");
+            console.error("Please select a filter and ensure you're logged in.");
         }
     };
 
-    // USING DB
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const token = localStorage.getItem("token");
-    
-    //     if (muscle && token) {  // Make sure both muslce and token are set
-    //         getbackEndExercises(token, muscle)
-    //         .then((data) => {
-    //             setExercises(data);  // Set exercises to onesfetched from API
-    //         })
-    //         .catch((err) => {
-    //             console.error(err);
-    //             navigate("/login");
-    //         });
-    //     } else {
-    //         console.error("Please select a muscle group and ensure you're logged in.");
-    //     }
-    // };
 
     return (
         <>
@@ -141,14 +136,17 @@ export function GenerateExercises() {
                     />
                 </div>
                 <div>
+                    <h1>Choose Difficulty</h1>
+                    <ChooseDifficulty
+                        setDifficulty={setDifficulty}
+                    />
+                </div>
+                <div>
                     <GenerateButton/>
                 </div>
             </form>
-            {/* {if (exercises) {
-                return (
-                    
-                )
-            }} */}
+
+            {exercises.length > 0 &&
             <div>
                 <h1>Try these exercises:</h1>
                 {exercises.map((exercise, index) => {
@@ -164,7 +162,7 @@ export function GenerateExercises() {
                         />
                     )
                 })}
-            </div>
+            </div>}
         </>
     )
 }
