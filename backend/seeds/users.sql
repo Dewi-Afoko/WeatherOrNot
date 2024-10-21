@@ -9,6 +9,7 @@ CREATE TABLE users (
     last_name text,
     dob text,
     height text,
-    weight int[]
+    weight int[],
+    weight_date text[]
 );
 

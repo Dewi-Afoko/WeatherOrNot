@@ -57,8 +57,8 @@ export function WeightChart() {
                 style={{ data: { fill: "#c43a31" } }}
                 size={9}
                 data={graphData} 
-                labels={({ datum }) => `${datum.y} kg, 
-                Weigh in number: ${datum.x}`} 
+                labels={({ datum }) => `Weight: ${datum.y} kg, 
+                Date: ${datum.x}`} 
                 labelComponent={<VictoryTooltip flyoutStyle={{ fill: "white" }}/>}
                 />
             </VictoryChart>
