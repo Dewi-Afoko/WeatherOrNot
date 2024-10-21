@@ -35,7 +35,7 @@ export function WeightLog() {
     const minGauge = minWeight ? (minWeight * 0.5) : 0;    
     
     // Ensure valid sub-arc limits
-    const subArcBaseLimit = maxWeight && minWeight ? (((maxWeight * 1.5) - (minWeight * 5)) / 5) : 20;  // Default to 20 if invalid
+    const subArcBaseLimit = maxWeight && minWeight ? (((maxWeight * 1.5) - (minWeight * 0.5)) / 5) : 20;  // Default to 20 if invalid
     
 
     return (
@@ -48,30 +48,30 @@ export function WeightLog() {
             cornerRadius: 1,
             subArcs: [
               {
-                limit: subArcBaseLimit,
+                limit: subArcBaseLimit+minGauge,
                 color: '#EA4228',
                 showTick: true,
                 tooltip: { text: 'Too low weight!' },
               },
               {
-                limit: subArcBaseLimit * 2,
+                limit: (subArcBaseLimit * 2)+minGauge,
                 color: '#F5CD19',
                 showTick: true,
                 tooltip: { text: 'Low weight!' }
               },
               {
-                limit: subArcBaseLimit * 3,
+                limit: (subArcBaseLimit * 3)+minGauge,
                 color: '#5BE12C',
                 showTick: true,
                 tooltip: { text: 'OK weight!' }
               },
               {
-                limit: subArcBaseLimit * 4,
+                limit: (subArcBaseLimit * 4)+minGauge,
                 color: '#F5CD19',
                 showTick: true,
                 tooltip: { text: 'High weight!' }
               },
-              {
+              {limit: (subArcBaseLimit * 5)+minGauge,
                 color: '#EA4228',
                 tooltip: { text: 'Too high weight!' }
               }
@@ -95,7 +95,7 @@ export function WeightLog() {
           maxValue={maxGauge}
         />)}</div>
         <div className="stats-container">
-        <h4>WEIGHT TRACKER</h4>
+        <h4>{maxGauge}WEIGHT{minGauge} TRACKER{subArcBaseLimit}dif{subArcBaseLimit*5}</h4>
         <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
         <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
         <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
