@@ -12,7 +12,7 @@ export function UserDetails() {
   const [lastName, setLastName] = useState('')
   const [currentDob, setCurrentDob]=useState('')
   const [dob, setDob] = useState('')
-  const [currentHeight, setCurrentHeight]=useState('')
+  const [currentHeight, setCurrentHeight]= useState('')
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState(0)
   const [weighterror,setweighterror]=useState('')
@@ -116,7 +116,7 @@ if (!token) {
           value={dob}
           onChange={handledobChange}
         />
-        <label htmlFor="height">Height: {currentHeight}</label>
+        <label htmlFor="height">Height: {currentHeight}<br></br>(Update Weight below)</label>
         <input
           placeholder="Update height(cm)"
           id="height"
