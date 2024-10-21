@@ -24,12 +24,6 @@ function ChooseMuscle(props) {
     'traps',
     'triceps'
   ]
-  //NEED TO HAVE FORMATTED MUSCLES ONLY FOR USER DISPLAY AND NOT FOR VALUES
-  const formattedMuscles = muscleOptions.map(
-    (muscle) => muscle.replace('_', ' ') // removes underscores
-  ).map(
-    (muscle) => muscle.replace(muscle[0], muscle[0].toUpperCase() //changes to title-case
-  ))
 
     const handleChange = (event) => {
       props.setMuscle(event.target.value)
@@ -38,13 +32,14 @@ function ChooseMuscle(props) {
   return (
     <div>
       {/* <form> */}
-        {muscleOptions.map((muscle, index) => {
+        {muscleOptions.map((muscleOption, index) => {
           return (
             <RadioSelector
               key={index}
-              id={muscle}
-              value={muscle}
+              id={muscleOption}
+              value={muscleOption}
               name="muscle_group"
+              checked={props.muscle === muscleOption}
               onChange={handleChange}
             />
           )

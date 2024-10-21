@@ -10,22 +10,33 @@ import { getNewExercises, getbackEndExercises } from "../../services/exercises";
 export function GenerateExercises() {
 
     const exerciseTypes = [
+        'cardio',
         'olympic_weightlifting',
         'plyometrics',
+        'powerlifting',
         'strength',
         'stretching',
-        'strongman',
-        '',
+        'strongman'
     ]
+
+    // A function to be passed down to each component - used to correctly format display for user
+    // const formatDisplayOutput = (output) => {
+    //     return output
+    //         .replace('_', ' ') // removes underscores
+    //         .replace(output[0], output[0].toUpperCase()); //changes to title-case
+    // };
 
     const navigate = useNavigate();
 
-    const [muscle, setMuscle] = useState("")
-    const[difficulty, setDifficulty] = useState("")
-    // const[equipment, setEquipment] = useState([])
-    const[type, setType] =useState("")
-
+    // Managin state for exercises output
     const [exercises, setExercises] = useState([])
+
+    // managing state for form inputs
+    const [muscle, setMuscle] = useState("")
+    const [difficulty, setDifficulty] = useState("")
+    // const [equipment, setEquipment] = useState([])
+    // const [type, setType] = useState("")
+
 
     // USING API
     const handleSubmit = (event) => {
@@ -45,8 +56,8 @@ export function GenerateExercises() {
             getNewExercises(token, muscle, difficulty)
             .then((data) => {
                 setExercises(data);
-                // setDifficulty("");
-                // setMuscle("");
+                setMuscle(""); //reset value
+                setDifficulty(""); //reset value
             })
             .catch((err) => {
                 console.error(err)
@@ -64,13 +75,17 @@ export function GenerateExercises() {
                 <div>
                     <h1>Choose a Muscle</h1>
                     <ChooseMuscle
+                        muscle={muscle}
                         setMuscle={setMuscle}
+                        // formatDisplayOutput={formatDisplayOutput}
                     />
                 </div>
                 <div>
                     <h1>Choose Difficulty</h1>
                     <ChooseDifficulty
+                        difficulty={difficulty}
                         setDifficulty={setDifficulty}
+                        // formatDisplayOutput={formatDisplayOutput}
                     />
                 </div>
                 <div>
@@ -92,6 +107,7 @@ export function GenerateExercises() {
                             equipment={exercise.equipment}
                             difficulty={exercise.difficulty}
                             instructions={exercise.instructions}
+                            // formatDisplayOutput={formatDisplayOutput}
                         />
                     )
                 })}
