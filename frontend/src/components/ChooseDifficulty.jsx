@@ -8,6 +8,10 @@ function ChooseDifficulty(props) {
     'expert'
   ]
 
+  const handleChange = (event) => {
+    props.setMuscle(event.target.value)
+  }
+
   return (
     <div>
       {/* <form> */}
@@ -18,7 +22,7 @@ function ChooseDifficulty(props) {
               id={difficulty}
               value={difficulty}
               name="difficulty_group"
-              onChange={() => props.setDifficulty(difficulty)}
+              onChange={handleChange}
             />
           )
         })}

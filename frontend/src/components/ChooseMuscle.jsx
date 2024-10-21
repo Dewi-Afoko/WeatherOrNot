@@ -31,6 +31,9 @@ function ChooseMuscle(props) {
     (muscle) => muscle.replace(muscle[0], muscle[0].toUpperCase() //changes to title-case
   ))
 
+    const handleChange = (event) => {
+      props.setMuscle(event.target.value)
+    }
 
   return (
     <div>
@@ -42,7 +45,7 @@ function ChooseMuscle(props) {
               id={muscle}
               value={muscle}
               name="muscle_group"
-              onChange={() => props.setMuscle(muscle)}
+              onChange={handleChange}
             />
           )
         })}
