@@ -96,7 +96,6 @@ def post_exercises():
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
 
-// robs FE get exercise request
 @app.route('/get_exercise', methods=['GET']) 
 def get_exercise():
     payload = {
@@ -110,7 +109,7 @@ def get_exercise():
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
 
-      
+
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)
