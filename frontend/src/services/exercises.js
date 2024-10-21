@@ -3,7 +3,7 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 // const API_URL = 'https://api.api-ninjas.com/v1/exercises'
 
-export async function getNewExercises(token, muscle, difficulty) {
+export async function getNewExercises(token, muscle, difficulty, equipment) {
 // export async function getNewExercises(token, muscle, difficulty, type) { //includes type for randomising 
 
   const requestOptions = {
@@ -14,16 +14,34 @@ export async function getNewExercises(token, muscle, difficulty) {
     },
   };
 
-  let route;
-  if (muscle && difficulty) {
-    route = `muscle=${muscle}&difficulty=${difficulty}`
-  } else if (muscle) {
-    route = `muscle=${muscle}`
-  } else if (difficulty) {
-    route = `difficulty=${difficulty}`
-  }
+  // let queryParams = "";
 
-    const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}`, requestOptions);
+  // let route;
+  // if (muscle && difficulty) {
+  //   route = `muscle=${muscle}&difficulty=${difficulty}`
+  // } else if (muscle) {
+  //   route = `muscle=${muscle}`
+  // } else if (difficulty) {
+  //   route = `difficulty=${difficulty}`
+  // } else if (equipment) {
+  //   route = `equipment=${equipment}`
+  // }
+
+  // if (muscle) {
+  //   queryParams += `muscle=${muscle}`
+  // }
+  // if (difficulty) {
+  //   queryParams += `difficulty=${difficulty}`
+  // }
+  // if (equipment) {
+  //   queryParams += `equipment=${equipment}`
+  // }
+
+
+
+    // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${queryParams}` , requestOptions);
+    const response = await fetch(`${BACKEND_URL}/get_new_exercises?muscle=${muscle}&difficulty=${difficulty}&equipment=${equipment}` , requestOptions);
+    // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}`, requestOptions);
     // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}&type=${type}`, requestOptions); //includes type for randomising 
 
 

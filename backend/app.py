@@ -85,6 +85,7 @@ def get_new_exercises():
 
     muscle = request.args.get('muscle')
     difficulty = request.args.get('difficulty')
+    equipment = request.args.get('equipment')
     # exercise_type = request.args.get('type')
 
     payload = {}
@@ -92,6 +93,8 @@ def get_new_exercises():
         payload['muscle'] = muscle
     if difficulty:
         payload['difficulty'] = difficulty
+    if equipment:
+        payload['equipment'] = equipment
     # if exercise_type:
     #     payload['type'] = exercise_type
 

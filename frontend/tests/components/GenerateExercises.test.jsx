@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { GenerateExercises } from '../../src/pages/GenerateExercises/GenerateExercises';
 import { getNewExercises } from '../../src/services/exercises';
