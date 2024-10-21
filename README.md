@@ -16,10 +16,13 @@ Description on the project
 - 
 
 ## Structure 
-This repo contains two applications:
+Our web application consists of:
 
 A frontend React App  
 A backend api server built with Flask and links to a PostgreSQL database
+
+The React Testing Library is used to test the Frontend.
+Pytest is used to test the Backend.
 
 ## Installation
 
@@ -64,9 +67,6 @@ JWT_SECRET= your_secret_key
 # Run seed_database to seed the sql files into database 
 (backend-venv); python seed_database.py
 
-# Run the tests (with extra logging)
-(backend-venv); pytest -sv
-
 # Run the app
 (backend-venv); python app.py
 
@@ -92,10 +92,25 @@ npm install
 # Run the app
 npm run dev
 
-# Run the tests
-npm test
-
 # Visit the url http://localhost:5173/ in your browser
 ```
 
+### 4. Run the Tests
+  
+#### Backend tests
+```
+# Run the backend tests
+cd backend
+
+# Run the tests (with extra logging)
+(backend-venv); pytest -sv
+```
+  
+#### Frontend tests
+```
+cd frontend
+
+# Run the tests
+npm test
+```
 
