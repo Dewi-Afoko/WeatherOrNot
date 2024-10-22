@@ -1,9 +1,13 @@
+DROP TABLE IF EXISTS workouts;
+DROP SEQUENCE IF EXISTS user_username;
 DROP TABLE IF EXISTS users;
+DROP SEQUENCE IF EXISTS username;
+
 
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username text,
+    username text UNIQUE,
     password text,
     exercise_list text[],
     first_name text,
@@ -15,22 +19,26 @@ CREATE TABLE users (
     user_level text
 );
 
-INSERT INTO users (username, password)
-VALUES
-    ('johndoe', 'P@ssword1324%6'),
-    ('janedoe', 'P@55word1324%6');
-
-
+CREATE TABLE workouts (
+    id SERIAL PRIMARY KEY,
+    date text,
+    exercise_list jsonb,
+    complete boolean,
+    user_username text,
+    constraint fk_username foreign key(user_username)
+    references users(username)
+    on delete set null
+    on update set default
+);
 
 DROP TABLE IF EXISTS Exercise;
 
 CREATE TABLE Exercise (
     id SERIAL PRIMARY KEY,
-    name text UNIQUE,
+    name text,
     type text,
     muscle text,
     equipment text,
     difficulty text,
     instructions text
 );
-

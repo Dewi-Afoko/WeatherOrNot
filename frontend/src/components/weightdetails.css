@@ -1,0 +1,37 @@
+/* Container to position the statistics */
+.stats-container {
+    position: absolute; /* Position it in the top-right corner */
+    top: 20px;         /* Distance from the top */
+    right: 50px;       /* Distance from the right */
+    width: 250px;      /* Set a width */
+    padding: 15px;     /* Add some padding */
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  }
+
+  
+  /* Styling for headings */
+  .stats-container h3 {
+    margin: 8px 0;  /* Space between headings */
+    font-size: 16px; /* Font size */
+    color: #333;     /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+  }
+
+  .stats-container h4 {
+    margin: 8px 0;  /* Space between headings */
+    font-size: 16px; /* Font size */
+    color: #333;     /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+    text-decoration: underline;
+  }
+
+  .weightRule{
+    position: absolute; /* Position it in the top-right corner */
+    top: 250px;         /* Distance from the top */
+    right: 20px;   
+
+  }
+  

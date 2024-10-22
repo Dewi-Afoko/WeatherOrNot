@@ -2,12 +2,19 @@ import os
 import psycopg2
 import requests
 from flask_sqlalchemy import SQLAlchemy
+
+from datetime import datetime
+
+from functools import wraps
+
 from dotenv import load_dotenv
 from flask import Flask,request, redirect, jsonify,  render_template, flash, session
 from lib.user_repository import UserRepository
 from lib.user import User
 from lib.exercise import Exercise
 from lib.exercise_repository import ExerciseRepository
+from lib.workout import Workout
+from lib.workout_repository import WorkoutRepository
 from lib.database_connection import get_flask_database_connection
 from controllers.authentification import check_password
 from controllers.token_checker import token_checker
@@ -19,6 +26,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://127.0.01/exercise'
 db = SQLAlchemy(app)
 load_dotenv()
 # Enable CORS for all routes, allowing requests from http://localhost:5173
+
 CORS(app, origins=["http://localhost:5173"])
 
 @app.route('/')
@@ -63,11 +71,13 @@ def update_user():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
     data = request.get_json()
+    print(data)
     repository.add_details(data['username'], data['first_name'], data['last_name'], data['dob'], data['height'], data['weight'])
     return jsonify({'message':'Details added'}),201
 
 
-@app.route('/users', methods=['POST']) #TODO Add TokenChecker
+@app.route('/users_weight', methods=['POST'])
+@token_checker 
 def user_weight():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
@@ -75,6 +85,16 @@ def user_weight():
     weight = repository.weight_details(data['username'])
     print(weight)
     return  jsonify(weight),201
+
+@app.route('/users_details', methods=['POST']) 
+@token_checker
+def user_details():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    details = repository.user_details(data['username'])
+    print(details)
+    return  jsonify(details),201
 
 
 # Rob's FE get exercise request
@@ -140,6 +160,25 @@ def add_favourite():
     # print(result)
     return jsonify({"message": result}), 201
 
+@app.route('/workouts', methods=['POST']) #TODO Add TokenChecker
+def add_workout():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    date = datetime.now().strftime('%Y/%m/%d')
+    data = request.get_json()
+    data['date'] = date
+    print(f'1This line:{data}')
+    details = repository.save_workout(data)
+    return jsonify(details),201
+
+
+@app.route('/workouts', methods=['PATCH']) #TODO Add TokenChecker
+def update_workout():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    details = repository.update_workout(data)
+    return jsonify(details),201
 
 
 ###### Delete favourite exercise to user repo
@@ -198,7 +237,6 @@ def get_exercises():
     exercises = repository.all()
     exercise_dicts = [exercise.to_dict() for exercise in exercises]
     return jsonify(exercise_dicts), 200
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

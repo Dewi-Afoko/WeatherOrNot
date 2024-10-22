@@ -9,12 +9,14 @@ class User:
         self.dob = ""
         self.height = ""
         self.weight = []
+        self.weight_date = []
+        self.level = ""
     
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
 
     def __repr__(self):
-        return f"User({self.id}, {self.username}, {self.password}, {self.exercise_list}, {self.first_name}, {self.last_name}, {self.dob}, {self.height}, {self.weight})"
+        return f"User({self.id}, {self.username}, {self.password}, {self.exercise_list}, {self.first_name}, {self.last_name}, {self.dob}, {self.height}, {self.weight}, {self.weight_date}, {self.level})"
     
     def to_dict(self):
         return {
@@ -25,7 +27,9 @@ class User:
             "last_name":self.last_name,
             "dob":self.dob,
             "height":self.height, 
-            "weight":self.weight 
+            "weight":self.weight,
+            "weight_date":self.weight_date,
+            "level":self.level
             }
     
     def add_exercise(self, exercise):

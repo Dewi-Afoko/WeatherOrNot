@@ -1,0 +1,88 @@
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #222;
+}
+
+.rotating-text {
+  font-family: Lato, sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  color: white;
+  display: inline-flex; /* Align static text and rotating words side by side */
+  align-items: center;
+
+  p {
+    margin: 0;
+
+    /* Static text styles */
+    .static-text {
+      margin-right: 10px; /* Add space between static text and rotating words */
+    }
+
+    /* Container for rotating words */
+    .word-container {
+      position: relative; /* Parent for absolute-positioned words */
+      width: 150px; /* Ensure consistent width for rotating words */
+      height: 50px; /* Ensure consistent height */
+      display: flex;
+      align-items: center;
+
+      .word {
+        position: absolute;
+        opacity: 0; /* Start hidden */
+        transition: opacity 0.5s ease-in-out;
+        display: flex;
+
+        &.active {
+          opacity: 1; /* Word fades in */
+        }
+
+        &.fade-out {
+          opacity: 0; /* Word fades out */
+        }
+
+        .letter {
+          transform-origin: center center 25px;
+
+          &.out {
+            transform: rotateX(90deg);
+            transition: 0.32s cubic-bezier(0.6, 0, 0.7, 0.2);
+          }
+
+          &.in {
+            transition: 0.38s ease;
+          }
+
+          &.behind {
+            transform: rotateX(-90deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Color palette
+.alizarin {
+  color: #e74c3c;
+}
+
+.wisteria {
+  color: #8e44ad;
+}
+
+.peter-river {
+  color: #3498db;
+}
+
+.emerald {
+  color: #2ecc71;
+}
+
+.sun-flower {
+  color: #f1c
+}
