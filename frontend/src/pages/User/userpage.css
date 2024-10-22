@@ -20,3 +20,14 @@
     background-color: #e0e0e0; /* Slightly darker background on hover */
     color: #000; /* Darker text color on hover */
 }
+
+.weightChart {
+    z-index: 80;
+    position: absolute;
+    top: 400px;
+    right: 0px;
+    
+    /* Scale down the size */
+    transform: scale(0.8); /* Adjust the value as needed to reduce size */
+    transform-origin: top right; /* Ensures it scales from the top-right corner */
+}

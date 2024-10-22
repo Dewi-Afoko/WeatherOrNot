@@ -60,7 +60,7 @@ class UserRepository:
             self._connection.execute("UPDATE users SET last_name = %s WHERE username = %s", [last_name, current_user.username])
         if len(dob) > 1:
             self._connection.execute("UPDATE users SET dob = %s WHERE username = %s", [dob, current_user.username])
-        if len(dob) > 1:
+        if height:
             self._connection.execute("UPDATE users SET height = %s WHERE username = %s", [height, current_user.username])
         if int(weight) > 0 :
             weight_date = datetime.now().strftime('%Y/%m/%d')

@@ -31,7 +31,7 @@ export async function addDetails(token, username, firstname, lastname, dob, heig
 }
 
 
-export async function weight_details(username) {
+export async function weight_details(token,username) {
   const payload = {
     username: username,
   };
@@ -40,12 +40,12 @@ export async function weight_details(username) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: `Bearer ${token}` #TODO Integrate tokens
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(payload),
   };
 
-  const response = await fetch(`${BACKEND_URL}/users`, requestOptions);
+  const response = await fetch(`${BACKEND_URL}/users_weight`, requestOptions);
 
   if (response.status !== 201) {
     throw new Error("Unable to change details");
@@ -55,7 +55,7 @@ export async function weight_details(username) {
   return data;
 }
 
-export async function user_details(username) {
+export async function user_details(token,username) {
   const payload = {
     username: username,
   };
@@ -64,7 +64,7 @@ export async function user_details(username) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // Authorization: `Bearer ${token}` #TODO Integrate tokens
+      Authorization: `Bearer ${token}`
     },
     body: JSON.stringify(payload),
   };
@@ -78,6 +78,7 @@ export async function user_details(username) {
   const data = await response.json();
   return data;
 }
+
 
 // Add a workout
 export async function add_workout() {
@@ -133,3 +134,4 @@ console.log(payload)
 //   const data = await response.json();
 //   return data;
 // }
+

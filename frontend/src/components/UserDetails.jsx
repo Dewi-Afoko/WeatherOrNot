@@ -12,7 +12,7 @@ export function UserDetails() {
   const [lastName, setLastName] = useState('')
   const [currentDob, setCurrentDob]=useState('')
   const [dob, setDob] = useState('')
-  const [currentHeight, setCurrentHeight]=useState('')
+  const [currentHeight, setCurrentHeight]= useState('')
   const [height, setHeight] = useState('')
   const [weight, setWeight] = useState(0)
   const [weighterror,setweighterror]=useState('')
@@ -26,7 +26,8 @@ export function UserDetails() {
 useEffect(() => {
   async function fetchUserDetails() {
     const username = localStorage.getItem('username');
-    const data = await user_details(username);
+    const token = localStorage.getItem("token");
+    const data = await user_details(token,username);
     setCurrentFirstName(data[0]);
     setCurrentLastName(data[1]);
     setCurrentDob(data[2]);
@@ -116,7 +117,7 @@ if (!token) {
           value={dob}
           onChange={handledobChange}
         />
-        <label htmlFor="height">Height: {currentHeight}</label>
+        <label htmlFor="height">Height: {currentHeight}<br></br>(Update Weight below)</label>
         <input
           placeholder="Update height(cm)"
           id="height"

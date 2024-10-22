@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { weight_details } from "../services/adddetails";
 import { VictoryChart, VictoryScatter, VictoryTheme, VictoryTooltip, VictoryAnimation } from 'victory';
 
@@ -9,19 +10,20 @@ export function WeightChart() {
     const [maxWeight, setMaxWeight] = useState(0);
     const [minWeight, setMinWeight] = useState(0);
     const [graphData, SetGraphData] = useState([]);
-    const [dateArray, setDateArray] = useState([]);
+    //const [dateArray, setDateArray] = useState([]);
     const [weightArray, setWeightArray] = useState([]);
 
     useEffect(() => {
         async function fetchWeightDetails() {
             try {
                 const username = localStorage.getItem('username');
-                const data = await weight_details(username);
+                const token = localStorage.getItem('token')
+                const data = await weight_details(token, username);
                 const weightArray = data[0];
                 const dateArray = data[1];
             
                 setWeightArray(weightArray);
-                setDateArray(dateArray);
+                //setDateArray(dateArray);
 
                 const graphDataJSON = dateArray.map((date, index) => ({
                     x: date,  
