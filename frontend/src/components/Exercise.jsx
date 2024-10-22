@@ -34,15 +34,23 @@ function Exercise(props) {
     // console.log(props.name)
     
 
+    const formatDisplayOutput = (output) => {
+        return output
+            .replace('_', ' ') // removes underscores
+            .replace(output[0], output[0].toUpperCase()); //changes to title-case
+    };
+
 return (
     <div>
-        <h2>{props.name}</h2>
+            <a href="">
+            <h2>{formatDisplayOutput(props.name)}</h2>
+            </a>
         <ul>
-            <li>Type: {props.type}</li>
-            <li>Muscle: {props.muscle}</li>
-            <li>Equipment: {props.equipment}</li>
-            <li>Difficulty: {props.difficulty}</li>
-            <li>Instructions: {props.instructions}</li>
+            <li>Type: {formatDisplayOutput(props.type)}</li>
+            <li>Muscle: {formatDisplayOutput(props.muscle)}</li>
+            <li>Equipment: {formatDisplayOutput(props.equipment)}</li>
+            <li>Difficulty: {formatDisplayOutput(props.difficulty)}</li>
+            {/* <li>Instructions: {props.instructions}</li> */}
             <button onClick={handleAddFavouriteClick}>
                     {like ? "UnFavourite" : "Favourite"}
                 </button>

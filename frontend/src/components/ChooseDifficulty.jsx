@@ -1,27 +1,29 @@
 import RadioSelector from "./RadioSelector";
-// import { useEffect } from "react";
 
-function ChooseMuscle(props) {
-
-  // const useEffect()
+function ChooseDifficulty(props) {
 
   const difficultyOptions = [
     'beginner',
-    'intermediate'
+    'intermediate',
+    'expert'
   ]
 
+  const handleChange = (event) => {
+    props.setDifficulty(event.target.value)
+  }
 
   return (
     <div>
       {/* <form> */}
-        {difficultyOptions.map((difficulty, index) => {
+        {difficultyOptions.map((difficultyOption, index) => {
           return (
             <RadioSelector
               key={index}
-              id={difficulty}
-              value={difficulty}
+              id={difficultyOption}
+              value={difficultyOption}
               name="difficulty_group"
-              onChange={() => props.setDifficulty(difficulty)}
+              checked={props.difficulty === difficultyOption}
+              onChange={handleChange}
             />
           )
         })}
@@ -30,4 +32,4 @@ function ChooseMuscle(props) {
   );
 }
   
-export default ChooseMuscle;
+export default ChooseDifficulty;
