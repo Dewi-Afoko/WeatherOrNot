@@ -1,0 +1,21 @@
+.logout-button {
+    position: fixed; /* Use fixed positioning for the button */
+    bottom: 20px; /* Distance from the bottom of the viewport */
+    right: 20px; /* Distance from the right side of the viewport */
+    width: 200px; /* Adjust width as needed */
+    padding: 10px; /* Inner padding */
+    background-color: #f9f9f9; /* Same background color as user details */
+    border: 1px solid #ddd; /* Same border style */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    color: #333; /* Text color */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Transition effects for hover */
+}
+
+/* Hover effect */
+.logout-button:hover {
+    background-color: #e0e0e0; /* Slightly darker background on hover */
+    color: #000; /* Darker text color on hover */
+}

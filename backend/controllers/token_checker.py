@@ -1,13 +1,16 @@
 import os
 import jwt
 from flask import request, jsonify
-
+from functools import wraps
+from dotenv import load_dotenv
 # Load the secret key from environment variable
+load_dotenv()
 SECRET_KEY = os.getenv('JWT_SECRET', 'your_default_secret_key')
 
 # Token checker to be used before routes that we want to have token to run 
 def token_checker(f):
-    def decorated_function():
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
         auth_header = request.headers.get('Authorization')
         if not auth_header or not auth_header.startswith("Bearer "):
             return jsonify({"message": "Authorization header missing or invalid"}), 401
@@ -22,6 +25,6 @@ def token_checker(f):
         except jwt.InvalidTokenError:
             return jsonify({"message": "Invalid token!"}), 401
         
-        return f()  # Call the original function
+        return f(*args, **kwargs)  # Call the original function
     return decorated_function
 
