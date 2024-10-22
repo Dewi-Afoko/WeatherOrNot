@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { weight_details } from "../services/adddetails";
+import { weight_details } from '../services/addDetails';
 
 import GaugeComponent from 'react-gauge-component';
 
@@ -14,11 +14,11 @@ export function WeightLog() {
     const [maxWeight, setMaxWeight] = useState(null);
     const [minWeight, setMinWeight] = useState(null);
 
-
     useEffect(() => {
         async function fetchWeightDetails() {
             const username = localStorage.getItem('username');
-            const data = await weight_details(username);
+            const token = localStorage.getItem('token');
+            const data = await weight_details(token,username);
             setCurrentWeight(data[2]);
             setAverageWeight(data[3]);
             setWeightDifference(data[4]);

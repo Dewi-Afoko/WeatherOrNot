@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
-
+import GfGWeatherApp from "../../components/weather/weather";
 import PreferenceTest from "../../components/preferencesTest";
 import './userpage.css'
-import { weight_details } from "../../services/adddetails";
+//import { weight_details } from "../../services/adddetails";
 
-import { addDetails } from "../../services/adddetails";
+//import { addDetails } from "../../services/adddetails";
 
 
 import { UserDetails } from "../../components/UserDetails";
 
 import LogoutButton from "../../components/LogoutButton";
-import BackgroundAnimation from "../../components/BackgroundAnimation";
+//import BackgroundAnimation from "../../components/BackgroundAnimation";
 import WeightLog from "../../components/WeightDetails";
 import WeightChart from "../../components/WeightChart";
 
@@ -36,10 +36,13 @@ export function UserPage() {
     <div className="main-container">
       <UserDetails />
       <WeightLog />
-      <WeightChart/>
+      <div className="weightChart"><WeightChart/></div>
       <button className='test-button' onClick={handleclick}>Workout Preferences Test </button>
       {test && (<PreferenceTest onClose={handleClose}/>)}
       <LogoutButton />
+      <div className="weatherbox">
+      <GfGWeatherApp/>
+      </div>
     </div>
   );
 }

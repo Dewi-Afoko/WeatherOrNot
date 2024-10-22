@@ -26,7 +26,8 @@ export function UserDetails() {
 useEffect(() => {
   async function fetchUserDetails() {
     const username = localStorage.getItem('username');
-    const data = await user_details(username);
+    const token = localStorage.getItem("token");
+    const data = await user_details(token,username);
     setCurrentFirstName(data[0]);
     setCurrentLastName(data[1]);
     setCurrentDob(data[2]);
