@@ -74,6 +74,11 @@ class UserRepository:
             return [average_weight, weight_difference,max_weight,min_weight]
 
 
+# GET favourites list
+    def find_favourite_exercises(self, username):
+        current_user = self.find_by_username(username)
+        self._connection.execute("SELECT exercise_list FROM users WHERE username = %s", [current_user.username])
+
 ############# ADD exercise to user.exercise_list                   
     def add_exercise(self, username, exercise):
         current_user = self.find_by_username(username)  # Fetch the user object

@@ -2,26 +2,39 @@
 // import { handleAddFavouriteClick } from "../handlers/exercises.js";
 // import { useState, useEffect } from "react";
 // import { user_workout_list } from "../services/exercises.js";
-import { useState } from "react";
-import { addFavourite, deleteFavourite } from "../services/exercises";
+import { useEffect, useState } from "react";
+import { addFavourite, deleteFavourite, getFavourites } from "../services/exercises";
 
 function Exercise(props) {
     const [like, setLike] = useState(false);
 
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        getFavourites(token)
+        .then((data) => {
+            if (data.includes(props.name)) {
+                setLike(true)
+            } else {
+                setLike(false)
+            }
+        })
+    }, [])
+
+
     const handleAddFavouriteClick = async () => {
         try {
             if (!like) {
-                    console.log("LIKE STATUS 13:", like);
+                    // console.log("LIKE STATUS 13:", like);
                 // If not liked, add to favourites                
                 await addFavourite(props.user, props.name);
                 setLike(true); // Set like to true
-                    console.log("LIKE STATUS 18:", like);
+                    // console.log("LIKE STATUS 18:", like);
             } else {
-                    console.log("LIKE STATUS 21:", like);
+                    // console.log("LIKE STATUS 21:", like);
                 // If already liked, remove from favourites
                 await deleteFavourite(props.user, props.name);
                 setLike(false); // Set like to false
-                    console.log("LIKE STATUS 26:", like);
+                    // console.log("LIKE STATUS 26:", like);
             }
         } catch (error) {
             console.error("Failed to update favourite:", error);

@@ -72,6 +72,25 @@ export async function getbackEndExercises(token, muscle) {
 }
 
 
+/////////////GET Likes list////////////
+export async function getFavourites(token) {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  };
+
+  const response = await fetch(`${BACKEND_URL}/get_favourites`, requestOptions);
+  if (response.status !== 200) {
+      throw new Error("Unable get favourite exercises");
+  }
+
+
+  const data = await response.json();
+  return data;
+}
 
 
 ///////////// add and delete likes /////////////

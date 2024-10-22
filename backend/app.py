@@ -106,8 +106,20 @@ def get_new_exercises():
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
     
 
-
-    
+# GET favourites
+@app.route('/get_favourites', methods=['GET']) #<int:user>
+# @app.route('/get_favourites/<int:user>', methods=['GET']) #<int:user>
+# @token_checker #NEED TOKEN ACCESS
+def get_favourite_exercises():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json() # HOW TO DEAL WITH PARAMS IN PYTHON - need to get username from params (i.e. <int:user>), not request body
+    # print("Received data:", data)
+    # print("USER ID: ", data.get("user_id"))
+    username = data.get("user")
+    # favourites = repository.find_favourite_exercises(user) #CHANGE TO USER_ID
+    favourites = repository.find_favourite_exercises(username) #CHANGE TO USER_ID
+    return jsonify(favourites), 200    
 
 ###### Add favourite exercise to user repo
 
@@ -116,7 +128,6 @@ def add_favourite():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
     data = request.get_json()
-    # print("Received data:", data)  # Log the incoming data
     username = data.get("user")
     exercise = data.get("name")
     # print("USERNAME DATA:", username)  # Log the incoming data

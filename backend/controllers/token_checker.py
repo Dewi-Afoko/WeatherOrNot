@@ -16,7 +16,9 @@ def token_checker(f):
         
         try:
             decoded_payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
-            request.user_id = decoded_payload.get('user_id')
+            print("REQUEST 1: ", request)
+            request.user_id = decoded_payload.get('user_id') #asssigns user_id to the request??
+            print("REQUEST 2: ", request)
         except jwt.ExpiredSignatureError:
             return jsonify({"message": "Token has expired!"}), 401
         except jwt.InvalidTokenError:
