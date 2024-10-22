@@ -128,7 +128,6 @@ def delete_favourite():
     exercise = data.get("name")
     if not username or not exercise:
         return jsonify({"error": "Username and exercise name are required"}), 400
-
     result = repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
     # print(result)
     return jsonify({"message": result}), 201
