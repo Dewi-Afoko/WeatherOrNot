@@ -17,9 +17,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://127.0.01/exercise'
 db = SQLAlchemy(app)
-
 load_dotenv()
-
 # Enable CORS for all routes, allowing requests from http://localhost:5173
 CORS(app, origins=["http://localhost:5173"])
 
@@ -105,15 +103,17 @@ def add_favourite():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
     data = request.get_json()
-    username = data.get("username")
-    exercise = data.get("name")
     # print("Received data:", data)  # Log the incoming data
-    print("Received data:", username)  # Log the incoming data
+    username = data.get("user")
+    exercise = data.get("name")
+    # print("USERNAME DATA:", username)  # Log the incoming data
+    # print("EXERCISE DATA:", exercise)  # Log the incoming data
 
     if not username or not exercise:
         return jsonify({"error": "Username and exercise name are required"}), 400
 
     result = repository.add_exercise(username, exercise)  # Call the repository with both username and exercise name
+    # print(result)
     return jsonify({"message": result}), 201
 
 

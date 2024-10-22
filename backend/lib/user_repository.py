@@ -77,6 +77,8 @@ class UserRepository:
 # NEW
 
     def add_exercise(self, username, exercise):
-        current_user = self.find_by_username(username)
-        self._connection.execute('UPDATE users SET exercise_list = exercise_list || "{%s}" WHERE username = %s', [exercise, current_user.username])
+        current_user = self.find_by_username(username)  # Fetch the user object
+        # print("USER", current_user.username)
+        # print("EXERCISE", exercise)
+        self._connection.execute("UPDATE users SET exercise_list = exercise_list || %s WHERE username = %s", [[exercise], current_user.username])
         return "Exercise added to array"
