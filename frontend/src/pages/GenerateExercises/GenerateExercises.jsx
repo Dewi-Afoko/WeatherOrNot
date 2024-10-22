@@ -40,6 +40,8 @@ export function GenerateExercises() {
     // const [type, setType] = useState("")
 
 
+    const user = localStorage.getItem("username")
+
     // USING API
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -58,6 +60,7 @@ export function GenerateExercises() {
             getNewExercises(token, muscle, difficulty, equipment)
             .then((data) => {
                 setExercises(data);
+                localStorage.setItem("exercise_list", JSON.stringify(data));
                 setMuscle(""); //reset value
                 setDifficulty(""); //reset value
                 setEquipment("")
@@ -109,7 +112,7 @@ export function GenerateExercises() {
             <div>
                 <h3>Try these exercises:</h3>
                 {exercises.map((exercise, index) => {
-                    console.log('exercise', exercise);
+                    // console.log('exercise', exercise);
                     return(
                         <Exercise
                             key={index}
@@ -119,6 +122,8 @@ export function GenerateExercises() {
                             equipment={exercise.equipment}
                             difficulty={exercise.difficulty}
                             instructions={exercise.instructions}
+                            user = {user}
+                            exercise = {exercise}
                             // formatDisplayOutput={formatDisplayOutput}
                         />
                     )

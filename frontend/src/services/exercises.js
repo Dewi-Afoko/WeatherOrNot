@@ -49,7 +49,6 @@ export async function getNewExercises(token, muscle, difficulty, equipment) {
   if (response.status !== 200) {
     throw new Error("Unable to fetch exercises from API");
   }
-
   const data = await response.json();
   return data;
 }
@@ -57,7 +56,24 @@ export async function getNewExercises(token, muscle, difficulty, equipment) {
 
 // GET for exercises stored in DB (rather than API)
 export async function getbackEndExercises(token, muscle) {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  };
+  const response = await fetch(`${BACKEND_URL}/get_exercises?muscle=${muscle}`, requestOptions);
+  if (response.status !== 200) {
+    throw new Error("Unable to fetch exercises from backend");
+  }
+  const data = await response.json();
+  return data;
+}
 
+
+/////////////GET Likes list////////////
+export async function getFavourites(token) {
   const requestOptions = {
     method: "GET",
     headers: {
@@ -66,12 +82,84 @@ export async function getbackEndExercises(token, muscle) {
     },
   };
 
-  const response = await fetch(`${BACKEND_URL}/get_exercises?muscle=${muscle}`, requestOptions);
-
+  const response = await fetch(`${BACKEND_URL}/get_favourites`, requestOptions);
   if (response.status !== 200) {
-    throw new Error("Unable to fetch exercises from backend");
+      throw new Error("Unable get favourite exercises");
+  }
+
+
+  const data = await response.json();
+  return data;
+}
+
+
+///////////// add and delete likes /////////////
+
+export async function addFavourite(user, name) {
+  const payload = { user: user, name: name };
+  // console.log(payload)
+  const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+
+      },
+      body: JSON.stringify(payload),
+  };
+// console.log(requestOptions)
+  const response = await fetch(`${BACKEND_URL}/add_favourite`, requestOptions);
+  if (response.status !== 201) {
+      throw new Error("Unable to add favourite exercise");
   }
 
   const data = await response.json();
   return data;
 }
+
+export async function deleteFavourite(user, name) {
+  const payload = { user: user, name: name };
+  // console.log(payload)
+  const requestOptions = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+
+      },
+      body: JSON.stringify(payload),
+  };
+// console.log(requestOptions)
+  const response = await fetch(`${BACKEND_URL}/delete_favourite`, requestOptions);
+  if (response.status !== 201) {
+      throw new Error("Unable to add favourite exercise");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+
+// export async function user_workout_list(token, username) {
+//   const payload = {
+//     username: username,
+//   };
+
+//   const requestOptions = {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`
+//     },
+//     body: JSON.stringify(payload),
+//   };
+
+//   const response = await fetch(`${BACKEND_URL}/users_workout_list`, requestOptions);
+
+//   if (response.status !== 201) {
+//     throw new Error("Unable to load user details");
+//   }
+
+//   const data = await response.json();
+//   return data;
+// }
