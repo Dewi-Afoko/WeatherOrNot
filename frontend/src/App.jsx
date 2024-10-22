@@ -29,6 +29,10 @@ const router = createBrowserRouter([
     path: "/generate_exercises",
     element: <GenerateExercises />,
   },
+  {
+    path: "/addFavourite",
+    element: <GenerateExercises />,
+  },
 ]);
 
 

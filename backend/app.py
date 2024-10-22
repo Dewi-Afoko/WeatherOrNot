@@ -79,7 +79,7 @@ def user_weight():
     return  jsonify(weight),201
 
 
-# robs FE get exercise request
+# Rob's FE get exercise request
 @app.route('/get_new_exercises', methods=['GET']) 
 def get_new_exercises():
 
@@ -93,8 +93,46 @@ def get_new_exercises():
         return jsonify(response.json()), 200
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
+    
 
 
+    
+
+###### Add favourite exercise to user repo
+
+@app.route('/add_favourite', methods=['POST'])
+def add_favourite():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    username = data.get("username")
+    exercise = data.get("name")
+    # print("Received data:", data)  # Log the incoming data
+    print("Received data:", username)  # Log the incoming data
+
+    if not username or not exercise:
+        return jsonify({"error": "Username and exercise name are required"}), 400
+
+    result = repository.add_exercise(username, exercise)  # Call the repository with both username and exercise name
+    return jsonify({"message": result}), 201
+
+
+
+# @app.route('/user_workout_list', methods=['POST']) 
+# # @token_checker
+# def user_workout_list():
+#     connection = get_flask_database_connection(app)
+#     repository = UserRepository(connection)
+#     data = request.get_json()
+#     details = repository.user_workout_list(data['username'])
+#     return  jsonify(details),201
+
+
+
+
+
+
+######### Chris' BE API Save
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():
     connection = get_flask_database_connection(app)
@@ -112,7 +150,7 @@ def post_exercises():
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
-
+######### Chris' BE API Fetch
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)
