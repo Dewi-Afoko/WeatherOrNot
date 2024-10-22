@@ -22,7 +22,7 @@ CREATE TABLE users (
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
     date text,
-    exercise_list text[],
+    exercise_list jsonb,
     complete boolean,
     user_username text,
     constraint fk_username foreign key(user_username)

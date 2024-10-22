@@ -16,6 +16,8 @@ from lib.user_repository import UserRepository
 from lib.user import User
 from lib.exercise import Exercise
 from lib.exercise_repository import ExerciseRepository
+from lib.workout import Workout
+from lib.workout_repository import WorkoutRepository
 from lib.database_connection import get_flask_database_connection
 from controllers.authentification import check_password
 from controllers.token_checker import token_checker
@@ -119,8 +121,21 @@ def user_details():
     print(details)
     return  jsonify(details),201
 
+@app.route('/workouts', methods=['POST']) #TODO Add TokenChecker
+def add_workout():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    details = repository.save_workout(data)
+    return jsonify(details),201
 
-
+@app.route('/workouts', methods=['PATCH']) #TODO Add TokenChecker
+def update_workout():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    details = repository.update_workout(data)
+    return jsonify(details),201
 
 
 # @app.route('/get_exercises', methods=['GET'])
