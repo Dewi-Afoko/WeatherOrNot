@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
 
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username text,
@@ -10,6 +11,7 @@ CREATE TABLE users (
     dob text,
     height text,
     weight int[],
-    weight_date text[]
+    weight_date text[],
+    user_level text
 );
 
