@@ -93,8 +93,15 @@ def get_new_exercises():
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
     
 
-
-    
+# GET favourites 
+@app.route('/get_favourites', methods=['GET']) 
+def get_favourite_exercises():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    username = data.get("user")
+    favourites = repository.find_favourite_exercises(username)
+    return jsonify(favourites), 200
 
 ###### Add favourite exercise to user repo
 

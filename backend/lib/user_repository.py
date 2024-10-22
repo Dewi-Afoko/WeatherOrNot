@@ -74,16 +74,15 @@ class UserRepository:
             return [average_weight, weight_difference,max_weight,min_weight]
 
 
-############# ADD exercise to user.exercise_list                   
+# NEW
+
     def add_exercise(self, username, exercise):
-        current_user = self.find_by_username(username)  # Fetch the user object
-        # print("USER", current_user.username)
-        # print("EXERCISE", exercise)
-        self._connection.execute("UPDATE users SET exercise_list = exercise_list || %s WHERE username = %s", [[exercise], current_user.username])
-        return "Exercise added to array"    
-    
-############# DELETE exercise to user.exercise_list                   
-    def delete_exercise( self, username, exercise):
         current_user = self.find_by_username(username)
-        self._connection.execute("UPDATE users SET exercise_list = array_remove(exercise_list, %s) WHERE username = %s", [exercise, current_user.username]) 
-        return "Exercise has been removed from the array"
+        print("username is", username)
+        print("exercise is", exercise)
+        self._connection.execute("UPDATE users SET exercise_list = exercise_list || %s WHERE username = %s", [exercise, current_user.username])
+        return "Exercise added to array"
+    
+    def find_favourite_exercises(self, username):
+        current_user = self.find_by_username(username)
+        self._connection.execute("SELECT exercise_list FROM users WHERE username = %s", [current_user.username])
