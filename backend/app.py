@@ -78,13 +78,43 @@ def user_weight():
     print(weight)
     return  jsonify(weight),201
 
+
+# robs FE get exercise request
+@app.route('/get_new_exercises', methods=['GET']) 
+def get_new_exercises():
+
+    muscle = request.args.get('muscle')
+    difficulty = request.args.get('difficulty')
+    equipment = request.args.get('equipment')
+    # exercise_type = request.args.get('type')
+
+    payload = {}
+    if muscle:
+        payload['muscle'] = muscle
+    if difficulty:
+        payload['difficulty'] = difficulty
+    if equipment:
+        payload['equipment'] = equipment
+    # if exercise_type:
+    #     payload['type'] = exercise_type
+
+    api_url = 'https://api.api-ninjas.com/v1/exercises' 
+    headers = {'X-Api-Key': os.getenv('API_KEY')} 
+
+    response = requests.get(api_url, params=payload, headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json()), 200
+    else:
+        return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
+
+
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():
     connection = get_flask_database_connection(app)
     repository = ExerciseRepository(connection)
     # Fetch data from the API
     try:
-        data = repository.fetch_data_from_api()
+        data = repository.fetch_all_data()
         if not data:
             # Save the data to the database
             return jsonify({"message": "Data fetched and stored successfully!"}), 200
@@ -95,19 +125,6 @@ def post_exercises():
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
-
-@app.route('/get_exercise', methods=['GET']) 
-def get_exercise():
-    payload = {
-        'muscle': request.args.get('muscle'),
-    }
-    api_url = 'https://api.api-ninjas.com/v1/exercises' 
-    headers = {'X-Api-Key': os.getenv('API_KEY')} 
-    response = requests.get(api_url, params=payload, headers=headers)
-    if response.status_code == 200:
-        return jsonify(response.json()), 200
-    else:
-        return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
 
 
 @app.route('/get_exercises', methods=['GET'])

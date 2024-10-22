@@ -34,8 +34,24 @@ class Exercise(db.Model):
         
 
     def __eq__(self, other):
-        return self.__dict__ == other.__dict__
+        if not isinstance(other, Exercise):
+            return NotImplemented
+        return (
+            self.id == other.id and
+            self.name == other.name and
+            self.type == other.type and
+            self.muscle == other.muscle and
+            self.equipment == other.equipment and
+            self.difficulty == other.difficulty and
+            self.instructions == other.instructions
+    )
+    
 
-    # def __repr__(self):
-    #     return f"Exercise({self.id}, {self.name}, {self.type}, {self.muscle}, {self.equipment}, {self.difficulty}, {self.instructions})"
+    def __repr__(self):
+        return f"Exercise({self.id}, {self.name}, {self.type}, {self.muscle}, {self.equipment}, {self.difficulty}, {self.instructions})"
+
+    # def __eq__(self, other):
+    #     return self.__dict__ == other.__dict__
+
+    
     

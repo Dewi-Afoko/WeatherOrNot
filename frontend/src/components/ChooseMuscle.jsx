@@ -25,24 +25,22 @@ function ChooseMuscle(props) {
     'triceps'
   ]
 
-  const formattedMuscles = muscleOptions.map(
-    (muscle) => muscle.replace('_', ' ') // removes underscores
-  ).map(
-    (muscle) => muscle.replace(muscle[0], muscle[0].toUpperCase() //changes to title-case
-  ))
-
+    const handleChange = (event) => {
+      props.setMuscle(event.target.value)
+    }
 
   return (
     <div>
       {/* <form> */}
-        {formattedMuscles.map((muscle, index) => {
+        {muscleOptions.map((muscleOption, index) => {
           return (
             <RadioSelector
               key={index}
-              id={muscle}
-              value={muscle}
+              id={muscleOption}
+              value={muscleOption}
               name="muscle_group"
-              onChange={() => props.setMuscle(muscle)}
+              checked={props.muscle === muscleOption}
+              onChange={handleChange}
             />
           )
         })}
