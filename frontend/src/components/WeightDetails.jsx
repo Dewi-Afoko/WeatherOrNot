@@ -40,7 +40,7 @@ export function WeightLog() {
 
     return (
 <>     <div className='weightRule'>
-       { currentWeight &&( <GaugeComponent
+      { currentWeight &&( <GaugeComponent
           type="semicircle"
           arc={{
             width: 0.2,
@@ -95,7 +95,9 @@ export function WeightLog() {
           maxValue={maxGauge}
         />)}</div>
         <div className="stats-container">
-        <h4>WEIGHT TRACKER</h4>
+
+        <h4>Weight Tracker</h4>
+
         <h3>Your current weight: {currentWeight !== null ? currentWeight : 'Loading...'}kg</h3>
         <h3>Your average weight: {averageWeight !== null ? averageWeight : 'Loading...'}kg</h3>
         <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>

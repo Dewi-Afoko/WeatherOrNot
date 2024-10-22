@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { weight_details } from '../services/addDetails';
-import { VictoryChart, VictoryScatter, VictoryTheme } from 'victory';
+
+import { weight_details } from "../services/adddetails";
+import { VictoryChart, VictoryScatter, VictoryTheme, VictoryTooltip, VictoryAnimation } from 'victory';
 
 import './weightdetails.css';
 
@@ -45,12 +46,22 @@ export function WeightChart() {
         {graphData.length > 0 && (
             <VictoryChart
                 theme={VictoryTheme.material}
-                domain={{ x: [0, weightArray.length], y: [minWeight, maxWeight] }}
+                domain={{ x: [0, weightArray.length], y: [minWeight - 25, maxWeight + 25] }}
+                style={{
+                    parent: { backgroundColor: "#000" }  // Set black background for the chart
+                }}
             >
                 <VictoryScatter
-                    style={{ data: { fill: "#c43a31" } }}
-                    size={7}
-                    data={graphData} 
+                animate={{
+                    duration: 2000,
+                    onLoad: { duration: 1000 }
+                }}
+                style={{ data: { fill: "#c43a31" } }}
+                size={9}
+                data={graphData} 
+                labels={({ datum }) => `Weight: ${datum.y} kg, 
+                Date: ${datum.x}`} 
+                labelComponent={<VictoryTooltip flyoutStyle={{ fill: "white" }}/>}
                 />
             </VictoryChart>
         )}
@@ -58,8 +69,4 @@ export function WeightChart() {
     );
 }
 
-
-
-
 export default WeightChart;
-

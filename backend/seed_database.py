@@ -9,7 +9,8 @@ connection.connect()
 # Add your own seed lines below...
 # E.g.connection.seed("seeds/your_seed.sql")
 
-connection.seed("seeds/users.sql")
+# connection.seed("seeds/users.sql")
+connection.seed("seeds/workout.sql")
 
 # Add your own seed lines below...
 # E.g.connection.seed("seeds/your_seed.sql")
