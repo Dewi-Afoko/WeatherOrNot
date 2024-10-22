@@ -30,3 +30,15 @@ CREATE TABLE workouts (
     on delete set null
     on update set default
 );
+
+DROP TABLE IF EXISTS Exercise;
+
+CREATE TABLE Exercise (
+    id SERIAL PRIMARY KEY,
+    name text,
+    type text,
+    muscle text,
+    equipment text,
+    difficulty text,
+    instructions text
+);

@@ -5,6 +5,7 @@ import requests
 
 from flask_sqlalchemy import SQLAlchemy
 
+from datetime import datetime
 
 from dotenv import load_dotenv
 
@@ -125,7 +126,10 @@ def user_details():
 def add_workout():
     connection = get_flask_database_connection(app)
     repository = WorkoutRepository(connection)
+    date = datetime.now().strftime('%Y/%m/%d')
     data = request.get_json()
+    data['date'] = date
+    print(f'1This line:{data}')
     details = repository.save_workout(data)
     return jsonify(details),201
 

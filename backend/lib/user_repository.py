@@ -30,7 +30,6 @@ class UserRepository:
             item.height = row['height']
             item.weight = row['weight']
             item.weight_date = row['weight_date']
-            item.level = row['level']
             user.append(item)
         if user : 
             return user[0]
@@ -44,14 +43,14 @@ class UserRepository:
         passw = hashed.decode('utf-8')
         print(passw)
         self._connection.execute(
-            "INSERT INTO users (username, password, exercise_list, first_name, last_name, dob, height, weight, weight_date, level) VALUES (%s, %s,%s, %s,%s, %s, %s, %s, %s, %s)",
-            [user.username, passw, user.exercise_list, user.first_name, user.last_name, user.dob, user.height, user.weight, user.weight_date, user.level]
+            "INSERT INTO users (username, password, exercise_list, first_name, last_name, dob, height, weight, weight_date) VALUES (%s, %s,%s, %s,%s, %s, %s, %s, %s)",
+            [user.username, passw, user.exercise_list, user.first_name, user.last_name, user.dob, user.height, user.weight, user.weight_date]
         )
         return 'User added'
     
 
 
-    def add_details(self, username, first_name, last_name, dob, height, weight, level):
+    def add_details(self, username, first_name, last_name, dob, height, weight):
         current_user = self.find_by_username(username)
 
         print(f'Hereeee{[ username, first_name, last_name, dob, height, weight]}')
@@ -63,8 +62,6 @@ class UserRepository:
             self._connection.execute("UPDATE users SET dob = %s WHERE username = %s", [dob, current_user.username])
         if len(dob) > 1:
             self._connection.execute("UPDATE users SET height = %s WHERE username = %s", [height, current_user.username])
-        if len(level) > 1:
-            self._connection.execute("UPDATE users SET level = %s WHERE username = %s", [level, current_user.username]) # Added level path
         if int(weight) > 0 :
             weight_date = datetime.now().strftime('%Y/%m/%d')
             self._connection.execute('UPDATE users SET weight = array_append(weight, %s) WHERE username = %s', [weight, current_user.username])

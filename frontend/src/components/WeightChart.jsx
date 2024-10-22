@@ -44,7 +44,7 @@ export function WeightChart() {
         {graphData.length > 0 && (
             <VictoryChart
                 theme={VictoryTheme.material}
-                domain={{ x: [0, weightArray.length], y: [minWeight, maxWeight] }}
+                domain={{ x: [0, weightArray.length], y: [minWeight - 25, maxWeight + 25] }}
                 style={{
                     parent: { backgroundColor: "#000" }  // Set black background for the chart
                 }}

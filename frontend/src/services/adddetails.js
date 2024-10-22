@@ -81,13 +81,12 @@ export async function user_details(username) {
 
 // Add a workout
 export async function add_workout() {
+  const username = localStorage.getItem('username')
   const payload = {
-    user_username: 'Testy',
-    date: "2024/03/01",
-    exercise_list: '{}',
-    complete: 'False',
+    user_username: username,
+    complete: false,
   };
-
+console.log(payload)
   const requestOptions = {
     method: "POST",
     headers: {
