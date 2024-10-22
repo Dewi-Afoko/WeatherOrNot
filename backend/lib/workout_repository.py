@@ -21,3 +21,6 @@ class WorkoutRepository:
             return workouts
         else:
             return "No workouts found!"
+
+
+#TODO If we want to create partial objects in the database, we need update methods that encapsulate Workout class functions; current idea is to only send instance to DB upon marking complete -- unsure if this is actually possible

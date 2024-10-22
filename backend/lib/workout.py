@@ -1,14 +1,15 @@
 from datetime import datetime
 
 class Workout:
-    def __init__(self, username): # Datetime string and User object passed in
+    def __init__(self, username, planning=False): # Datetime string and User object passed in
         self.date = datetime.now().strftime('Y%/m%/d%')
         self.exercise_list = []
         self.complete = False
         self.user_username = username
+        self.planning_mode = planning #TODO: Implement planning mode, means no need to complete exercises and "template" created in DB.
 
     def add_exercise(self, exercise):
-        if self.exercise_list[-1]['complete'] == True or len(self.exercise_list) == 0:
+        if self.exercise_list[-1]['complete'] == True or len(self.exercise_list) == 0 or self.planning_mode == True:
             self.exercise_list.append(
             {
             'name' : exercise.name,
@@ -35,7 +36,8 @@ class Workout:
         self.exercise_list[-1]['complete'] = True
 
     def complete_workout(self):
-        self.complete = True
+        if self.planning_mode == False:
+            self.complete = True
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
