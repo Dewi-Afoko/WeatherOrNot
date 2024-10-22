@@ -23,8 +23,8 @@ def test_compares():
     assert exercise_1 == exercise_2
 
 """
-Spaces can be represented as strings
+Exercises can be represented as strings
 """
 def test_string():
-    exercise = Exercise(1, "Name_1", "type_1", "muscle_1", "equipment_1", "difficulty_1", "instructions_1")
-    assert str(exercise) == "Exercise(1, name_1, type, muscle_1, equipment_1, difficulty_1, instructions_1)"
+    exercise = Exercise(1, "name_1", "type_1", "muscle_1", "equipment_1", "difficulty_1", "instructions_1")
+    assert str(exercise) == "Exercise(1, name_1, type_1, muscle_1, equipment_1, difficulty_1, instructions_1)"

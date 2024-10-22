@@ -1,17 +1,19 @@
-import { useState} from "react";
+
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import GfGWeatherApp from "../../components/weather/weather";
 import PreferenceTest from "../../components/preferencesTest";
 import './userpage.css'
 //import { weight_details } from "../../services/adddetails";
 
-//import { addDetails } from "../../services/adddetails";
+
 
 
 import { UserDetails } from "../../components/UserDetails";
 
 import LogoutButton from "../../components/LogoutButton";
-//import BackgroundAnimation from "../../components/BackgroundAnimation";
+
 import WeightLog from "../../components/WeightDetails";
 import WeightChart from "../../components/WeightChart";
 
@@ -33,6 +35,7 @@ export function UserPage() {
   };
 
   return (
+
     <div className="main-container">
       <UserDetails />
       <WeightLog />

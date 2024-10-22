@@ -1,14 +1,22 @@
 function Exercise(props) {
 
+    const formatDisplayOutput = (output) => {
+        return output
+            .replace('_', ' ') // removes underscores
+            .replace(output[0], output[0].toUpperCase()); //changes to title-case
+    };
+
     return (
         <div>
-            <h2>name:{props.exercise.name}</h2>
+            <a href="">
+                <h2>{formatDisplayOutput(props.name)}</h2>
+            </a>
             <ul>
-                <li>Type:</li>
-                <li>Muscle:</li>
-                <li>Equipment:</li>
-                <li>Difficulty:</li>
-                <li>Instructions:</li>
+                <li>Type: {formatDisplayOutput(props.type)}</li>
+                <li>Muscle: {formatDisplayOutput(props.muscle)}</li>
+                <li>Equipment: {formatDisplayOutput(props.equipment)}</li>
+                <li>Difficulty: {formatDisplayOutput(props.difficulty)}</li>
+                {/* <li>Instructions: {props.instructions}</li> */}
             </ul>
         </div>
     )

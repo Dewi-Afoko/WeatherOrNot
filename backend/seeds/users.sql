@@ -15,3 +15,22 @@ CREATE TABLE users (
     user_level text
 );
 
+INSERT INTO users (username, password)
+VALUES
+    ('johndoe', 'P@ssword1324%6'),
+    ('janedoe', 'P@55word1324%6');
+
+
+
+DROP TABLE IF EXISTS Exercise;
+
+CREATE TABLE Exercise (
+    id SERIAL PRIMARY KEY,
+    name text UNIQUE,
+    type text,
+    muscle text,
+    equipment text,
+    difficulty text,
+    instructions text
+);
+
