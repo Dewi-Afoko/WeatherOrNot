@@ -44,7 +44,7 @@ export async function getbackEndExercises(token, muscle) {
 
 export async function addFavourite(user, name) {
   const payload = { user: user, name: name };
-  console.log(payload)
+  // console.log(payload)
   const requestOptions = {
       method: "POST",
       headers: {
@@ -66,7 +66,7 @@ export async function addFavourite(user, name) {
 
 export async function deleteFavourite(user, name) {
   const payload = { user: user, name: name };
-  console.log(payload)
+  // console.log(payload)
   const requestOptions = {
       method: "DELETE",
       headers: {
@@ -85,22 +85,6 @@ export async function deleteFavourite(user, name) {
   const data = await response.json();
   return data;
 }
-
-
-// export async function deleteLike(token, exercise_list) {
-//   const requestOptions = {
-//     method: "DELETE",
-//     headers: {      
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`
-// },
-//   };
-//   const newUrl = new URL(`${BACKEND_URL}/add_favourite'${exercise_list}`);
-//   const response = await fetch(newUrl.toString(), requestOptions);
-  
-//   const data = await response.json()
-//   return data;
-// }
 
 
 // export async function user_workout_list(token, username) {

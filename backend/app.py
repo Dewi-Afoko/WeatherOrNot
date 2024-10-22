@@ -118,6 +118,23 @@ def add_favourite():
 
 
 
+###### Delete favourite exercise to user repo
+@app.route('/delete_favourite', methods=['DELETE'])
+def delete_favourite():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    username = data.get("user")
+    exercise = data.get("name")
+    if not username or not exercise:
+        return jsonify({"error": "Username and exercise name are required"}), 400
+
+    result = repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
+    # print(result)
+    return jsonify({"message": result}), 201
+
+
+
 # @app.route('/user_workout_list', methods=['POST']) 
 # # @token_checker
 # def user_workout_list():
