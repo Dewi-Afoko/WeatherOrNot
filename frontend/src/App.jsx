@@ -9,6 +9,7 @@ import { GenerateExercises } from "./pages/GenerateExercises/GenerateExercises";
 // import { CreateWorkout } from "./components/CreateWorkout";
 import { Workouts } from "./pages/Workouts/Workouts";
 import ExerciseDetails from "./components/ExerciseDetails";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
