@@ -109,8 +109,13 @@ class UserRepository:
         return "Exercise has been removed from the array"
     
 
-    ######## DELETE USER
+ ######## DELETE ALL USERS
+    def delete_all_users(self):
+        self._connection.execute("DELETE FROM users")
+
+
+    ######## DELETE ONE USER
     def delete_user(self, username):
         current_user = self.find_by_username(username)  # Fetch the user object
-        self._connection.execute("DELETE FROM users WHERE username = %s", [current_user.username])
+        self._connection.execute("DELETE FROM users WHERE username = %s", [current_user])
 

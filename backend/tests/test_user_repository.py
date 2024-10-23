@@ -3,10 +3,11 @@ from lib.user_repository import UserRepository
 from lib.user import User
 import bcrypt
 
-# def test_empty_db_is_empty(db_connection):
-#     db_connection.seed("seeds/users.sql")
-#     repository = UserRepository(db_connection)
-#     assert repository.all() == []
+def test_empty_db_is_empty(db_connection):
+    db_connection.seed("seeds/users.sql")
+    repository = UserRepository(db_connection)
+    repository.delete_all_users()
+    assert repository.all() == []
 
 
 def test_find_user_on_empty_db(db_connection):
