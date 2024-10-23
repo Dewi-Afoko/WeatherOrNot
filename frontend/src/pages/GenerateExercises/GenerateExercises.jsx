@@ -119,6 +119,7 @@ export function GenerateExercises() {
                             equipment={exercise.equipment}
                             difficulty={exercise.difficulty}
                             instructions={exercise.instructions}
+                            exercise={exercise}
                             // formatDisplayOutput={formatDisplayOutput}
                         />
                     )

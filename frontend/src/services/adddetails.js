@@ -134,3 +134,28 @@ export async function update_workout(exercise) {
    return data;
  }
 
+
+ export async function get_workout() {
+  const username = localStorage.getItem('username')
+   const payload = {
+    username: username,
+  };
+
+  const requestOptions = {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+       // Authorization: `Bearer ${token}` #TODO Integrate tokens
+     },
+     body: JSON.stringify(payload),
+   };
+
+   const response = await fetch(`${BACKEND_URL}/get_workouts`, requestOptions);
+
+   if (response.status !== 201) {
+     throw new Error("Unable to add workout");
+   }
+
+   const data = await response.json();
+   return data;
+ }

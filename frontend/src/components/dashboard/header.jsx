@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AnimatedHeadline from "./title";
 import './header.css';
-
+import { CreateWorkout } from "../workout/CreateWorkout";
 const Header = () => {
  
     const [showPopup, setShowPopup] = useState(false); 
@@ -30,6 +30,9 @@ const Header = () => {
                 <nav className="app-nav">
                     
                     <ul >
+                        <li>
+                            <CreateWorkout/>
+                        </li>
                         <li>
                             <Link to="/user" className="nav-menu-list">My Profile</Link>
                         </li>

@@ -2,7 +2,7 @@ import os
 import psycopg2
 import requests
 from flask_sqlalchemy import SQLAlchemy
-
+import json
 from datetime import datetime
 
 from functools import wraps
@@ -146,6 +146,22 @@ def update_workout():
     data = request.get_json()
     details = repository.update_workout(data)
     return jsonify(details),201
+
+@app.route('/get_workouts', methods=['POST'])
+def return_workouts():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    print(f'HEEEEE {data}')
+    details = repository.my_workouts(data['username'])
+    details2=[]
+    for workout in details: 
+        details2.append(workout.to_dict())
+    
+    print(details2)
+    return jsonify(details2),201
+
+
 
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():

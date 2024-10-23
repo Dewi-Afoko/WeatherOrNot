@@ -1,3 +1,6 @@
+import AddExerciseButton from "./workout/addExerciseButton";
+
+
 function Exercise(props) {
 
     const formatDisplayOutput = (output) => {
@@ -17,6 +20,7 @@ function Exercise(props) {
                 <li>Equipment: {formatDisplayOutput(props.equipment)}</li>
                 <li>Difficulty: {formatDisplayOutput(props.difficulty)}</li>
                 {/* <li>Instructions: {props.instructions}</li> */}
+            <AddExerciseButton exercise={props.exercise}/>
             </ul>
         </div>
     )

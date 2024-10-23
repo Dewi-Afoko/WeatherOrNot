@@ -2,7 +2,7 @@ import  { useState } from 'react';
 import './addExerciseButton.css';
 import { UpdateWorkout } from './updateWorkout';
 
-function AddExerciseButton() {
+function AddExerciseButton(props) {
   const [detailsOn, setDetailsOn] = useState(false);
 
   const handleClick = () => {
@@ -15,14 +15,14 @@ function AddExerciseButton() {
 
   return (
     <>
-      <button className='test-button' onClick={handleClick}>ADD WORKOUT</button>
+      <button className='test-button1' onClick={handleClick}>ADD WORKOUT</button>
       {detailsOn && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={handleClose}>&times;</span>
             <h3>Exercise details</h3>
             {/* Directly pass the string value of exercise to UpdateWorkout */}
-            <UpdateWorkout/>
+            <UpdateWorkout exercise={props.exercise}/>
           </div>
         </div>
       )}
