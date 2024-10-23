@@ -74,6 +74,12 @@ export function GenerateExercises() {
         }
     };
 
+    const handleViewExerciseDetails = (exercise) => {
+        navigate('/exercise', {
+            state: { ...exercise },
+        });
+    };
+
 
     return (
         <>
@@ -124,6 +130,7 @@ export function GenerateExercises() {
                             instructions={exercise.instructions}
                             user = {user}
                             exercise = {exercise}
+                            onClick={() => handleViewExerciseDetails(exercise)}
                             // formatDisplayOutput={formatDisplayOutput}
                         />
                     )

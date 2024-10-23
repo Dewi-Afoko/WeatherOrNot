@@ -37,17 +37,30 @@ export async function getNewExercises(token, muscle, difficulty, equipment) {
   //   queryParams += `equipment=${equipment}`
   // }
 
-
-
     // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${queryParams}` , requestOptions);
     const response = await fetch(`${BACKEND_URL}/get_new_exercises?muscle=${muscle}&difficulty=${difficulty}&equipment=${equipment}` , requestOptions);
     // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}`, requestOptions);
     // const response = await fetch(`${BACKEND_URL}/get_new_exercises?${route}&type=${type}`, requestOptions); //includes type for randomising 
 
-
-
   if (response.status !== 200) {
     throw new Error("Unable to fetch exercises from API");
+  }
+  const data = await response.json();
+  return data;
+}
+
+// GET request for single exercise
+export async function getExerciseDetails(token, exerciseName) {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  };
+  const response = await fetch(`${BACKEND_URL}/exercise?name=${exerciseName}`, requestOptions);
+  if (response.status !== 200) {
+    throw new Error("Unable to fetch exercise from API");
   }
   const data = await response.json();
   return data;
