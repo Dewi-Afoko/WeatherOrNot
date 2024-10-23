@@ -27,9 +27,9 @@ class WorkoutRepository:
     # Exercise is JSON string
     # Require an empty dictionary in the SQL table exercise_list column
     def update_workout(self, exercise):
-        workout = self.my_workouts('Testy')
+        workout = self.my_workouts(exercise['user_username'])
         user = str(workout[0].user_username)
-        exercise = json.dumps([exercise])
+        exercise = json.dumps([exercise['exercise']])
         self._connection.execute('UPDATE workouts SET exercise_list = exercise_list || %s::jsonb WHERE user_username = %s', [exercise, user])
         return "Workout Updated"
     

@@ -5,14 +5,12 @@ import { useNavigate } from "react-router-dom";
 import GfGWeatherApp from "../../components/weather/weather";
 import PreferenceTest from "../../components/preferencesTest";
 import './userpage.css'
-//import { weight_details } from "../../services/adddetails";
-
 
 
 
 import { UserDetails } from "../../components/UserDetails";
 
-import LogoutButton from "../../components/LogoutButton";
+//import LogoutButton from "../../components/LogoutButton";
 
 import WeightLog from "../../components/WeightDetails";
 import WeightChart from "../../components/WeightChart";
@@ -42,10 +40,10 @@ export function UserPage() {
       <div className="weightChart"><WeightChart/></div>
       <button className='test-button' onClick={handleclick}>Workout Preferences Test </button>
       {test && (<PreferenceTest onClose={handleClose}/>)}
-      <LogoutButton />
       <div className="weatherbox">
       <GfGWeatherApp/>
       </div>
+      
     </div>
   );
 }
