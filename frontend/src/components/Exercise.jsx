@@ -13,8 +13,13 @@ function Exercise(props) {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        getFavourites(token)
+        if (!token) {
+            console.error("Token not found in localStorage");
+            return;
+        }
+        getFavourites(token, props.user)
         .then((data) => {
+            // console.log("DATA: " ,data)
             if (data.includes(props.name)) {
                 setLike(true)
             } else {
@@ -26,17 +31,11 @@ function Exercise(props) {
     const handleAddFavouriteClick = async () => {
         try {
             if (!like) {
-                    // console.log("LIKE STATUS 13:", like);
-                // If not liked, add to favourites                
                 await addFavourite(props.user, props.name);
                 setLike(true); // Set like to true
-                    // console.log("LIKE STATUS 18:", like);
             } else {
-                    // console.log("LIKE STATUS 21:", like);
-                // If already liked, remove from favourites
                 await deleteFavourite(props.user, props.name);
                 setLike(false); // Set like to false
-                    // console.log("LIKE STATUS 26:", like);
             }
         } catch (error) {
             console.error("Failed to update favourite:", error);

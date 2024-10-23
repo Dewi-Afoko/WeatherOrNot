@@ -85,10 +85,14 @@ class UserRepository:
         user = self.find_by_username(username)
         return [user.first_name, user.last_name, user.dob, user.height]
 
+
+
 # GET favourites list
     def find_favourite_exercises(self, username):
         current_user = self.find_by_username(username)
-        self._connection.execute("SELECT exercise_list FROM users WHERE username = %s", [current_user.username])
+        return current_user.exercise_list
+       
+
 
 ############# ADD exercise to user.exercise_list                   
     def add_exercise(self, username, exercise):

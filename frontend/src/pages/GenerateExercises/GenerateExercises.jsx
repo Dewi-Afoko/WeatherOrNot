@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import GenerateButton from "../../components/GenerateButton";
 import ChooseMuscle from "../../components/ChooseMuscle";
 import ChooseDifficulty from "../../components/ChooseDifficulty";
@@ -7,26 +6,8 @@ import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getNewExercises } from "../../services/exercises";
-// import { getNewExercises, getbackEndExercises } from "../../services/exercises";
 
 export function GenerateExercises() {
-
-    // const exerciseTypes = [
-    //     'cardio',
-    //     'olympic_weightlifting',
-    //     'plyometrics',
-    //     'powerlifting',
-    //     'strength',
-    //     'stretching',
-    //     'strongman'
-    // ]
-
-    // A function to be passed down to each component - used to correctly format display for user
-    // const formatDisplayOutput = (output) => {
-    //     return output
-    //         .replace('_', ' ') // removes underscores
-    //         .replace(output[0], output[0].toUpperCase()); //changes to title-case
-    // };
 
     const navigate = useNavigate();
 

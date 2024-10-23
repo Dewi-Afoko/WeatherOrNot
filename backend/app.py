@@ -2,11 +2,8 @@ import os
 import psycopg2
 import requests
 from flask_sqlalchemy import SQLAlchemy
-
 from datetime import datetime
-
 from functools import wraps
-
 from dotenv import load_dotenv
 from flask import Flask,request, redirect, jsonify,  render_template, flash, session
 from lib.user_repository import UserRepository
@@ -140,23 +137,23 @@ def get_single_exercise():
     else:
         return jsonify({'error': 'Failed to fetch exercise'}), response.status_code
 
-# GET favourites
-@app.route('/get_favourites', methods=['GET']) #<int:user>
-# @app.route('/get_favourites/<int:user>', methods=['GET']) #<int:user>
-# @token_checker #NEED TOKEN ACCESS
+
+
+######### GET favourites
+@app.route('/get_favourites', methods=['GET']) 
 def get_favourite_exercises():
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
-    data = request.get_json() # HOW TO DEAL WITH PARAMS IN PYTHON - need to get username from params (i.e. <int:user>), not request body
-    # print("Received data:", data)
-    # print("USER ID: ", data.get("user_id"))
-    username = data.get("user")
-    # favourites = repository.find_favourite_exercises(user) #CHANGE TO USER_ID
-    favourites = repository.find_favourite_exercises(username) #CHANGE TO USER_ID
+    username = request.args.get("username") # access parameter pass in request url
+    favourites = repository.find_favourite_exercises(username)
     return jsonify(favourites), 200    
 
-###### Add favourite exercise to user repo
 
+
+
+
+
+###### Add favourite exercise to user repo
 @app.route('/add_favourite', methods=['POST'])
 def add_favourite():
     connection = get_flask_database_connection(app)
@@ -173,6 +170,24 @@ def add_favourite():
     result = repository.add_exercise(username, exercise)  # Call the repository with both username and exercise name
     # print(result)
     return jsonify({"message": result}), 201
+
+
+
+###### Delete favourite exercise to user repo
+@app.route('/delete_favourite', methods=['DELETE'])
+def delete_favourite():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    username = data.get("user")
+    exercise = data.get("name")
+    if not username or not exercise:
+        return jsonify({"error": "Username and exercise name are required"}), 400
+    result = repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
+    # print(result)
+    return jsonify({"message": result}), 201
+
+
 
 @app.route('/workouts', methods=['POST']) #TODO Add TokenChecker
 def add_workout():
@@ -193,35 +208,6 @@ def update_workout():
     data = request.get_json()
     details = repository.update_workout(data)
     return jsonify(details),201
-
-
-###### Delete favourite exercise to user repo
-@app.route('/delete_favourite', methods=['DELETE'])
-def delete_favourite():
-    connection = get_flask_database_connection(app)
-    repository = UserRepository(connection)
-    data = request.get_json()
-    username = data.get("user")
-    exercise = data.get("name")
-    if not username or not exercise:
-        return jsonify({"error": "Username and exercise name are required"}), 400
-    result = repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
-    # print(result)
-    return jsonify({"message": result}), 201
-
-
-
-# @app.route('/user_workout_list', methods=['POST']) 
-# # @token_checker
-# def user_workout_list():
-#     connection = get_flask_database_connection(app)
-#     repository = UserRepository(connection)
-#     data = request.get_json()
-#     details = repository.user_workout_list(data['username'])
-#     return  jsonify(details),201
-
-
-
 
 
 
