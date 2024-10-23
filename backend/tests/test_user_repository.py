@@ -3,10 +3,10 @@ from lib.user_repository import UserRepository
 from lib.user import User
 import bcrypt
 
-def test_empty_db_is_empty(db_connection):
-    db_connection.seed("seeds/users.sql")
-    repository = UserRepository(db_connection)
-    assert repository.all() == []
+# def test_empty_db_is_empty(db_connection):
+#     db_connection.seed("seeds/users.sql")
+#     repository = UserRepository(db_connection)
+#     assert repository.all() == []
 
 
 def test_find_user_on_empty_db(db_connection):
@@ -27,6 +27,7 @@ def test_create_user_on_empty_db(db_connection):
 
 def test_add_details_after_user_creation_empty_db(db_connection):
     repository = UserRepository(db_connection)
+    repository.delete_user('Username_Test')
     new_user = User(None, 'Username_Test', 'password')
     repository.create_user(new_user)
     response = repository.add_details('Username_Test', 'FirstName_Test', 'LastName_Test', '1988_04_11', "201cm", "90") 

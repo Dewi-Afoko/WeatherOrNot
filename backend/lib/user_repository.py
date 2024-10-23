@@ -107,3 +107,10 @@ class UserRepository:
         current_user = self.find_by_username(username)
         self._connection.execute("UPDATE users SET exercise_list = array_remove(exercise_list, %s) WHERE username = %s", [exercise, current_user.username]) 
         return "Exercise has been removed from the array"
+    
+
+    ######## DELETE USER
+    def delete_user(self, username):
+        current_user = self.find_by_username(username)  # Fetch the user object
+        self._connection.execute("DELETE FROM users WHERE username = %s", [current_user.username])
+
