@@ -11,23 +11,6 @@ import { getNewExercises } from "../../services/exercises";
 
 export function GenerateExercises() {
 
-    // const exerciseTypes = [
-    //     'cardio',
-    //     'olympic_weightlifting',
-    //     'plyometrics',
-    //     'powerlifting',
-    //     'strength',
-    //     'stretching',
-    //     'strongman'
-    // ]
-
-    // A function to be passed down to each component - used to correctly format display for user
-    // const formatDisplayOutput = (output) => {
-    //     return output
-    //         .replace('_', ' ') // removes underscores
-    //         .replace(output[0], output[0].toUpperCase()); //changes to title-case
-    // };
-
     const navigate = useNavigate();
 
     // Managin state for exercises output

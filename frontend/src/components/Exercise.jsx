@@ -10,8 +10,13 @@ function Exercise(props) {
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        getFavourites(token)
+        if (!token) {
+            console.error("Token not found in localStorage");
+            return;
+        }
+        getFavourites(token, props.user)
         .then((data) => {
+            // console.log("DATA: " ,data)
             if (data.includes(props.name)) {
                 setLike(true)
             } else {
