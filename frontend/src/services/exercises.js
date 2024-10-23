@@ -20,6 +20,23 @@ export async function getNewExercises(token, muscle, difficulty, equipment) {
   return data;
 }
 
+// GET request for single exercise
+export async function getExerciseDetails(token, exerciseName) {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+  };
+  const response = await fetch(`${BACKEND_URL}/exercise?name=${exerciseName}`, requestOptions);
+  if (response.status !== 200) {
+    throw new Error("Unable to fetch exercise from API");
+  }
+  const data = await response.json();
+  return data;
+}
+
 
 // GET for exercises stored in DB (rather than API)
 export async function getbackEndExercises(token, muscle) {

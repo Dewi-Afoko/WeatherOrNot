@@ -6,8 +6,9 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { UserPage } from "./pages/User/UserPage";
 import { GenerateExercises } from "./pages/GenerateExercises/GenerateExercises";
-import { CreateWorkout } from "./components/CreateWorkout";
+// import { CreateWorkout } from "./components/CreateWorkout";
 import { Workouts } from "./pages/Workouts/Workouts";
+import ExerciseDetails from "./components/ExerciseDetails";
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/workouts",
     element: <Workouts />,
+  },
+  {
+    path: "/exercise",
+    element: <ExerciseDetails />,
   },
 ]);
 
