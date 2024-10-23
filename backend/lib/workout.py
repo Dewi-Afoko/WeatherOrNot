@@ -46,7 +46,8 @@ class Workout:
             "id": self.id,
             "username": self.user_username,
             "exercise_list": self.exercise_list,
-            "date":self.date
+            "date":self.date,
+            "complete":self.complete
             }
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
