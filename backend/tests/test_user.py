@@ -23,7 +23,7 @@ Spaces can be represented as strings
 """
 def test_string():
     user = User(1, "test_username", "test_password")
-    assert str(user) == "User(1, test_username, test_password, [], , , , , [])"
+    assert str(user) == "User(1, test_username, test_password, [], , , , , [], [], )"
 
 def test_user_sets_all_properties():
     user = User(1, "Dewi", "password")
@@ -39,5 +39,5 @@ def test_user_sets_all_properties():
 
 def test_repr():
     user = User(1, "Dewi", "password")
-    expected_repr = "User(1, Dewi, password, [], , , , , [])"
+    expected_repr = "User(1, Dewi, password, [], , , , , [], [], )"
     assert repr(user) == expected_repr
