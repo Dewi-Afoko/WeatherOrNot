@@ -97,7 +97,7 @@ def user_details():
     return  jsonify(details),201
 
 
-# Rob's FE get exercise request
+# Rob's FE get exercises request
 @app.route('/get_new_exercises', methods=['GET']) 
 def get_new_exercises():
 
@@ -124,7 +124,21 @@ def get_new_exercises():
         return jsonify(response.json()), 200
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
-    
+
+# GET single exercise from API
+@app.route('/exercise', methods=["GET"])
+def get_single_exercise():
+    name = request.args.get('name')
+    payload = {
+        'name': name
+    }
+    api_url = 'https://api.api-ninjas.com/v1/exercises' 
+    headers = {'X-Api-Key': os.getenv('API_KEY')} 
+    response = requests.get(api_url, params=payload, headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json()), 200
+    else:
+        return jsonify({'error': 'Failed to fetch exercise'}), response.status_code
 
 # GET favourites
 @app.route('/get_favourites', methods=['GET']) #<int:user>

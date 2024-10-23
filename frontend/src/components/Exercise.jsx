@@ -4,8 +4,11 @@
 // import { user_workout_list } from "../services/exercises.js";
 import { useEffect, useState } from "react";
 import { addFavourite, deleteFavourite, getFavourites } from "../services/exercises";
+// import { Link } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Exercise(props) {
+
     const [like, setLike] = useState(false);
 
     useEffect(() => {
@@ -19,7 +22,6 @@ function Exercise(props) {
             }
         })
     }, [])
-
 
     const handleAddFavouriteClick = async () => {
         try {
@@ -40,38 +42,26 @@ function Exercise(props) {
             console.error("Failed to update favourite:", error);
         }
     };
-    
-    
-//    console.log(like)
-    // console.log(props.user)
-    // console.log(props.name)
-    
 
     const formatDisplayOutput = (output) => {
         return output
             .replace('_', ' ') // removes underscores
             .replace(output[0], output[0].toUpperCase()); //changes to title-case
     };
-
+    
 return (
     <div>
-            <a href="">
-            <h2>{formatDisplayOutput(props.name)}</h2>
-            </a>
+        {/* <a> tag just to give it link styling  */}
+        <a href=""><h2 onClick={props.onClick}>{formatDisplayOutput(props.name)}</h2></a> 
         <ul>
-            <li>Type: {formatDisplayOutput(props.type)}</li>
+            {/* <li>Type: {formatDisplayOutput(props.type)}</li> */}
             <li>Muscle: {formatDisplayOutput(props.muscle)}</li>
-            <li>Equipment: {formatDisplayOutput(props.equipment)}</li>
             <li>Difficulty: {formatDisplayOutput(props.difficulty)}</li>
+            <li>Equipment: {formatDisplayOutput(props.equipment)}</li>
             {/* <li>Instructions: {props.instructions}</li> */}
             <button onClick={handleAddFavouriteClick}>
                     {like ? "UnFavourite" : "Favourite"}
                 </button>
-
-            {/* <button onClick={() => setlike((prevState) => !prevState)}>{like ? "Favourite" : "UnFavourite"}</button> */}
-
-            {/* {isLiked && (<button onClick={() => handleDeleteFavouriteClick(props.exercise_list)}>Remove Favourite</button>)}
-            {!isLiked && (<button onClick={() => handleAddFavouriteClick(props.exercise_list)}>Favourite</button>)} */}
             </ul>
     </div>
 );
