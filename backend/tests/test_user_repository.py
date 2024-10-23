@@ -10,6 +10,20 @@ def test_empty_db_is_empty(db_connection):
     assert repository.all() == []
 
 
+def test_all_users_are_returned(db_connection):
+    repository = UserRepository(db_connection)
+    repository.delete_all_users()
+    new_user_1 = User(None, 'Username_Test_1', 'Password_Test_1')
+    repository.create_user(new_user_1)
+    new_user_2 = User(None, 'Username_Test_2', 'Password_Test_2')
+    repository.create_user(new_user_2)
+    new_user_3 = User(None, 'Username_Test_3', 'Password_Test_2')
+    repository.create_user(new_user_3)
+    all_users =repository.all()
+    assert all_users[0].username == 'Username_Test_1'
+
+
+
 def test_find_user_on_empty_db(db_connection):
     repository = UserRepository(db_connection)
     user = repository.find_by_username('NonExistingUser')
