@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import GenerateButton from "../../components/GenerateButton";
 import ChooseMuscle from "../../components/ChooseMuscle";
 import ChooseDifficulty from "../../components/ChooseDifficulty";
@@ -7,7 +6,6 @@ import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getNewExercises } from "../../services/exercises";
-// import { getNewExercises, getbackEndExercises } from "../../services/exercises";
 
 export function GenerateExercises() {
 
