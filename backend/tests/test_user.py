@@ -1,4 +1,6 @@
 from lib.user import User
+from lib.user_repository import UserRepository
+import unittest
 
 """
 Constructs an id, username, password
@@ -41,3 +43,27 @@ def test_repr():
     user = User(1, "Dewi", "password")
     expected_repr = "User(1, Dewi, password, [], , , , , [], [], )"
     assert repr(user) == expected_repr
+
+
+def test_to_dict(db_connection):
+    user_repository = UserRepository(db_connection)
+    user_repository.delete_all_users()
+    new_user = User(1, 'Username_Test', 'password')
+    user_repository.create_user(new_user)
+    user_repository.add_details('Username_Test', 'FirstName_Test', 'LastName_Test', '1988_04_11', "201cm", "90") 
+    user_repository.add_exercise('Username_Test','Exercise_1')
+    user_repository.find_by_username('Username_Test')
+    assert new_user.to_dict() == {
+            "id": 1,
+            "username": 'Username_Test',
+            "exercise_list": [],
+            "first_name": '',
+            "last_name": '',
+            "dob": '',
+            "height": '', 
+            "weight": [],
+            "weight_date": [],
+            "level": ''
+            }
+
+
