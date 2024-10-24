@@ -7,6 +7,7 @@ import { SignupPage } from "./pages/Signup/SignupPage";
 import { UserPage } from "./pages/User/UserPage";
 import { GenerateExercises } from "./pages/GenerateExercises/GenerateExercises";
 import { Workouts } from "./pages/Workouts/Workouts";
+import  ExerciseDetails from "./components/ExerciseDetails";
 // Component to handle conditional rendering of the Header
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
           <Route path="/user" element={<UserPage />} />
           <Route path="/workouts" element={<Workouts/>}/>
           <Route path="/generate_exercises" element={<GenerateExercises />} />
+          <Route path="/exercise" element={<ExerciseDetails />} />
         </Routes>
       </Layout>
     </BrowserRouter>
