@@ -85,10 +85,10 @@ function GfGWeatherApp() {
     }
 	return (
 		<>
-		<Card className="p-4 shadow custom-card bg-dark text-white">
+		<Card className="p-4 shadow custom-card bg-light">
             <Card.Body>
                 <Card.Title className="display-6">Want to workout outside?</Card.Title>
-                <Card.Subtitle className="pb-2 text-white">
+                <Card.Subtitle className="pb-2">
                     Check the weather where you live
                 </Card.Subtitle>
 				<Form.Group className="pt-2">
@@ -98,7 +98,7 @@ function GfGWeatherApp() {
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 onKeyPress={search}
-				className="bg-secondary text-white"
+				className=""
             />
         </Form.Group>
                 {weather.loading && (

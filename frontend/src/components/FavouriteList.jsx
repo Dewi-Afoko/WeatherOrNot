@@ -22,15 +22,15 @@ function FavouriteList() {
 
     return (
         <>
-            <Card className="p-4 shadow bg-dark text-white">
+            <Card className="p-4 shadow bg-light">
             <Card.Body>
-                <Card.Title className="display-6">My Favorites</Card.Title>
-                <hr className="text-white" />
+                <Card.Title className="display-6">My Favourites</Card.Title>
+                <hr className="" />
                 <div className="favorites-list">
                     {favourites.map((favorite, index) => (
                         <div key={index}>
                             <p className="mb-2">{favorite}</p>
-                            {index < favourites.length - 1 && <hr className="text-white" />} {/* Line separator */}
+                            {index < favourites.length - 1 && <hr className="" />} 
                         </div>
                     ))}
                 </div>
