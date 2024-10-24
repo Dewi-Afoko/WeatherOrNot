@@ -2,7 +2,7 @@
 import { get_workout } from "../../services/addDetails"
 import { useEffect, useState } from "react"
 // import Exercise from "../../components/Exercise"
-import DeleteExerciseButton from "../../components/workout/deleteWorkoutButton"
+
 
 export function Workouts() {
    const workoutOpen = localStorage.getItem('WorkoutOpen')

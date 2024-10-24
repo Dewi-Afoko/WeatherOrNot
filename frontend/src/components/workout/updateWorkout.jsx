@@ -49,7 +49,7 @@ export function UpdateWorkout(props) {
             <form onSubmit={handleSubmit}>
                 {reps.map((rep, index) => (
                     <div key={index} style={{ marginBottom: '10px' }}>
-                        <label htmlFor={`loading-${index}`}>Loading:</label>
+                        <label htmlFor={`loading-${index}`}>Loading (kg):</label>
                         <input
                             placeholder="Input Loading here"
                             id={`loading-${index}`}
@@ -70,10 +70,10 @@ export function UpdateWorkout(props) {
                 ))}
                 
                 <button type="button" onClick={addRepField}>
-                    Add More Reps/Load
+                    Add another set?
                 </button>
                 
-                <input role="submit-button" id="submit" type="submit" value="Submit" />
+                <input role="submit-button" id="submit" type="submit" value="Add reps and loading to current workout" />
             </form>
         </>
     );

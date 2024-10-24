@@ -15,7 +15,7 @@ function AddExerciseButton(props) {
 
   return (
     <>
-      <button className='test-button1' onClick={handleClick}>ADD WORKOUT</button>
+      <button className='test-button1' onClick={handleClick}>Add exercise to current workout</button>
       {detailsOn && (
         <div className="modal">
           <div className="modal-content">

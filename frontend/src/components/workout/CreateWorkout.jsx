@@ -93,7 +93,7 @@ export function CreateWorkout() {
       <div className="form-container2">
         <button type="button" onClick={handleButtonClick}>
           <label htmlFor={isWorkoutOpen ? "Create Workout" : "In progress"}>
-            {isWorkoutOpen ? `Currently Building Workout...` : "Create Workout (click to add exercises!)"}
+            {isWorkoutOpen ? `Status: Currently Building Workout` : "Create Workout"}
           </label>
         </button>
       </div>

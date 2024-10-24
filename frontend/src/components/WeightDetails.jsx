@@ -49,31 +49,31 @@ export function WeightLog() {
             subArcs: [
               {
                 limit: subArcBaseLimit+minGauge,
-                color: '#EA4228',
+                color: '#FF6E00',
                 showTick: true,
-                tooltip: { text: 'Too low weight!' },
+                tooltip: { text: 'Suggestion: Eat a burger!' },
               },
               {
                 limit: (subArcBaseLimit * 2)+minGauge,
                 color: '#F5CD19',
                 showTick: true,
-                tooltip: { text: 'Low weight!' }
+                tooltip: { text: 'Below your average weight' }
               },
               {
                 limit: (subArcBaseLimit * 3)+minGauge,
                 color: '#5BE12C',
                 showTick: true,
-                tooltip: { text: 'OK weight!' }
+                tooltip: { text: 'Within your average weight range' }
               },
               {
                 limit: (subArcBaseLimit * 4)+minGauge,
                 color: '#F5CD19',
                 showTick: true,
-                tooltip: { text: 'High weight!' }
+                tooltip: { text: 'Above your average weight' }
               },
               {limit: (subArcBaseLimit * 5)+minGauge,
-                color: '#EA4228',
-                tooltip: { text: 'Too high weight!' }
+                color: '#FF6E00',
+                tooltip: { text: 'You bulking? Cos you thicc!' }
               }
             ]
           }}
