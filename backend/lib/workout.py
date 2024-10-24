@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import json
 class Workout:
     def __init__(self, username, planning=False): # Datetime string and User object passed in
         self.date = datetime.now().strftime('Y%/m%/d%')
@@ -9,7 +9,8 @@ class Workout:
         self.planning_mode = planning #TODO: Implement planning mode, means no need to complete exercises and "template" created in DB.
 
     def add_exercise(self, exercise):
-        if self.exercise_list[-1]['complete'] == True or len(self.exercise_list) == 0 or self.planning_mode == True:
+        # if self.exercise_list[-1]['complete'] == True or len(self.exercise_list) == 0 or self.planning_mode == True:
+        if len(self.exercise_list) == 0 or self.exercise_list[-1]['complete'] == True or self.planning_mode == True:
             self.exercise_list.append(
             {
             'name' : exercise.name,
@@ -39,6 +40,16 @@ class Workout:
         if self.planning_mode == False:
             self.complete = True
 
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__)
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "username": self.user_username,
+            "exercise_list": self.exercise_list,
+            "date":self.date,
+            "complete":self.complete
+            }
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
     

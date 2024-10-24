@@ -1,7 +1,7 @@
 /* Container to position the form */
 .form-container {
   position:absolute; /* Allows for absolute positioning within the nearest positioned ancestor */
-  top: 30px; /* Distance from the top */
+  top: 100px; /* Distance from the top */
   left: 20px; /* Distance from the left */
   width: 300px; /* Fixed width for the container */
   padding: 20px; /* Inner padding */

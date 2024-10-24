@@ -1,3 +1,7 @@
+
+import AddExerciseButton from "./workout/addExerciseButton";
+
+
 // import { handleAddFavouriteClick, handleDeleteFavouriteClick } from "../handlers/exercises.js";
 // import { handleAddFavouriteClick } from "../handlers/exercises.js";
 // import { useState, useEffect } from "react";
@@ -9,6 +13,7 @@ import { addFavourite, deleteFavourite, getFavourites } from "../services/exerci
 import { Card, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 
 function Exercise(props) {
 
@@ -52,6 +57,7 @@ function Exercise(props) {
     };
     
     return (
+
         <Card className="mb-4 shadow-sm">
             <Card.Body>
 
@@ -79,11 +85,13 @@ function Exercise(props) {
                             style={{ color: like ? 'pink' : 'grey', marginLeft: '5px' }}
                         />
                     </Button>
+            <AddExerciseButton exercise={props.exercise}/>
                 </div>
 
             </Card.Body>
         </Card>
     );
+
 }
 
 export default Exercise;

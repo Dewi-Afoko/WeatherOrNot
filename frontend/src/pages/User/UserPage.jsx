@@ -4,8 +4,13 @@ import GfGWeatherApp from "../../components/weather/weather";
 import { UserDetails } from "../../components/UserDetails";
 import WeightLog from "../../components/WeightDetails";
 import PreferenceTest from "../../components/preferencesTest";
-import './userpage.css'
-import LogoutButton from "../../components/LogoutButton";
+import './userpage.css';
+
+
+
+
+
+
 import WeightChart from "../../components/WeightChart";
 import FavouriteList from "../../components/FavouriteList";
 
@@ -35,10 +40,10 @@ export function UserPage() {
       <div className="weightChart"><WeightChart/></div>
       <button className='test-button' onClick={handleclick}>Workout Preferences Test </button>
       {test && (<PreferenceTest onClose={handleClose}/>)}
-      <LogoutButton />
       <div className="weatherbox">
       <GfGWeatherApp/>
       </div>
+      
     </div>
   );
 }

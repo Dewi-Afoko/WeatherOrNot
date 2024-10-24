@@ -123,8 +123,9 @@ export function GenerateExercises() {
                     <h3 className="text-center fw-bold">Try these exercises:</h3>
                     <Row>
                         {exercises.map((exercise, index) => (
-                            <Col xs={12} md={6} lg={4} key={index} className="mb-4">
+                            <Col xs={12} md={6} lg={4} className="mb-4">
                                 <Exercise
+                                    key={index}
                                     name={exercise.name}
                                     type={exercise.type}
                                     muscle={exercise.muscle}
@@ -143,3 +144,31 @@ export function GenerateExercises() {
         </Container>
     );
 }
+
+//             {exercises.length > 0 &&
+//             <div>
+//                 <h3>Try these exercises:</h3>
+//                 {exercises.map((exercise, index) => {
+//                     // console.log('exercise', exercise);
+//                     return(
+//                         <Exercise
+//                             key={index}
+//                             name={exercise.name}
+//                             type={exercise.type}
+//                             muscle={exercise.muscle}
+//                             equipment={exercise.equipment}
+//                             difficulty={exercise.difficulty}
+//                             instructions={exercise.instructions}
+//                             user = {user}
+//                             exercise = {exercise}
+//                             onClick={() => handleViewExerciseDetails(exercise)}
+
+//                             // formatDisplayOutput={formatDisplayOutput}
+//                         />
+//                     )
+//                 })}
+//             </div>}
+//         </>
+//     )
+// }
+

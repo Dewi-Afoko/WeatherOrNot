@@ -12,6 +12,7 @@ function LogoutButton() {
 
     
     setTimeout(() => {
+      localStorage.removeItem('username');
       localStorage.removeItem("token");
       navigate("/");
     }, 5000); 

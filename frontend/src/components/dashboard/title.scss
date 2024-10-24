@@ -1,0 +1,28 @@
+body {
+    background-color: #1d1d1d;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .wrapper {
+    display: flex;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  h1 {
+    max-width: 75%;
+    font-size: 25px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    color: #540032;
+  }
+  
+  .title {
+    background-image: url(https://cdn.pixabay.com/photo/2017/07/03/20/17/abstract-2468874_960_720.jpg);
+    background-attachment: fixed;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+  

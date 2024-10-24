@@ -31,6 +31,3 @@ class User:
             "weight_date":self.weight_date,
             "level":self.level
             }
-    
-    def add_exercise(self, exercise):
-        self.exercise_list.append(exercise)

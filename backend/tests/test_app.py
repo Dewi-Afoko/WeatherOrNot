@@ -1,95 +1,33 @@
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 import json
+import pytest
+from flask import jsonify
+
+
 
 # GET /get_exercises 
 def test_api_call_response_200_get_exercises(web_client):
-    response = web_client.get("/get_exercises")
+    response = web_client.get("/get_new_exercises")
     assert response.status_code == 200
-
 
 # GET /get_exercises mock data
 def test_api_call_gets_data(web_client):
     # Mock the data that we want
     mock_response_data = [
   {
-    "name": "Incline Hammer Curls",
-    "type": "strength",
     "muscle": "biceps",
-    "equipment": "dumbbell",
     "difficulty": "beginner",
-    "instructions": "Seat yourself on an incline bench with a dumbbell in each hand. You should pressed firmly against he back with your feet together. Allow the dumbbells to hang straight down at your side, holding them with a neutral grip. This will be your starting position. Initiate the movement by flexing at the elbow, attempting to keep the upper arm stationary. Continue to the top of the movement and pause, then slowly return to the start position."
+    "equipment": "dumbbell"
   },
   {
-    "name": "Wide-grip barbell curl",
-    "type": "strength",
     "muscle": "biceps",
-    "equipment": "barbell",
     "difficulty": "beginner",
-    "instructions": "Stand up with your torso upright while holding a barbell at the wide outer handle. The palm of your hands should be facing forward. The elbows should be close to the torso. This will be your starting position. While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out. Tip: Only the forearms should move. Continue the movement until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a second and squeeze the biceps hard. Slowly begin to bring the bar back to starting position as your breathe in. Repeat for the recommended amount of repetitions.  Variations:  You can also perform this movement using an E-Z bar or E-Z attachment hooked to a low pulley. This variation seems to really provide a good contraction at the top of the movement. You may also use the closer grip for variety purposes."
-  },
+    "equipment": "barbell"
+    },
   {
-    "name": "EZ-bar spider curl",
-    "type": "strength",
     "muscle": "biceps",
-    "equipment": "barbell",
     "difficulty": "intermediate",
-    "instructions": "Start out by setting the bar on the part of the preacher bench that you would normally sit on. Make sure to align the barbell properly so that it is balanced and will not fall off. Move to the front side of the preacher bench (the part where the arms usually lay) and position yourself to lay at a 45 degree slant with your torso and stomach pressed against the front side of the preacher bench. Make sure that your feet (especially the toes) are well positioned on the floor and place your upper arms on top of the pad located on the inside part of the preacher bench. Use your arms to grab the barbell with a supinated grip (palms facing up) at about shoulder width apart or slightly closer from each other. Slowly begin to lift the barbell upwards and exhale. Hold the contracted position for a second as you squeeze the biceps. Slowly begin to bring the barbell back to the starting position as your breathe in. . Repeat for the recommended amount of repetitions.  Variation: You can also use dumbbells when performing this exercise. Just make sure you place the dumbbells on the part of the preacher bench where you would normally sit properly."
-  },
-  {
-    "name": "Hammer Curls",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "dumbbell",
-    "difficulty": "intermediate",
-    "instructions": "Stand up with your torso upright and a dumbbell on each hand being held at arms length. The elbows should be close to the torso. The palms of the hands should be facing your torso. This will be your starting position. Now, while holding your upper arm stationary, exhale and curl the weight forward while contracting the biceps. Continue to raise the weight until the biceps are fully contracted and the dumbbell is at shoulder level. Hold the contracted position for a brief moment as you squeeze the biceps. Tip: Focus on keeping the elbow stationary and only moving your forearm. After the brief pause, inhale and slowly begin the lower the dumbbells back down to the starting position. Repeat for the recommended amount of repetitions.  Variations: There are many possible variations for this movement. For instance, you can perform the exercise sitting down on a bench with or without back support and you can also perform it by alternating arms; first lift the right arm for one repetition, then the left, then the right, etc."
-  },
-  {
-    "name": "EZ-Bar Curl",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "e-z_curl_bar",
-    "difficulty": "intermediate",
-    "instructions": "Stand up straight while holding an EZ curl bar at the wide outer handle. The palms of your hands should be facing forward and slightly tilted inward due to the shape of the bar. Keep your elbows close to your torso. This will be your starting position. Now, while keeping your upper arms stationary, exhale and curl the weights forward while contracting the biceps. Focus on only moving your forearms. Continue to raise the weight until your biceps are fully contracted and the bar is at shoulder level. Hold the top contracted position for a moment and squeeze the biceps. Then inhale and slowly lower the bar back to the starting position. Repeat for the recommended amount of repetitions.  Variations: You can also perform this movement using an E-Z attachment hooked to a low pulley. This variation seems to really provide a good contraction at the top of the movement. You may also use the closer grip for variety purposes."
-  },
-  {
-    "name": "Zottman Curl",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "None",
-    "difficulty": "intermediate",
-    "instructions": "Stand up with your torso upright and a dumbbell in each hand being held at arms length. The elbows should be close to the torso. Make sure the palms of the hands are facing each other. This will be your starting position. While holding the upper arm stationary, curl the weights while contracting the biceps as you breathe out. Only the forearms should move. Your wrist should rotate so that you have a supinated (palms up) grip. Continue the movement until your biceps are fully contracted and the dumbbells are at shoulder level. Hold the contracted position for a second as you squeeze the biceps. Now during the contracted position, rotate your wrist until you now have a pronated (palms facing down) grip with the thumb at a higher position than the pinky. Slowly begin to bring the dumbbells back down using the pronated grip. As the dumbbells close your thighs, start rotating the wrist so that you go back to a neutral (palms facing your body) grip. Repeat for the recommended amount of repetitions."
-  },
-  {
-    "name": "Biceps curl to shoulder press",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "dumbbell",
-    "difficulty": "beginner",
-    "instructions": "Begin in a standing position with a dumbbell in each hand. Your arms should be hanging at your sides with your palms facing forward. Look directly ahead, keeping your chest up, with your feet shoulder-width apart. This will be your starting position. Initiate the movement by flexing the elbows to curl the weight. Do not use momentum or flex through the shoulder, instead use a controlled motion. Execute the pressing movement by extending the arm, flexing and abducting the shoulder to rotate the arm as you press above your head. Pause at the top of the motion before reversing the movement to return to the starting position. Complete the desired number of repetitions before switching to the opposite side."
-  },
-  {
-    "name": "Barbell Curl",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "barbell",
-    "difficulty": "intermediate",
-    "instructions": "Stand up with your torso upright while holding a barbell at a shoulder-width grip. The palm of your hands should be facing forward and the elbows should be close to the torso. This will be your starting position. While holding the upper arms stationary, curl the weights forward while contracting the biceps as you breathe out. Tip: Only the forearms should move. Continue the movement until your biceps are fully contracted and the bar is at shoulder level. Hold the contracted position for a second and squeeze the biceps hard. Slowly begin to bring the bar back to starting position as your breathe in. Repeat for the recommended amount of repetitions.  Variations:  You can also perform this movement using a straight bar attachment hooked to a low pulley. This variation seems to really provide a good contraction at the top of the movement. You may also use the closer grip for variety purposes."
-  },
-  {
-    "name": "Concentration curl",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "dumbbell",
-    "difficulty": "intermediate",
-    "instructions": "Sit down on a flat bench with one dumbbell in front of you between your legs. Your legs should be spread with your knees bent and feet on the floor. Use your right arm to pick the dumbbell up. Place the back of your right upper arm on the top of your inner right thigh. Rotate the palm of your hand until it is facing forward away from your thigh. Tip: Your arm should be extended and the dumbbell should be above the floor. This will be your starting position. While holding the upper arm stationary, curl the weights forward while contracting the biceps as you breathe out. Only the forearms should move. Continue the movement until your biceps are fully contracted and the dumbbells are at shoulder level. Tip: At the top of the movement make sure that the little finger of your arm is higher than your thumb. This guarantees a good contraction. Hold the contracted position for a second as you squeeze the biceps. Slowly begin to bring the dumbbells back to starting position as your breathe in. Caution: Avoid swinging motions at any time. Repeat for the recommended amount of repetitions. Then repeat the movement with the left arm.  Variations: This exercise can be performed standing with the torso bent forward and the arm in front of you. In this case, no leg support is used for the back of your arm so you will need to make extra effort to ensure no movement of the upper arm. This is a more challenging version of the exercise and is not recommended for people with lower back issues."
-  },
-  {
-    "name": "Flexor Incline Dumbbell Curls",
-    "type": "strength",
-    "muscle": "biceps",
-    "equipment": "dumbbell",
-    "difficulty": "beginner",
-    "instructions": "Hold the dumbbell towards the side farther from you so that you have more weight on the side closest to you. (This can be done for a good effect on all bicep dumbbell exercises). Now do a normal incline dumbbell curl, but keep your wrists as far back as possible so as to neutralize any stress that is placed on them. Sit on an incline bench that is angled at 45-degrees while holding a dumbbell on each hand. Let your arms hang down on your sides, with the elbows in, and turn the palms of your hands forward with the thumbs pointing away from the body. Tip: You will keep this hand position throughout the movement as there should not be any twisting of the hands as they come up. This will be your starting position. Curl up the two dumbbells at the same time until your biceps are fully contracted and exhale. Tip: Do not swing the arms or use momentum. Keep a controlled motion at all times. Hold the contracted position for a second at the top. As you inhale, slowly go back to the starting position. Repeat for the recommended amount of repetitions.  Caution: Do not extend your arms totally as you could injure your elbows if you hyperextend them. Also, make sure that on the way down you move slowly to avoid injury. Variations: You can use cables for this movement as well."
+    "equipment": "barbell"
   }]
     # Patch function replaces requests.get with a mock, it makes a fake HTTP request
     with patch('requests.get') as mock_get:
@@ -97,19 +35,447 @@ def test_api_call_gets_data(web_client):
         mock_get.return_value.json.return_value = mock_response_data 
         # Defines the JSON data that the mock should return when response.json is called in the route
         #  Conftest.py file
-        response = web_client.get("/get_exercises")
+        response = web_client.get("/get_new_exercises")
         assert response.status_code == 200
         # json.loads converts json data into a python dictionary
         response_data = json.loads(response.data)
-        assert response_data[1]['name'] == "Wide-grip barbell curl"
         assert response_data[1]['muscle'] == "biceps"
-        assert response_data[1]['type'] == "strength"
-        assert response_data[1]['equipment'] == "barbell"
         assert response_data[1]['difficulty'] == "beginner"
+        assert response_data[1]['equipment'] == "barbell"
 
-####################################################################################################
-
-    # GET /get_exercise 
-def test_api_call_response_200_get_exercise(web_client):
-    response = web_client.get("/get_exercise")
+# GET/ get_new_exercises API
+@patch('app.os.getenv')
+@patch('app.requests.get')
+def test_get_new_exercises_success(mock_get, mock_getenv, web_client):
+    # Set up the mock for os.getenv to return the expected API key
+    mock_getenv.return_value = 'mock_api_key'
+    # Mock API response data
+    mock_response_data = [
+  {
+    "muscle": "biceps",
+    "difficulty": "beginner",
+    "equipment": "dumbbell"
+  },
+  {
+    "muscle": "biceps",
+    "difficulty": "beginner",
+    "equipment": "barbell"
+    },
+  {
+    "muscle": "biceps",
+    "difficulty": "intermediate",
+    "equipment": "barbell"
+  }]
+    # Create a mock response object with status_code and json method
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.json.return_value = mock_response_data
+    # Set the return value of requests.get to this mock response
+    mock_get.return_value = mock_response
+    # Make the GET request to the route with query params
+    response = web_client.get('/get_new_exercises?muscle=biceps&difficulty=beginner&equipment=barbell')
+    # Check if the correct response is returned
     assert response.status_code == 200
+    assert response.json == mock_response_data
+    # Ensure the mock API was called with the correct parameters
+    mock_get.assert_called_once_with(
+        'https://api.api-ninjas.com/v1/exercises',
+        params={'muscle': 'biceps', 'difficulty': 'beginner', 'equipment': 'barbell'},
+        headers={'X-Api-Key': 'mock_api_key'}
+    )
+
+# GET/ get_new_exercises API
+# Failure
+@patch('app.requests.get')
+def test_get_new_exercises_failure(mock_get, web_client):
+    # Simulate an API failure (e.g., 500 server error)
+    mock_get.return_value.status_code = 500
+    # Make the GET request to the route
+    response = web_client.get('/get_new_exercises?muscle=chest')
+    # Check if the error response is returned correctly
+    assert response.status_code == 500
+    assert response.json == {'error': 'Failed to fetch exercises'}
+
+# GET /exercise
+@patch('app.os.getenv')
+@patch('app.requests.get')
+def test_get_single_exercises_success(mock_get, mock_getenv, web_client):
+    # Set up mock for os.getenv to return the expected API key
+    mock_getenv.return_value = 'mock_api_key'
+    # Mock API response data
+    mock_response_data = [
+        {
+            "name": "landmine_twist",
+            "muscle": "abdominals",
+            "difficulty": "intermediate",
+            "equipment": "other"
+        }
+    ]
+    # Create mock response object with status_code and json method
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.json.return_value = mock_response_data
+    # Set return value of requests.get to mock response
+    mock_get.return_value = mock_response
+    # Make GET request to route with query params
+    response = web_client.get('/exercise?name=landmine_twist')  # Change the URL here to /exercise
+    # Check if correct response returned
+    assert response.status_code == 200
+    assert response.json == mock_response_data
+    # mock API called with the params
+    mock_get.assert_called_once_with(
+        'https://api.api-ninjas.com/v1/exercises',
+        params={'name': 'landmine_twist'},
+        headers={'X-Api-Key': 'mock_api_key'}
+    )
+
+# GET /exercise
+# Failure
+@patch('app.requests.get')
+def test_get_single_exercise_failure(mock_get, web_client):
+    # Simulate an API failure
+    mock_get.return_value.status_code = 500
+    response = web_client.get('/exercise?name=elbow_plank') 
+    # Check if the error response is returned correctly
+    assert response.status_code == 500
+    assert response.json == {'error': 'Failed to fetch exercise'}
+
+
+# GET /get_favourites
+@patch('app.UserRepository')  # Mock the UserRepository
+@patch('app.get_flask_database_connection')  # Mock the database connection function
+def test_get_favourite_exercises_success(mock_get_db_conn, mock_user_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repos behavior
+    mock_repo_instance = mock_user_repo.return_value
+    mock_repo_instance.find_favourite_exercises.return_value = [
+        {
+            "name": "Push Up",
+            "muscle": "chest",
+            "difficulty": "medium",
+            "equipment": "none"
+        },
+        {
+            "name": "Squat",
+            "muscle": "legs",
+            "difficulty": "hard",
+            "equipment": "barbell"
+        }
+    ]
+    # Make the GET request to the route with a username parameter
+    response = web_client.get('/get_favourites?username=test_user')
+    # Check if the correct response is returned
+    assert response.status_code == 200
+    assert response.json == [
+        {
+            "name": "Push Up",
+            "muscle": "chest",
+            "difficulty": "medium",
+            "equipment": "none"
+        },
+        {
+            "name": "Squat",
+            "muscle": "legs",
+            "difficulty": "hard",
+            "equipment": "barbell"
+        }
+    ]
+    # Ensure the repository method was called with the correct parameter
+    mock_repo_instance.find_favourite_exercises.assert_called_once_with("test_user")
+    
+# GET /get_favourites
+# Empty list
+@patch('app.UserRepository')
+@patch('app.get_flask_database_connection')
+def test_get_favourite_exercises_no_favourites(mock_get_db_conn, mock_user_repo, web_client):
+    # Mock connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    mock_repo_instance = mock_user_repo.return_value
+    # Return an empty list of favorite exercises
+    mock_repo_instance.find_favourite_exercises.return_value = []
+    # Make the GET request with a username
+    response = web_client.get('/get_favourites?username=test_user')
+    # Check for empty list response
+    assert response.status_code == 200
+    assert response.json == []
+    # Ensure repository method was called
+    mock_repo_instance.find_favourite_exercises.assert_called_once_with("test_user")
+
+
+# POST /add_favourite
+@patch('app.UserRepository')  # Mock the UserRepository
+@patch('app.get_flask_database_connection')  # Mock the database connection function
+def test_add_favourite_success(mock_get_db_conn, mock_user_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior
+    mock_repo_instance = mock_user_repo.return_value
+    mock_repo_instance.add_exercise.return_value = None  # The function returns None on success
+    # Define the POST data (JSON body)
+    post_data = {
+        "user": "test_user",
+        "name": "Push Up"
+    }
+    # Make the POST request to the route
+    response = web_client.post('/add_favourite', json=post_data)
+    # Check if the correct response is returned
+    assert response.status_code == 201
+    assert response.json == {"message": "Favourite exercise added"}
+    # Ensure the repository method was called with the correct arguments
+    mock_repo_instance.add_exercise.assert_called_once_with("test_user", "Push Up")
+
+# POST /add_favourite
+# failure
+@patch('app.UserRepository')
+@patch('app.get_flask_database_connection')
+def test_add_favourite_missing_data(mock_get_db_conn, mock_user_repo, web_client):
+    # Mock connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    mock_repo_instance = mock_user_repo.return_value
+    # Define the POST data with missing exercise name
+    post_data = {
+        "user": "test_user"
+    }
+    # Make the POST request
+    response = web_client.post('/add_favourite', json=post_data)
+    # Check if the response status code is 400 (Bad Request)
+    assert response.status_code == 400
+    assert "error" in response.json
+    # Ensure repository method was not called since data is missing
+    mock_repo_instance.add_exercise.assert_not_called()
+
+
+# DELETE /delete_favourite
+@patch('app.UserRepository')  # Mock the UserRepository
+@patch('app.get_flask_database_connection')  # Mock the database connection function
+def test_delete_favourite_success(mock_get_db_conn, mock_user_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior
+    mock_repo_instance = mock_user_repo.return_value
+    mock_repo_instance.delete_exercise.return_value = None  # Assume the function returns None on success
+    # Define the DELETE data (JSON body)
+    delete_data = {
+        "user": "test_user",
+        "name": "Push Up"
+    }
+    # Make the DELETE request to the route
+    response = web_client.delete('/delete_favourite', json=delete_data)
+    # Check if the correct response is returned
+    assert response.status_code == 200
+    assert response.json == {"message": "Favourite exercise deleted"}
+    # Ensure the repository method was called with the correct arguments
+    mock_repo_instance.delete_exercise.assert_called_once_with("test_user", "Push Up")
+
+# DELETE /delete_favourite
+# failure
+@patch('app.UserRepository')
+@patch('app.get_flask_database_connection')
+def test_delete_favourite_missing_data(mock_get_db_conn, mock_user_repo, web_client):
+    # Mock connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    mock_repo_instance = mock_user_repo.return_value
+    # Define the DELETE data with missing exercise name
+    delete_data = {
+        "user": "test_user"
+    }
+    # Make the DELETE request with missing data
+    response = web_client.delete('/delete_favourite', json=delete_data)
+    # Check for 400 Bad Request response
+    assert response.status_code == 400
+    assert response.json == {"error": "Username and exercise name are required"}
+    # Ensure repository method was not called
+    mock_repo_instance.delete_exercise.assert_not_called()
+
+
+# POST /workouts
+@patch('app.WorkoutRepository')  # Mock the WorkoutRepository
+@patch('app.get_flask_database_connection')  # Mock the database connection function
+def test_add_workout_success(mock_get_db_conn, mock_workout_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior
+    mock_repo_instance = mock_workout_repo.return_value
+    mock_repo_instance.save_workout.return_value = {
+        "user": "test_user",
+        "workout": "Chest Day",
+        "date": "2024/10/24"
+    }
+    # Define the POST data (JSON body)
+    post_data = {
+        "user": "test_user",
+        "workout": "Chest Day"
+    }
+    # Make the POST request to the route
+    response = web_client.post('/workouts', json=post_data)
+    # Check if the correct response is returned
+    assert response.status_code == 201
+    assert response.json == {
+        "user": "test_user",
+        "workout": "Chest Day",
+        "date": "2024/10/24"
+    }
+    # Ensure the repository method was called with the correct data
+    mock_repo_instance.save_workout.assert_called_once()
+    saved_data = mock_repo_instance.save_workout.call_args[0][0]  # Get the argument passed to save_workout
+    assert saved_data['user'] == "test_user"
+    assert saved_data['workout'] == "Chest Day"
+    assert 'date' in saved_data  # Ensure the date was added
+
+# POST /workouts
+# failure
+# @patch('app.WorkoutRepository')
+# @patch('app.get_flask_database_connection')
+# def test_add_workout_missing_user(mock_get_db_conn, mock_workout_repo, web_client):
+#     # Mock database connection and repository
+#     mock_connection = Mock()
+#     mock_get_db_conn.return_value = mock_connection
+#     # Mock the repository's behavior to return valid data
+#     mock_repo_instance = mock_workout_repo.return_value
+#     mock_repo_instance.save_workout.return_value = {
+#         "user": "test_user",
+#         "workout": "Chest Day",
+#         "date": "2024/10/24"
+#     }
+#     # Define the POST data with missing 'user'
+#     post_data = {
+#         "workout": "Chest Day"
+#     }
+#     # Make the POST request
+#     response = web_client.post('/workouts', json=post_data)
+#     # Check for 400 Bad Request response
+#     assert response.status_code == 400
+#     assert "error" in response.json
+#     # Ensure repository method was not called
+#     mock_repo_instance.save_workout.assert_not_called()
+
+
+# POST /post_exercises
+@patch('app.ExerciseRepository')  # Mock the ExerciseRepository
+@patch('app.get_flask_database_connection')  # Mock the database connection function
+def test_post_exercises_success(mock_get_db_conn, mock_exercise_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior
+    mock_repo_instance = mock_exercise_repo.return_value
+    mock_repo_instance.fetch_all_data.return_value = [{"exercise": "Push Up", "difficulty": "Medium"}]
+    mock_repo_instance.store_data.return_value = None  # Assume storing returns None
+    # Make the POST request to the route
+    response = web_client.post('/post_exercises')
+    # Check if the correct response is returned
+    assert response.status_code == 200
+    assert response.json == {"message": "Data fetched and stored successfully!"}
+    # Ensure the repository methods were called
+    mock_repo_instance.fetch_all_data.assert_called_once()
+    mock_repo_instance.store_data.assert_called_once_with([{"exercise": "Push Up", "difficulty": "Medium"}])
+
+# POST /post_exercise
+# Failure - no data 
+@patch('app.ExerciseRepository')
+@patch('app.get_flask_database_connection')
+def test_post_exercises_no_data(mock_get_db_conn, mock_exercise_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior (no data returned)
+    mock_repo_instance = mock_exercise_repo.return_value
+    mock_repo_instance.fetch_all_data.return_value = None
+    # Make the POST request
+    response = web_client.post('/post_exercises')
+    # Check for 400 Bad Request response
+    assert response.status_code == 400
+    assert response.json == {"error": "No data received from the API"}
+    # Ensure the repository method was called but no data was stored
+    mock_repo_instance.fetch_all_data.assert_called_once()
+    mock_repo_instance.store_data.assert_not_called()
+
+# POST /post_exercise
+# API failure 
+@patch('app.ExerciseRepository')
+@patch('app.get_flask_database_connection')
+def test_post_exercises_api_failure(mock_get_db_conn, mock_exercise_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository to raise an exception
+    mock_repo_instance = mock_exercise_repo.return_value
+    mock_repo_instance.fetch_all_data.side_effect = Exception("API failure")
+    # Make the POST request
+    response = web_client.post('/post_exercises')
+    # Check for 500 Internal Server Error response
+    assert response.status_code == 500
+    assert response.json == {"error": "Failed to fetch data from the API"}
+    # Ensure the repository method was called and an exception was raised
+    mock_repo_instance.fetch_all_data.assert_called_once()
+
+
+# GET /get_exercises
+@patch('app.ExerciseRepository')  # Mock the ExerciseRepository
+@patch('app.get_flask_database_connection')  # Mock the database connection function
+def test_get_exercises_success(mock_get_db_conn, mock_exercise_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior
+    mock_repo_instance = mock_exercise_repo.return_value
+    mock_repo_instance.all.return_value = [
+        Mock(to_dict=Mock(return_value={"name": "Push Up", "difficulty": "Medium"})),
+        Mock(to_dict=Mock(return_value={"name": "Squat", "difficulty": "Hard"}))
+    ]
+    # Make the GET request to the route
+    response = web_client.get('/get_exercises')
+    # Check if the correct response is returned
+    assert response.status_code == 200
+    assert response.json == [
+        {"name": "Push Up", "difficulty": "Medium"},
+        {"name": "Squat", "difficulty": "Hard"}
+    ]
+    # Ensure the repository method was called
+    mock_repo_instance.all.assert_called_once()
+
+# GET /get_exercises
+# Failure - no data
+@patch('app.ExerciseRepository')
+@patch('app.get_flask_database_connection')
+def test_get_exercises_no_data(mock_get_db_conn, mock_exercise_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository's behavior (return no exercises)
+    mock_repo_instance = mock_exercise_repo.return_value
+    mock_repo_instance.all.return_value = []
+    # Make the GET request
+    response = web_client.get('/get_exercises')
+    # Check for 404 Not Found response
+    assert response.status_code == 404
+    assert response.json == {"message": "No exercises found"}
+    # Ensure the repository method was called
+    mock_repo_instance.all.assert_called_once()
+
+# GET /get_exercises
+# Repo failure
+@patch('app.ExerciseRepository')
+@patch('app.get_flask_database_connection')
+def test_get_exercises_repository_failure(mock_get_db_conn, mock_exercise_repo, web_client):
+    # Mock database connection and repository
+    mock_connection = Mock()
+    mock_get_db_conn.return_value = mock_connection
+    # Mock the repository to raise an exception
+    mock_repo_instance = mock_exercise_repo.return_value
+    mock_repo_instance.all.side_effect = Exception("Database failure")
+    # Make the GET request
+    response = web_client.get('/get_exercises')
+    # Check for 500 Internal Server Error response
+    assert response.status_code == 500
+    assert response.json == {"error": "Failed to retrieve exercises"}
+    # Ensure the repository method was called and an exception was raised
+    mock_repo_instance.all.assert_called_once()
