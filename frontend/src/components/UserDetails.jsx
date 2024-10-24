@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './userdetails.css'
 import {addDetails} from '../services/addDetails'
 import { user_details } from "../services/addDetails";
+import { Card } from 'react-bootstrap';
 
 
 export function UserDetails() {
@@ -88,57 +89,121 @@ if (!token) {
     }
   }
 
-  return (<>
-    <div className="form-container">
-      <h2>USER PROFILE DETAILS</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="FirstName">First Name: {currentFirstName}</label>
-        <input
-        placeholder="Update First Name"
-          id="FirstName"
-          type="text"
-          value={firstname}
-          onChange={handlefirstnameChange}
-        />
-        <label htmlFor="lastname">Last Name: {currentLastName}</label>
-        <input
-        placeholder="Update Last Name"
-          id="lastname"
-          type="text"
-          value={lastName}
-          onChange={handlelastnameChange}
-        />
-        <label htmlFor="dob">Date of Birth: {currentDob}<br></br>(Update DoB below)</label>
-        <input
-      
-          placeholder="Update date of birth(dd/mm/yyyy)"
-          id="dob"
-          type="date"
-          value={dob}
-          onChange={handledobChange}
-        />
-        <label htmlFor="height">Height: {currentHeight}<br></br>(Update Weight below)</label>
-        <input
-          placeholder="Update height(cm)"
-          id="height"
-          type="number"
-          value={height}
-          onChange={handleHeightChange}
-        />
-        <label htmlFor="weight">Weight(kg):<br></br>(Update Weight below)</label>
-        <input
-          placeholder="Update weight(kg)"
-          id="weight"
-          type="number"
-          value={weight}
-          onChange={handleWeightChange}
-        />
-        <input role="submit-button" id="submit" type="submit" value="Submit" />
-      </form>
-    </div>
+  return (
+    <>
+            <Card className="shadow bg-light">
+                <Card.Body>
+                    <h2 className="text-center">USER PROFILE DETAILS</h2>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="FirstName" className="form-label">First Name: {currentFirstName}</label>
+                            <input
+                                placeholder="Update First Name"
+                                id="FirstName"
+                                type="text"
+                                className="form-control"
+                                value={firstname}
+                                onChange={handlefirstnameChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="lastname" className="form-label">Last Name: {currentLastName}</label>
+                            <input
+                                placeholder="Update Last Name"
+                                id="lastname"
+                                type="text"
+                                className="form-control"
+                                value={lastName}
+                                onChange={handlelastnameChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="dob" className="form-label">Date of Birth: {currentDob}</label>
+                            <input
+                                placeholder="Update date of birth (dd/mm/yyyy)"
+                                id="dob"
+                                type="date"
+                                className="form-control"
+                                value={dob}
+                                onChange={handledobChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="height" className="form-label">Height (cm): {currentHeight}</label>
+                            <input
+                                placeholder="Update height (cm)"
+                                id="height"
+                                type="number"
+                                className="form-control"
+                                value={height}
+                                onChange={handleHeightChange}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="weight" className="form-label">Weight (kg):<br/>(Update Weight below)</label>
+                            <input
+                                placeholder="Update weight (kg)"
+                                id="weight"
+                                type="number"
+                                className="form-control"
+                                value={weight}
+                                onChange={handleWeightChange}
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary w-100">Submit</button>
+                    </form>
+                </Card.Body>
+            </Card>
     {weighterror && (weighterror)}
     {heighterror && (heighterror)}
     </>
   );
 }
 
+
+{/* <div className="form-container">
+<h2>USER PROFILE DETAILS</h2>
+<form onSubmit={handleSubmit}>
+  <label htmlFor="FirstName">First Name: {currentFirstName}</label>
+  <input
+  placeholder="Update First Name"
+    id="FirstName"
+    type="text"
+    value={firstname}
+    onChange={handlefirstnameChange}
+  />
+  <label htmlFor="lastname">Last Name: {currentLastName}</label>
+  <input
+  placeholder="Update Last Name"
+    id="lastname"
+    type="text"
+    value={lastName}
+    onChange={handlelastnameChange}
+  />
+  <label htmlFor="dob">Date of Birth: {currentDob}</label>
+  <input
+    placeholder="Update date of birth(dd/mm/yyyy)"
+    id="dob"
+    type="date"
+    value={dob}
+    onChange={handledobChange}
+  />
+  <label htmlFor="height">Height: {currentHeight}</label>
+  <input
+    placeholder="Update height(cm)"
+    id="height"
+    type="number"
+    value={height}
+    onChange={handleHeightChange}
+  />
+  <label htmlFor="weight">Weight(kg):<br></br>(Update Weight below)</label>
+  <input
+    placeholder="Update weight(kg)"
+    id="weight"
+    type="number"
+    value={weight}
+    onChange={handleWeightChange}
+  />
+  <input role="submit-button" id="submit" type="submit" value="Submit" />
+</form>
+</div> */}

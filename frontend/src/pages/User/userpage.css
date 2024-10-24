@@ -1,24 +1,23 @@
-.test-button {
-    position: fixed; /* Use fixed positioning for the button */
-    top: 80px; /* Distance from the top of the viewport */
-    left: 50%; /* Center the button horizontally */
-    transform: translateX(-50%); /* Adjust the position to fully center the button */
-    width: 200px; /* Adjust width as needed */
-    padding: 10px; /* Inner padding */
-    background-color: #f9f9f9; /* Same background color as user details */
-    border: 1px solid #ddd; /* Same border style */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    color: #333; /* Text color */
-    font-size: 16px; /* Font size */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s, color 0.3s; /* Transition effects for hover */
+/* .test-button {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Hover effect */
 .test-button:hover {
-    background-color: #e0e0e0; /* Slightly darker background on hover */
-    color: #000; /* Darker text color on hover */
+    background-color: #e0e0e0;
+    color: #000;
 }
 
 .weightChart {
@@ -26,13 +25,11 @@
     position: absolute;
     top: 500px;
     right: 40px;
-    
-    /* Scale down the size */
-    transform: scale(0.8); /* Adjust the value as needed to reduce size */
-    transform-origin: top right; /* Ensures it scales from the top-right corner */
+    transform: scale(0.8);
+    transform-origin: top right;
 }
 
-.addexercisebutton{
-top:300px;
-right:450px
-}
+.addexercisebutton {
+    top: 300px;
+    right: 450
+} */

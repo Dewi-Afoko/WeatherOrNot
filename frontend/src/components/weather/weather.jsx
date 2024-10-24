@@ -1,12 +1,15 @@
-//App.js
-
+import './weather.css';
 import { Oval } from 'react-loader-spinner';
 import  { useState } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFrown } from '@fortawesome/free-solid-svg-icons';
-import './weather.css';
 import { WeatherIdeas } from './weatherIdeas';
+import { Card } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+
+
+
 function GfGWeatherApp() {
 	const [input, setInput] = useState('');
 	const [weather, setWeather] = useState({
@@ -81,67 +84,65 @@ function GfGWeatherApp() {
         }
     }
 	return (
-		<div className="App">
-			<h1 className="app-name">
-				OUTDOOR WORKOUT ??
-			</h1>
-            <h2 className='subtitle'>
-                CHECK THE WEATHER IN YOUR CITY BEFORE YOU DECIDE 
-            </h2>
-			<div className="search-bar">
-				<input
-					type="text"
-					className="city-search"
-					placeholder="Enter City Name.."
-					name="query"
-					value={input}
-					onChange={(event) => setInput(event.target.value)}
-					onKeyPress={search}
-				/>
-			</div>
-			{weather.loading && (
-				<>
-					<br />
-					<br />
-					<Oval type="Oval" color="black" height={100} width={100} />
-				</>
-			)}
-			{weather.error && (
-				<>
-					<br />
-					<br />
-					<span className="error-message">
-						<FontAwesomeIcon icon={faFrown} />
-						<span style={{ fontSize: '20px' }}>City not found</span>
-					</span>
-				</>
-			)}
-			{weather && weather.data && weather.data.main && (
-				<div>
-					<div className="city-name">
-						<h2>
-							{weather.data.name}, <span>{weather.data.sys.country}</span>
-						</h2>
-					</div>
-					<div className="date">
-						<span>{toDateFunction()}</span>
-					</div>
-					<div className="icon-temp">
-						<img
-							className=""
-							src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`}
-							alt={weather.data.weather[0].description}
-						/>
-						{Math.round(weather.data.main.temp)}
-						<sup className="deg">°C</sup>
-					</div>
-					<div className="des-wind">
-						<p>Wind Speed: {weather.data.wind.speed}m/s</p>
-						<p className='weatherIdea'><WeatherIdeas description= {weather.data.weather[0].description.toUpperCase()} temp= {Math.round(weather.data.main.temp)}/></p>
-					</div>
-				</div>
-			)}
-		</div>
+		<>
+		<Card className="p-4 shadow custom-card bg-light">
+            <Card.Body>
+                <Card.Title className="display-6">Want to workout outside?</Card.Title>
+                <Card.Subtitle className="pb-2">
+                    Check the weather where you live
+                </Card.Subtitle>
+				<Form.Group className="pt-2">
+            <Form.Control
+                type="text"
+                placeholder="Enter City Name..."
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyPress={search}
+				className=""
+            />
+        </Form.Group>
+                {weather.loading && (
+                    <>
+                        <br />
+                        <Oval type="Oval" color="black" height={100} width={100} />
+                    </>
+                )}
+                {weather.error && (
+                    <>
+                        <br />
+                        <span>
+                            <FontAwesomeIcon icon={faFrown} />
+                            <span style={{ fontSize: '20px' }}> City not found</span>
+                        </span>
+                    </>
+                )}
+                {weather && weather.data && weather.data.main && (
+                    <div>
+                        <Card.Title className="text-center pt-4 display-6">
+                            {weather.data.name}, <span>{weather.data.sys.country}</span>
+                        </Card.Title>
+                        <Card.Text className="text-center">
+                            <span>{toDateFunction()}</span>
+                        </Card.Text>
+                        <div className="text-center"> 
+                            <img
+                                src={`https://openweathermap.org/img/wn/${weather.data.weather[0].icon}@2x.png`}
+                                alt={weather.data.weather[0].description}
+                            />
+                            {Math.round(weather.data.main.temp)}
+                            <sup>°C</sup>
+                        </div>
+                        <Card.Text className="text-center">
+                            Wind Speed: {weather.data.wind.speed}m/s
+                        </Card.Text>
+                        <Card.Text className="text-center text-bold">
+                            <WeatherIdeas description={weather.data.weather[0].description.toUpperCase()} temp={Math.round(weather.data.main.temp)} />
+                        </Card.Text>
+                    </div>
+                )}
+            </Card.Body>
+        </Card>
+		</>
 	);
 }
 

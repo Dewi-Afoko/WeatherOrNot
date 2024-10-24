@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { update_workout } from "../../services/addDetails";
 import { useNavigate } from "react-router-dom";
+import { Form, Button } from 'react-bootstrap';
 
 export function UpdateWorkout(props) {
     const [loading, setLoading] = useState(['']);  
@@ -47,34 +48,38 @@ export function UpdateWorkout(props) {
     return (
         <>
             <form onSubmit={handleSubmit}>
-                {reps.map((rep, index) => (
-                    <div key={index} style={{ marginBottom: '10px' }}>
-                        <label htmlFor={`loading-${index}`}>Loading (kg):</label>
-                        <input
-                            placeholder="Input Loading here"
-                            id={`loading-${index}`}
-                            type="number"
-                            value={loading[index] || ''}
-                            onChange={(e) => handleLoadingChange(index, e.target.value)}
-                        />
-                        
-                        <label htmlFor={`reps-${index}`}>Reps:</label>
-                        <input
-                            placeholder="Input reps here"
-                            id={`reps-${index}`}
-                            type="number"
-                            value={rep || ''}
-                            onChange={(e) => handleRepsChange(index, e.target.value)}
-                        />
-                    </div>
-                ))}
-                
-                <button type="button" onClick={addRepField}>
-                    Add another set?
-                </button>
-                
-                <input role="submit-button" id="submit" type="submit" value="Add reps and loading to current workout" />
-            </form>
+    {reps.map((rep, index) => (
+        <div key={index} className="mb-3">
+            <Form.Group controlId={`loading-${index}`}>
+                <Form.Label>Loading (kg):</Form.Label>
+                <Form.Control
+                    placeholder="Input Loading here"
+                    type="number"
+                    value={loading[index] || ''}
+                    onChange={(e) => handleLoadingChange(index, e.target.value)}
+                />
+            </Form.Group>
+            
+            <Form.Group controlId={`reps-${index}`}>
+                <Form.Label>Reps:</Form.Label>
+                <Form.Control
+                    placeholder="Input reps here"
+                    type="number"
+                    value={rep || ''}
+                    onChange={(e) => handleRepsChange(index, e.target.value)}
+                />
+            </Form.Group>
+        </div>
+    ))}
+    
+    <Button variant="secondary" onClick={addRepField} className="mb-3">
+        Add another set?
+    </Button>
+    
+    <Button type="submit" variant="primary">
+        Add reps and loading to current workout
+    </Button>
+</form>
         </>
     );
 }

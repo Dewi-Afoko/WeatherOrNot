@@ -1,19 +1,19 @@
-/* Ensure full height for body and html */
-* {
+
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Ensure full height for body and html */
+
 body, html {
-  display: flex; /* Use flexbox for layout */
-  justify-content: center; /* Center child elements horizontally */
-  align-items: center; /* Center child elements vertically */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  height: 100%; /* Full height for body and html */
-}
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin: 0; 
+  padding: 0; 
+  height: 100%; 
+} */
 
 .login-page {
   top:30px;
