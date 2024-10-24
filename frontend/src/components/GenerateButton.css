@@ -1,0 +1,18 @@
+.generate-button {
+    background-color: #28a745; /* Green color */
+    border: none;
+    border-radius: 30px; /* Rounded corners */
+    padding: 10px 30px; /* Padding for better size */
+    font-size: 18px;
+    transition: transform 0.2s ease, background-color 0.3s ease; /* Smooth transition for click effect */
+  }
+  
+  .generate-button:hover {
+    background-color: #218838; /* Slightly darker green on hover */
+  }
+  
+  .generate-button:active {
+    background-color: #1e7e34; /* Darker green when button is clicked */
+    transform: scale(0.95); /* Shrink button slightly on click */
+  }
+  
