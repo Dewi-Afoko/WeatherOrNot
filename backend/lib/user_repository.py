@@ -52,8 +52,6 @@ class UserRepository:
 
     def add_details(self, username, first_name, last_name, dob, height, weight):
         current_user = self.find_by_username(username)
-
-        print(f'Hereeee{[ username, first_name, last_name, dob, height, weight]}')
         if len(first_name) > 1:
             self._connection.execute("UPDATE users SET first_name = %s WHERE username = %s", [first_name, current_user.username])
         if len(last_name) > 1:
@@ -107,3 +105,11 @@ class UserRepository:
         current_user = self.find_by_username(username)
         self._connection.execute("UPDATE users SET exercise_list = array_remove(exercise_list, %s) WHERE username = %s", [exercise, current_user.username]) 
         return "Exercise has been removed from the array"
+    
+
+ ######## DELETE ALL USERS - function for testing purposes
+    def delete_all_users(self):
+        self._connection.execute("DELETE FROM users")
+
+
+

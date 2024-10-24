@@ -7,6 +7,7 @@ class WorkoutRepository:
     def __init__(self, connection):
         self._connection = connection
 
+
     def save_workout(self, workout):
         #TODO: Check if workout for today exists for user, if it does, do nothing.
         date = datetime.now().strftime('%Y/%m/%d')
@@ -16,6 +17,7 @@ class WorkoutRepository:
             return "Workout created!"
         else:
             return "Workout already created for today"
+
 
     def my_workouts(self, username):
         rows = self._connection.execute("SELECT * from workouts WHERE user_username = %s",[username])
@@ -35,6 +37,7 @@ class WorkoutRepository:
     # Exercise is JSON string
     # Require an empty dictionary in the SQL table exercise_list column
     def update_workout(self, exercise):
+
         workout = self.my_workouts(exercise['user_username'])
         id = workout[-1].id
         user = str(workout[-1].user_username)
