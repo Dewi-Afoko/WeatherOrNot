@@ -65,7 +65,7 @@ export function GenerateExercises() {
     };
 
     return (
-        <Container>
+        <Container className="justify-content-center">
             <div className="text-center my-4">
                 <h1 className="display-4 fw-bold text-success">Exercise Generator</h1>
             </div>
@@ -98,12 +98,6 @@ export function GenerateExercises() {
                 </div>
             </Form>
             <br />
-            {exercises.length < 1 && (
-                <div>
-                    <h6 className="text-center fw-bold text-danger">Sorry, no exercises match your criteria.</h6>
-                    <h6 className="text-center fw-bold text-danger">Please try a different combination.</h6>
-                </div>
-            )}
 
             {exercises.length > 0 && (
                 <div className="my-5">
@@ -145,31 +139,4 @@ export function GenerateExercises() {
         </Container>
     );
 }
-
-//             {exercises.length > 0 &&
-//             <div>
-//                 <h3>Try these exercises:</h3>
-//                 {exercises.map((exercise, index) => {
-//                     // console.log('exercise', exercise);
-//                     return(
-//                         <Exercise
-//                             key={index}
-//                             name={exercise.name}
-//                             type={exercise.type}
-//                             muscle={exercise.muscle}
-//                             equipment={exercise.equipment}
-//                             difficulty={exercise.difficulty}
-//                             instructions={exercise.instructions}
-//                             user = {user}
-//                             exercise = {exercise}
-//                             onClick={() => handleViewExerciseDetails(exercise)}
-
-//                             // formatDisplayOutput={formatDisplayOutput}
-//                         />
-//                     )
-//                 })}
-//             </div>}
-//         </>
-//     )
-// }
 

@@ -3,29 +3,18 @@
 // import AnimatedHeadline from "./title";
 // import './header.css';
 // import { CreateWorkout } from "../workout/CreateWorkout";
-// const Header = () => {
- 
+
+// export function Header() {
+
 //     const [showPopup, setShowPopup] = useState(false); 
 //     const navigate = useNavigate(); 
-
-    
-
-//     // Function to log out
-//     // function logOut() {
-//     //     setShowPopup(true);
-//     //     setTimeout(() => {
-//     //         localStorage.removeItem('username');
-//     //         localStorage.removeItem("token");
-//     //         navigate("/");
-//     //     }, 5000);
-//     // }
 
 //     return (
 //         <>
 //             <header className="app-header">
-//                 {/* <div className="nav_logo">
+//                 <div className="nav_logo">
 //                     <AnimatedHeadline/>
-//                 </div> */}
+//                 </div>
 
 //                 <nav className="app-nav">
                     
@@ -42,14 +31,14 @@
 //                         <li>
 //                             <Link to="/workouts" className="nav-menu-list">My Workouts</Link>
 //                         </li>
-//                         {/* <li>
+//                         <li>
 //                             <span className="nav-menu-list" onClick={logOut} style={{ cursor: "pointer" }}>Log Out</span>
-//                         </li> */}
+//                         </li>
 //                     </ul>
 //                 </nav>
 //             </header>
 
-//             {/* {showPopup && (
+//             {showPopup && (
 //                 <div className="popup-overlay">
 //                     <div className="popup-content">
 //                         <img
@@ -59,37 +48,9 @@
 //                         <p>Logging out...</p>
 //                     </div>
 //                 </div>
-//             )} */}
+//             )}
 //         </>
 //     );
+
 // };
-
-// export default Header;
-
-
-// header.jsx
-import { Link } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap"; // Importing Bootstrap components
-import './header.css'; // Optional if you're adding additional styles
-
-const Header = () => {
-  return (
-    <Navbar bg="light" variant="light" expand="lg" fixed="top" className="px-4">
-      <Navbar.Brand as={Link} to="/user">
-        WeatherOrNot
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/generate_exercises">Get Exercises</Nav.Link>
-          <Nav.Link as={Link} to="/workouts">My Workouts</Nav.Link>
-          <Nav.Link as={Link} to="/user">My Profile</Nav.Link>
-          <Nav.Link as={Link} to="/login">Log Out</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-};
-
-export default Header;
 

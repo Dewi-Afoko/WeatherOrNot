@@ -32,7 +32,7 @@ function ChooseMuscle(props) {
       <Row>
         {muscleOptions.map((muscleOption, index) => {
           return (
-            <Col xs={6} md={4} className="mb-3" key={index}> {/* Adjust column size and spacing */}
+            <Col xs={6} md={4} className="m-2" key={index}> {/* Adjust column size and spacing */}
               <RadioSelector
                 id={muscleOption}
                 value={muscleOption}
