@@ -73,3 +73,11 @@ def test_complete_workout_in_planning_mode():
     workout.complete_workout() 
     assert workout.complete == False
 
+def test_equal_objects():
+    # Setup
+    workout1 = Workout("Morning Workout", False)
+    workout2 = Workout("Morning Workout", False)
+
+    # Act & Assert
+    assert workout1 == workout2  # These should be equal
+
