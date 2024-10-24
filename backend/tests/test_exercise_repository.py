@@ -71,3 +71,5 @@ def test_save_data_to_db(db_connection):
             "difficulty": "beginner",
             "instructions": "Start push ups by having hand "
             }]
+
+
