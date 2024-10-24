@@ -10,6 +10,7 @@ class WorkoutRepository:
         self._connection.execute("INSERT INTO workouts (date, exercise_list, complete, user_username) VALUES (%s, %s, %s, %s)", [workout['date'], '[]', workout['complete'], workout['user_username']])
         return "Workout created!"
 
+
     def my_workouts(self, username):
         rows = self._connection.execute("SELECT * from workouts WHERE user_username = %s",[username])
         workouts = []
@@ -28,7 +29,8 @@ class WorkoutRepository:
     # Require an empty dictionary in the SQL table exercise_list column
     def update_workout(self, exercise):
         workout = self.my_workouts('Testy')
-        user = str(workout[0].user_username)
+        user = str(workout[0]["user_username"])
+        # user = str(workout[0].user_username)
         exercise = json.dumps([exercise])
         self._connection.execute('UPDATE workouts SET exercise_list = exercise_list || %s::jsonb WHERE user_username = %s', [exercise, user])
         return "Workout Updated"
