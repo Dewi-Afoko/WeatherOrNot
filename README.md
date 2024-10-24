@@ -1,28 +1,49 @@
-# WeatherOrNot (?)
 
-Description on the project
+# WeatherOrNot
+
+A Workout Generator and Tracker web app.
 
 ## Table of Contents
 
 - [Features](#features)
 - [Structure](#structure)
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 
 ## Features
 - A user can signup and create an account
 - A user can login and log out 
-- A user can edit their details
-- Generate exercises based on a chosen muscle group
-- 
+- A user can update their weight
+- A user can generate exercises based on a chosen muscle group
+- A user can log generated exercises along with loading and reps to create a workout plan
+- A user can enter their closest city or town and see the weather
+- A chart that displays the users weight updates
+- A gauge that displays someones weight
+- A user can favourite (and unfavourite) a generated exercise and then see a list of favourited exercises on the dashboard
 
-## Structure 
+## Structure
 Our web application consists of:
 
-A frontend React App  
-A backend api server built with Flask and links to a PostgreSQL database
+#### Frontend
+JavaScript, React, CSS, Bootstrap  
+  
+[![My Skills](https://skillicons.dev/icons?i=js,react,css,bootstrap)](https://skillicons.dev)
 
-The React Testing Library is used to test the Frontend.
+#### Backend
+Python, Flask, PostgresSQL  
+  
+[![My Skills](https://skillicons.dev/icons?i=python,flask,postgres)](https://skillicons.dev)
+
+#### Testing
+
+The React Testing Library is used to test the Frontend.  
 Pytest is used to test the Backend.
+
+## Prerequisites
+
+You will need to: 
+- Generate a free API key from [Api Ninjas](https://api-ninjas.com) and add this to your backend `.env` file.
+- Generate a free API key from [Open Weather](https://openweathermap.org/api) and add this to your backend `.env` file.
 
 ## Installation
 
@@ -62,6 +83,7 @@ source backend-venv/bin/activate
 .env
 
 # Add this to the .env file 
+API_KEY = 'your api ninjas key here'
 JWT_SECRET= your_secret_key
 
 # Run seed_database to seed the sql files into database 
@@ -113,4 +135,3 @@ cd frontend
 # Run the tests
 npm test
 ```
-
