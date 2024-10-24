@@ -138,3 +138,38 @@ def test_delete_exercise_from_list(db_connection):
     assert exercise_list[0] == 'Exercise_Test_1'
     assert exercise_list[1] == 'Exercise_Test_3'
 
+def test_weight_details(db_connection):
+    # Setup
+    repository = UserRepository(db_connection)
+    repository.delete_all_users()
+    new_user = User(None, 'Username_Test', 'password')
+    repository.create_user(new_user)
+
+    # Test case 1: User with no weight data
+    weight_details = repository.weight_details('Username_Test')
+    assert weight_details == []  # Expect an empty list as there are no weight entries
+
+    # Test case 2: User with one weight entry
+    repository.add_details('Username_Test', '', '', '', '', "75")  # Add a single weight entry
+    weight_details = repository.weight_details('Username_Test')
+    assert weight_details == [[75]]  # Expect a list with one weight entry
+
+    # Test case 3: User with multiple weight entries
+    repository.add_details('Username_Test', '', '', '', '', "80")
+    repository.add_details('Username_Test', '', '', '', '', "78")
+    weight_details = repository.weight_details('Username_Test')
+    expected_weights = [75, 80, 78]
+    expected_dates = [datetime.now().strftime('%Y/%m/%d')] * 3  # Assuming all weights were added today
+    average_weight = round(sum(expected_weights) / len(expected_weights))
+    weight_difference = expected_weights[0] - expected_weights[-1]
+    max_weight = max(expected_weights)
+    min_weight = min(expected_weights)
+
+    # Verify the returned values
+    assert weight_details[0] == expected_weights  # All weights
+    assert weight_details[1] == expected_dates  # Dates corresponding to each weight
+    assert weight_details[2] == expected_weights[-1]  # Most recent weight
+    assert weight_details[3] == average_weight  # Average weight
+    assert weight_details[4] == weight_difference  # Difference between first and last weight
+    assert weight_details[5] == max_weight  # Maximum weight
+    assert weight_details[6] == min_weight  # Minimum weight

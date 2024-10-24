@@ -61,3 +61,6 @@ class ExerciseRepository:
             )
             exercises.append(item)
         return exercises
+    
+    def delete_all_exercises(self):
+        self._connection.execute("DELETE FROM Exercise")
