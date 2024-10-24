@@ -1,9 +1,7 @@
 import RadioSelector from "./RadioSelector";
-// import { useEffect } from "react";
+import { Form, Row, Col } from "react-bootstrap"; // Bootstrap components
 
 function ChooseMuscle(props) {
-
-  // const useEffect()
 
   const muscleOptions = [
     'abdominals', 
@@ -23,30 +21,31 @@ function ChooseMuscle(props) {
     'shoulders',
     'traps',
     'triceps'
-  ]
+  ];
 
-    const handleChange = (event) => {
-      props.setMuscle(event.target.value)
-    }
+  const handleChange = (event) => {
+    props.setMuscle(event.target.value);
+  };
 
   return (
-    <div>
-      {/* <form> */}
+    <Form.Group>
+      <Row>
         {muscleOptions.map((muscleOption, index) => {
           return (
-            <RadioSelector
-              key={index}
-              id={muscleOption}
-              value={muscleOption}
-              name="muscle_group"
-              checked={props.muscle === muscleOption}
-              onChange={handleChange}
-            />
-          )
+            <Col xs={6} md={4} className="mb-3" key={index}> {/* Adjust column size and spacing */}
+              <RadioSelector
+                id={muscleOption}
+                value={muscleOption}
+                name="muscle_group"
+                checked={props.muscle === muscleOption}
+                onChange={handleChange}
+              />
+            </Col>
+          );
         })}
-      {/* </form> */}
-    </div>
+      </Row>
+    </Form.Group>
   );
 }
-  
+
 export default ChooseMuscle;

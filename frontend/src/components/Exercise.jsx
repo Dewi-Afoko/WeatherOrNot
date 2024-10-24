@@ -61,7 +61,7 @@ function Exercise(props) {
         <Card className="mb-4 shadow-sm">
             <Card.Body>
 
-                <Card.Title className="text-primary" style={{ cursor: 'pointer' }} onClick={props.onClick}>
+                <Card.Title className="text-success fw-bold" style={{ cursor: 'pointer' }} onClick={props.onClick}>
                     {formatDisplayOutput(props.name)}
                 </Card.Title>
                 
@@ -79,7 +79,7 @@ function Exercise(props) {
                         onClick={handleAddFavouriteClick}
                         className="d-flex align-items-center" 
                     >
-                        {like ? "Unfavourite" : "Favourite"}
+                        {like ? "Remove Favourite" : "Add Favourite"}
                         <FontAwesomeIcon
                             icon={faHeart}
                             style={{ color: like ? 'pink' : 'grey', marginLeft: '5px' }}

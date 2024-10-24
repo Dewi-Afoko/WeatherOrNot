@@ -1,12 +1,14 @@
-function GenerateButton() {
+import { Button } from 'react-bootstrap';
+import './GenerateButton.css'; // Importing custom styles
 
+function GenerateButton() {
   return (
     <>
-      <button value="Submit" type="submit">
-        Generate Workout
-      </button>
-  </>
-  )
+      <Button variant="success" size="lg" type="submit" className="generate-button fw-bold">
+        GENERATE
+      </Button>
+    </>
+  );
 }
 
 export default GenerateButton;

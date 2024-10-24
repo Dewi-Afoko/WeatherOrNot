@@ -1,26 +1,26 @@
-function RadioSelector(props) {
+import { Form } from 'react-bootstrap';
+import './RadioSelector.css'; // Custom styles
 
+function RadioSelector(props) {
+  
   const formatDisplayOutput = (output) => {
     return output
-        .replace('_', ' ') // removes underscores
-        .replace(output[0], output[0].toUpperCase()); //changes to title-case
+      .replace('_', ' ') // removes underscores
+      .replace(output[0], output[0].toUpperCase()); // capitalizes the first letter
   };
 
-    return (
-      <>
-        <input
-          type="radio"
-          id={props.id}
-          name={props.name}
-          value={props.value}
-          checked={props.checked}
-          onChange={props.onChange}
-        />
-        <label htmlFor={props.id}>
-          {formatDisplayOutput(props.value)}
-        </label>      
-      </>
-    )
-  }
-  
-  export default RadioSelector;
+  return (
+    <Form.Check 
+      type="radio"
+      id={props.id}
+      name={props.name}
+      value={props.value}
+      checked={props.checked}
+      onChange={props.onChange}
+      label={formatDisplayOutput(props.value)} // Format the label output
+      className="custom-radio"
+    />
+  );
+}
+
+export default RadioSelector;

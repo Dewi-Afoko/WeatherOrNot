@@ -11,7 +11,7 @@ export async function getNewExercises(token, muscle, difficulty, equipment) {
       'Content-Type': 'application/json' //need to make sure correct content type here
     },
   };
-    const response = await fetch(`${BACKEND_URL}/get_new_exercises?muscle=${muscle}&difficulty=${difficulty}&equipment=${equipment}` , requestOptions);
+  const response = await fetch(`${BACKEND_URL}/get_new_exercises?muscle=${muscle}&difficulty=${difficulty}&equipment=${equipment}` , requestOptions);
 
   if (response.status !== 200) {
     throw new Error("Unable to fetch exercises from API");
