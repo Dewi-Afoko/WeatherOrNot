@@ -7,6 +7,7 @@ class WorkoutRepository:
         self._connection = connection
 
     def save_workout(self, workout):
+        #TODO: Check if workout for today exists for user, if it does, do nothing.
         self._connection.execute("INSERT INTO workouts (date, exercise_list, complete, user_username) VALUES (%s, %s, %s, %s)", [workout['date'], '[]', workout['complete'], workout['user_username']])
 
         return "Workout created!"
