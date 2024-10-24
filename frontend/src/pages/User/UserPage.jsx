@@ -3,13 +3,8 @@ import { useNavigate } from "react-router-dom";
 import GfGWeatherApp from "../../components/weather/weather";
 import { UserDetails } from "../../components/UserDetails";
 import WeightLog from "../../components/WeightDetails";
-// import PreferenceTest from "../../components/preferencesTest";
 import './userpage.css';
-
-
-
-
-
+import { Container, Row, Col } from 'react-bootstrap';
 
 import WeightChart from "../../components/WeightChart";
 import FavouriteList from "../../components/FavouriteList";
@@ -32,13 +27,15 @@ export function UserPage() {
   // };
 
   return (
-  
-
-    <div className="main-container">
+    <>
+        
+    
+        <div className="">
       <FavouriteList />
       <UserDetails />
       <WeightLog />
-      <div className="weightChart"><WeightChart/>
+      <WeightChart/>
+      <div className="weightChart">
       {/* <button className='test-button' onClick={handleclick}>Workout Preferences Test </button>
       {test && (<PreferenceTest onClose={handleClose}/>)}
       <div className="weatherbox"> */}
@@ -46,5 +43,7 @@ export function UserPage() {
       </div>
       
     </div>
+    
+    </>
   );
 }

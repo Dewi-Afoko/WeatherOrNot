@@ -1,14 +1,14 @@
-/* Container to position the statistics */
-.favourite-container {
-    position: fixed; /* Use fixed positioning for the button */
-    bottom: 100px; /* Distance from the bottom of the viewport */
-    right: 20px; /* Distance from the right side of the viewport */
-    width: 200px; /* Adjust width as needed */
-    height: 200px; /* Set a fixed height for the container */
-    padding: 10px; /* Inner padding */
-    background-color: #f9f9f9; /* Light background */
-    border: 1px solid #ddd; /* Light border */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
-    overflow-y: auto; /* Enable vertical scrolling */
-}
+
+/* .favourite-container {
+    position: fixed; 
+    bottom: 100px; 
+    right: 20px; 
+    width: 200px; 
+    height: 200px; 
+    padding: 10px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    overflow-y: auto; 
+} */
