@@ -148,11 +148,6 @@ def get_favourite_exercises():
     favourites = repository.find_favourite_exercises(username)
     return jsonify(favourites), 200    
 
-
-
-
-
-
 ###### Add favourite exercise to user repo
 @app.route('/add_favourite', methods=['POST'])
 def add_favourite():
@@ -167,10 +162,9 @@ def add_favourite():
     if not username or not exercise:
         return jsonify({"error": "Username and exercise name are required"}), 400
 
-    result = repository.add_exercise(username, exercise)  # Call the repository with both username and exercise name
+    repository.add_exercise(username, exercise)  # Call the repository with both username and exercise name
     # print(result)
-    return jsonify({"message": result}), 201
-
+    return jsonify({"message": "Favourite exercise added"}), 201
 
 
 ###### Delete favourite exercise to user repo
@@ -183,10 +177,9 @@ def delete_favourite():
     exercise = data.get("name")
     if not username or not exercise:
         return jsonify({"error": "Username and exercise name are required"}), 400
-    result = repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
+    repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
     # print(result)
-    return jsonify({"message": result}), 201
-
+    return jsonify({"message": "Favourite exercise deleted"}), 200
 
 
 @app.route('/workouts', methods=['POST']) #TODO Add TokenChecker
@@ -210,33 +203,69 @@ def update_workout():
     return jsonify(details),201
 
 
-
 ######### Chris' BE API Save
+# @app.route('/post_exercises', methods=['POST'])
+# def post_exercises():
+#     connection = get_flask_database_connection(app)
+#     repository = ExerciseRepository(connection)
+#     # Fetch data from the API
+#     try:
+#         data = repository.fetch_all_data()
+#         if not data:
+#             # Save the data to the database
+#             return jsonify({"message": "Data fetched and stored successfully!"}), 200
+#         else:
+#             return jsonify({"error": "No data received from the API"}), 204  # No Content
+#     except Exception as e:
+#         # Log the exception or handle it as necessary
+#         print(f"An error occurred: {e}")
+#         return jsonify({"error": "Failed to fetch data from the API"}), 500
+
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():
     connection = get_flask_database_connection(app)
     repository = ExerciseRepository(connection)
-    # Fetch data from the API
     try:
+        # Fetch data from the API
         data = repository.fetch_all_data()
-        if not data:
-            # Save the data to the database
+
+        if data:  # If data is received, process it and store it in the database
+            repository.store_data(data) 
             return jsonify({"message": "Data fetched and stored successfully!"}), 200
-        else:
-            return jsonify({"error": "No data received from the API"}), 204  # No Content
+        else:  # No data was received from the API
+            return jsonify({"error": "No data received from the API"}), 400  # Bad Request
     except Exception as e:
-        # Log the exception or handle it as necessary
+        # Log the exception
         print(f"An error occurred: {e}")
-        return jsonify({"error": "Failed to fetch data from the API"}), 500
+        return jsonify({"error": "Failed to fetch data from the API"}), 500  # Internal Server Error
+
 
 ######### Chris' BE API Fetch
+# @app.route('/get_exercises', methods=['GET'])
+# def get_exercises():
+#     connection = get_flask_database_connection(app)
+#     repository = ExerciseRepository(connection)
+#     exercises = repository.all()
+#     exercise_dicts = [exercise.to_dict() for exercise in exercises]
+#     return jsonify(exercise_dicts), 200
+
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)
     repository = ExerciseRepository(connection)
-    exercises = repository.all()
-    exercise_dicts = [exercise.to_dict() for exercise in exercises]
-    return jsonify(exercise_dicts), 200
+    try:
+        exercises = repository.all()
+        # Check if any exercises are found
+        if not exercises:
+            return jsonify({"message": "No exercises found"}), 404
+        # Convert exercises to dictionaries for JSON response
+        exercise_dicts = [exercise.to_dict() for exercise in exercises]
+        return jsonify(exercise_dicts), 200
+    except Exception as e:
+        # Log the error and return an error response
+        print(f"An error occurred: {e}")
+        return jsonify({"error": "Failed to retrieve exercises"}), 500
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

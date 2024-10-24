@@ -111,7 +111,7 @@ export async function deleteFavourite(user, name) {
       body: JSON.stringify(payload),
   };
   const response = await fetch(`${BACKEND_URL}/delete_favourite`, requestOptions);
-  if (response.status !== 201) {
+  if (response.status !== 200) {
       throw new Error("Unable to add favourite exercise");
   }
 
