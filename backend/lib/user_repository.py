@@ -85,9 +85,25 @@ class UserRepository:
         user = self.find_by_username(username)
         return [user.first_name, user.last_name, user.dob, user.height]
 
-# NEW
 
-    def add_exercise(self, username, exercise):
+
+# GET favourites list
+    def find_favourite_exercises(self, username):
         current_user = self.find_by_username(username)
-        self._connection.execute('UPDATE users SET exercise_list = exercise_list || "{%s}" WHERE username = %s', [exercise, current_user.username])
-        return "Exercise added to array"
+        return current_user.exercise_list
+       
+
+
+############# ADD exercise to user.exercise_list                   
+    def add_exercise(self, username, exercise):
+        current_user = self.find_by_username(username)  # Fetch the user object
+        # print("USER", current_user.username)
+        # print("EXERCISE", exercise)
+        self._connection.execute("UPDATE users SET exercise_list = exercise_list || %s WHERE username = %s", [[exercise], current_user.username])
+        return "Exercise added to array"    
+    
+############# DELETE exercise to user.exercise_list                   
+    def delete_exercise( self, username, exercise):
+        current_user = self.find_by_username(username)
+        self._connection.execute("UPDATE users SET exercise_list = array_remove(exercise_list, %s) WHERE username = %s", [exercise, current_user.username]) 
+        return "Exercise has been removed from the array"

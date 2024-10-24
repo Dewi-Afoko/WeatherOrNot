@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import GenerateButton from "../../components/GenerateButton";
 import ChooseMuscle from "../../components/ChooseMuscle";
 import ChooseDifficulty from "../../components/ChooseDifficulty";
@@ -7,26 +6,8 @@ import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getNewExercises } from "../../services/exercises";
-// import { getNewExercises, getbackEndExercises } from "../../services/exercises";
 
 export function GenerateExercises() {
-
-    // const exerciseTypes = [
-    //     'cardio',
-    //     'olympic_weightlifting',
-    //     'plyometrics',
-    //     'powerlifting',
-    //     'strength',
-    //     'stretching',
-    //     'strongman'
-    // ]
-
-    // A function to be passed down to each component - used to correctly format display for user
-    // const formatDisplayOutput = (output) => {
-    //     return output
-    //         .replace('_', ' ') // removes underscores
-    //         .replace(output[0], output[0].toUpperCase()); //changes to title-case
-    // };
 
     const navigate = useNavigate();
 
@@ -39,6 +20,8 @@ export function GenerateExercises() {
     const [equipment, setEquipment] = useState([])
     // const [type, setType] = useState("")
 
+
+    const user = localStorage.getItem("username")
 
     // USING API
     const handleSubmit = (event) => {
@@ -58,6 +41,7 @@ export function GenerateExercises() {
             getNewExercises(token, muscle, difficulty, equipment)
             .then((data) => {
                 setExercises(data);
+                localStorage.setItem("exercise_list", JSON.stringify(data));
                 setMuscle(""); //reset value
                 setDifficulty(""); //reset value
                 setEquipment("")
@@ -69,6 +53,12 @@ export function GenerateExercises() {
         } else {
             console.error("Please select a filter and ensure you're logged in.");
         }
+    };
+
+    const handleViewExerciseDetails = (exercise) => {
+        navigate('/exercise', {
+            state: { ...exercise },
+        });
     };
 
 
@@ -109,7 +99,7 @@ export function GenerateExercises() {
             <div>
                 <h3>Try these exercises:</h3>
                 {exercises.map((exercise, index) => {
-                    console.log('exercise', exercise);
+                    // console.log('exercise', exercise);
                     return(
                         <Exercise
                             key={index}
@@ -119,7 +109,10 @@ export function GenerateExercises() {
                             equipment={exercise.equipment}
                             difficulty={exercise.difficulty}
                             instructions={exercise.instructions}
-                            exercise={exercise}
+                            user = {user}
+                            exercise = {exercise}
+                            onClick={() => handleViewExerciseDetails(exercise)}
+
                             // formatDisplayOutput={formatDisplayOutput}
                         />
                     )

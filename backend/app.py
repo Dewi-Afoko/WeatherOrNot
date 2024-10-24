@@ -2,11 +2,11 @@ import os
 import psycopg2
 import requests
 from flask_sqlalchemy import SQLAlchemy
+
 import json
+
 from datetime import datetime
-
 from functools import wraps
-
 from dotenv import load_dotenv
 from flask import Flask,request, redirect, jsonify,  render_template, flash, session
 from lib.user_repository import UserRepository
@@ -24,9 +24,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://127.0.01/exercise'
 db = SQLAlchemy(app)
-
 load_dotenv()
-
 # Enable CORS for all routes, allowing requests from http://localhost:5173
 
 CORS(app, origins=["http://localhost:5173"])
@@ -99,7 +97,7 @@ def user_details():
     return  jsonify(details),201
 
 
-# robs FE get exercise request
+# Rob's FE get exercises request
 @app.route('/get_new_exercises', methods=['GET']) 
 def get_new_exercises():
 
@@ -127,6 +125,73 @@ def get_new_exercises():
     else:
         return jsonify({'error': 'Failed to fetch exercises'}), response.status_code
 
+# GET single exercise from API
+@app.route('/exercise', methods=["GET"])
+def get_single_exercise():
+    name = request.args.get('name')
+    payload = {
+        'name': name
+    }
+    api_url = 'https://api.api-ninjas.com/v1/exercises' 
+    headers = {'X-Api-Key': os.getenv('API_KEY')} 
+    response = requests.get(api_url, params=payload, headers=headers)
+    if response.status_code == 200:
+        return jsonify(response.json()), 200
+    else:
+        return jsonify({'error': 'Failed to fetch exercise'}), response.status_code
+
+
+
+######### GET favourites
+@app.route('/get_favourites', methods=['GET']) 
+def get_favourite_exercises():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    username = request.args.get("username") # access parameter pass in request url
+    favourites = repository.find_favourite_exercises(username)
+    return jsonify(favourites), 200    
+
+
+
+
+
+
+###### Add favourite exercise to user repo
+@app.route('/add_favourite', methods=['POST'])
+def add_favourite():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    username = data.get("user")
+    exercise = data.get("name")
+    # print("USERNAME DATA:", username)  # Log the incoming data
+    # print("EXERCISE DATA:", exercise)  # Log the incoming data
+
+    if not username or not exercise:
+        return jsonify({"error": "Username and exercise name are required"}), 400
+
+    result = repository.add_exercise(username, exercise)  # Call the repository with both username and exercise name
+    # print(result)
+    return jsonify({"message": result}), 201
+
+
+
+###### Delete favourite exercise to user repo
+@app.route('/delete_favourite', methods=['DELETE'])
+def delete_favourite():
+    connection = get_flask_database_connection(app)
+    repository = UserRepository(connection)
+    data = request.get_json()
+    username = data.get("user")
+    exercise = data.get("name")
+    if not username or not exercise:
+        return jsonify({"error": "Username and exercise name are required"}), 400
+    result = repository.delete_exercise(username, exercise)  # Call the repository with both username and exercise name
+    # print(result)
+    return jsonify({"message": result}), 201
+
+
+
 @app.route('/workouts', methods=['POST']) #TODO Add TokenChecker
 def add_workout():
     connection = get_flask_database_connection(app)
@@ -146,6 +211,7 @@ def update_workout():
     data = request.get_json()
     details = repository.update_workout(data)
     return jsonify(details),201
+
 
 @app.route('/get_workouts', methods=['POST'])
 def return_workouts():
@@ -187,8 +253,7 @@ def post_exercises():
         print(f"An error occurred: {e}")
         return jsonify({"error": "Failed to fetch data from the API"}), 500
 
-
-
+######### Chris' BE API Fetch
 @app.route('/get_exercises', methods=['GET'])
 def get_exercises():
     connection = get_flask_database_connection(app)
