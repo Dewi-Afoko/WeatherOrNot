@@ -1,7 +1,11 @@
-from unittest.mock import patch, Mock
+from unittest.mock import patch, Mock, MagicMock
 import json
 import pytest
-from flask import jsonify
+import unittest
+from flask import Flask, request, jsonify
+from app import app 
+from lib.user_repository import UserRepository  # Replace with your actual module name and import statements
+from lib.user import User  # Replace with the correct import for your User model
 
 
 
@@ -479,3 +483,113 @@ def test_get_exercises_repository_failure(mock_get_db_conn, mock_exercise_repo, 
     assert response.json == {"error": "Failed to retrieve exercises"}
     # Ensure the repository method was called and an exception was raised
     mock_repo_instance.all.assert_called_once()
+
+
+@pytest.fixture
+def client():
+    app.testing = True
+    with app.test_client() as client:
+        yield client
+
+@patch('app.check_password')  # Correctly patch the check_password function
+def test_login_success(mock_check_password, client):
+    # Setup the mock to return a token
+    mock_check_password.return_value = {'token': 'fake_token'}
+
+    # Define the payload
+    payload = {'username': 'testuser', 'password': 'testpass'}
+
+    # Send a POST request to the /login endpoint
+    response = client.post('/login', json=payload)
+
+    # Check the response status code and data
+    assert response.status_code == 200
+    assert response.get_json() == {'token': 'fake_token'}
+
+@patch('app.check_password')  # Mocking for the failure case
+def test_login_failure(mock_check_password, client):
+    # Setup the mock to return an error message
+    mock_check_password.return_value = {'error': 'Invalid credentials'}
+
+    # Define the payload
+    payload = {'username': 'wronguser', 'password': 'wrongpass'}
+
+    # Send a POST request to the /login endpoint
+    response = client.post('/login', json=payload)
+
+    # Check the response status code and data
+    assert response.status_code == 200
+    assert response.get_json() == {'error': 'Invalid credentials'}
+
+
+@pytest.fixture
+def client():
+    app.testing = True  # Set the app to testing mode
+    with app.test_client() as client:
+        yield client
+
+def test_index(client):
+    response = client.get('/')
+    assert response.status_code == 200 
+    assert b'Elephants!' in response.data  
+    assert response.content_type == 'text/html; charset=utf-8' 
+
+
+# Mock the UserRepository class
+@pytest.fixture
+def mock_repository():
+    with patch('lib.user_repository.UserRepository') as MockRepository:
+        yield MockRepository
+        MockRepository.reset_mock()  # Reset the mock after each test
+
+# def test_signup_success(client, mock_repository):
+#     # Mock the UserRepository's find_by_username and create_user methods
+#     mock_repo_instance = mock_repository.return_value
+#     mock_repo_instance.find_by_username.return_value = None  # Simulate username not found
+#     mock_repo_instance.create_user = MagicMock()  # Ensure create_user is a mock method
+
+#     # Define the payload for a new user
+#     payload = {'username': 'newuser', 'password': 'securepassword'}
+
+#     # Send a POST request to the /signup endpoint
+#     response = client.post('/signup', json=payload)
+
+#     # Debugging: Print response details
+#     print("Response JSON:", response.get_json())
+#     print("Response status code:", response.status_code)
+
+#     # Check the response status code and message
+#     assert response.status_code == 400
+#     assert response.get_json() == {'message': 'Username already exists'}
+
+#     # Check that create_user was called once
+#     mock_repo_instance.create_user.assert_called_once_with(
+#         User(username='newuser', password='securepassword')  # Adjust if necessary
+#     )
+
+def test_signup_password_too_short(client, mock_repository):
+    # Define the payload with a short password
+    payload = {'username': 'testuser', 'password': 'short'}
+
+    # Send a POST request to the /signup endpoint
+    response = client.post('/signup', json=payload)
+
+    # Check the response status code and message
+    assert response.status_code == 400
+    assert response.get_json() == {'message': 'Password too short min. 8 characters'}
+
+def test_signup_username_exists(client, mock_repository):
+    # Mock the UserRepository's find_by_username method
+    mock_repo_instance = mock_repository.return_value
+    mock_repo_instance.find_by_username.return_value = User(1, 'existinguser', 'password123')  # Simulate existing username
+
+    # Define the payload for a user that already exists
+    payload = {'username': 'existinguser', 'password': 'securepassword'}
+
+    # Send a POST request to the /signup endpoint
+    response = client.post('/signup', json=payload)
+
+    # Check the response status code and message
+    assert response.status_code == 400
+    assert response.get_json() == {'message': 'Username already exists'}
+

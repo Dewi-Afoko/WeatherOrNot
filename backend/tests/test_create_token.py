@@ -53,5 +53,5 @@ class TestJWTFunctions(unittest.TestCase):
         
         self.assertEqual(str(context.exception), "Invalid token!")
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()

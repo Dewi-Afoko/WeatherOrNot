@@ -91,5 +91,5 @@ class TestCheckPassword(unittest.TestCase):
                 self.assertEqual(response[1], 500)  # Unpack status code from tuple
                 self.assertEqual(response[0].get_json()['message'], 'An error occurred during login')  # Unpack response from tuple
 
-if __name__ == '__main__':
-    unittest.main()
+# if __name__ == '__main__':
+#     unittest.main()
