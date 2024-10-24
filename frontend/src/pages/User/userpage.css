@@ -24,10 +24,15 @@
 .weightChart {
     z-index: 80;
     position: absolute;
-    top: 420px;
-    right: 30px;
+    top: 500px;
+    right: 40px;
     
     /* Scale down the size */
-    transform: scale(0.75); /* Adjust the value as needed to reduce size */
+    transform: scale(0.8); /* Adjust the value as needed to reduce size */
     transform-origin: top right; /* Ensures it scales from the top-right corner */
+}
+
+.addexercisebutton{
+top:300px;
+right:450px
 }

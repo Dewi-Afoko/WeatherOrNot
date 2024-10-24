@@ -112,6 +112,7 @@ export function GenerateExercises() {
                             user = {user}
                             exercise = {exercise}
                             onClick={() => handleViewExerciseDetails(exercise)}
+
                             // formatDisplayOutput={formatDisplayOutput}
                         />
                     )

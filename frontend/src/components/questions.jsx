@@ -20,7 +20,7 @@ const surveyJson = {
         "text" :"1-2"} ,
         {"value": "intermediate", 
         "text" :"3-4"} ,
-        {"value": "advanced", 
+        {"value": "expert", 
         "text" :"5-6"} 
       ],
 
@@ -36,7 +36,7 @@ const surveyJson = {
           "text" :"Never use it"} ,
           {"value": "intermediate", 
           "text" :"I've tried some equipment"} ,
-          {"value": "advanced", 
+          {"value": "expert", 
           "text" :"I'm comfortable with most equipment"} 
       ],
 
@@ -52,7 +52,7 @@ const surveyJson = {
           "text" :"I'm just starting out"} ,
           {"value": "intermediate", 
           "text" :"I exercise consistently"} ,
-          {"value": "advanced", 
+          {"value": "expert", 
           "text" :"I'm very experienced and fit"} 
       ],
 
@@ -69,7 +69,7 @@ const surveyJson = {
           "text" :"20-30 minutes"} ,
           {"value": "intermediate", 
           "text" :"30-45 minutes"} ,
-          {"value": "advanced", 
+          {"value": "expert", 
           "text" :"45-60+ minutes"} 
       ],
 
@@ -85,7 +85,7 @@ const surveyJson = {
           "text" :"Light, minimal workout"} ,
           {"value": "intermediate", 
           "text" :"Moderate"} ,
-          {"value": "advanced", 
+          {"value": "expert", 
           "text" :"High intensity"} 
       ],
 
@@ -101,7 +101,7 @@ const surveyJson = {
           "text" :"I can't lift heavy weights yet"} ,
           {"value": "intermediate", 
           "text" :"I can lift moderate weights for 8-12 reps"} ,
-          {"value": "advanced", 
+          {"value": "expert", 
           "text" :"I can lift heavy weights for a few reps"} 
       ],
 
@@ -117,7 +117,7 @@ const surveyJson = {
           "text" :"Low impact"} ,
           {"value": "intermediate", 
           "text" :"A mix of low and high impact"} ,
-          {"value": "advanced", 
+          {"value": "expert", 
           "text" :"High impact and intense"} 
       ],
 
@@ -144,7 +144,7 @@ function Questions()  {
         beginnerPoints++;
       } else if (answer === 'intermediate') {
         intermediatePoints++;
-      } else if (answer === 'advanced') {
+      } else if (answer === 'expert') {
         advancedPoints++;
       }
     }
@@ -154,7 +154,7 @@ function Questions()  {
     if (intermediatePoints > beginnerPoints && intermediatePoints > advancedPoints) {
       fitnessLevel = 'intermediate';
     } else if (advancedPoints > beginnerPoints && advancedPoints > intermediatePoints) {
-      fitnessLevel = 'advanced';
+      fitnessLevel = 'expert';
     }
   
 
