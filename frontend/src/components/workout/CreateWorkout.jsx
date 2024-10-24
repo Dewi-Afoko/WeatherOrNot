@@ -5,6 +5,16 @@ import { useState , useEffect} from "react";
 import './createworkout.css';
 import { get_workout } from "../../services/addDetails";
 
+// TODO: Switch so that button says "Start a new workout" or "Currently adding to workout: {id/name/date}" as function of button automatically adds exercise to most recently created in DB.
+
+// TODO: Decided how to handle that adding workout with none open adds to latest workout for user in DB
+
+// TODO: Only allow one workout to be created per day? (argue more than one is a "premium/subscriber feature" 😂)
+
+// TODO: Create workout deletion backend and frontend button
+
+// TODO: Return user weight when workout created if available?
+
 export function CreateWorkout() {
   const [isWorkoutOpen, setIsWorkoutOpen] = useState(true);
   const [exerciseCount, setExerciseCount]= useState(localStorage.getItem('counterEx'))
@@ -62,7 +72,7 @@ export function CreateWorkout() {
       <div className="form-container2">
         <button type="button" onClick={handleButtonClick}>
           <label htmlFor={isWorkoutOpen ? "CreateWorkout" : "FinishWorkout"}>
-            {isWorkoutOpen ? "Create Workout( start to add exercises)" : `Finish Workout (${exerciseCount} already added it)`}
+            {isWorkoutOpen ? "Create Workout (click to add exercises!)" : `Currently Building Workout... (${exerciseCount} already added it)`}
           </label>
         </button>
       </div>

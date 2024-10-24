@@ -33,11 +33,20 @@ class WorkoutRepository:
         id = workout[-1].id
         user = str(workout[-1].user_username)
         exercise = json.dumps([exercise['exercise']])
-        print(f'2ND Exercise >>>>>{exercise}')
+        # print(f'2ND Exercise >>>>>{exercise}')
         self._connection.execute('UPDATE workouts SET exercise_list = exercise_list || %s::jsonb WHERE user_username = %s AND id=%s', [exercise, user,id])
         return "Workout Updated"
     
-   
+
+#TODO: Implement fronted and routing
+    def delete_workout(self, date, user):
+        rows = self._connection.execute("SELECT * FROM workouts WHERE id = %s AND user_username = %s", [date, user])
+        if len(rows) == 0:
+            return "Workout not found!"
+        self._connection.execute("DELETE FROM workouts WHERE id = %s AND user_username = %s", [date, user])
+        
+        return "Workout deleted successfully!"
+
 
 
 #TODO If we want to create partial objects in the database, we need update methods that encapsulate Workout class functions; current idea is to only send instance to DB upon marking complete -- unsure if this is actually possible.
