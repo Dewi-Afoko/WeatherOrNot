@@ -1,7 +1,7 @@
 /* Container to position the statistics */
 .stats-container {
     position: absolute; /* Position it in the top-right corner */
-    top: 20px;         /* Distance from the top */
+    top: 80px;         /* Distance from the top */
     right: 50px;       /* Distance from the right */
     width: 250px;      /* Set a width */
     padding: 15px;     /* Add some padding */
@@ -30,7 +30,7 @@
 
   .weightRule{
     position: absolute; /* Position it in the top-right corner */
-    top: 250px;         /* Distance from the top */
+    top: 300px;         /* Distance from the top */
     right: 20px;   
 
   }
