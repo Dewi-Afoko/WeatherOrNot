@@ -7,11 +7,16 @@ function DeleteExerciseButton(props) {
 
     const navigate = useNavigate()
 
-  const handleClick = () => {
-    delete_workout(props.id)
-    localStorage.removeItem('WorkoutOpen')
-    navigate(0)
-  };
+    const handleClick = () => {
+      const date = new Date();
+      let dateString = date.toLocaleDateString().split("/").reverse().join("/");
+      delete_workout(props.id)
+      console.log(`This line:${dateString}`)
+      console.log(`This line:${props.date}`)
+      if (props.date === dateString)
+      {localStorage.removeItem('WorkoutOpen')}
+      navigate(0)
+    };
 
   return (
     <>
@@ -21,3 +26,5 @@ function DeleteExerciseButton(props) {
 }
 
 export default DeleteExerciseButton;
+
+

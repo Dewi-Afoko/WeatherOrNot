@@ -35,7 +35,7 @@ export function Workouts() {
                   <div key={index}>
                      <br></br>
                      <h3>{exercise.date}</h3> 
-                     <DeleteExerciseButton id={exercise.id}/>
+                     {/* <DeleteExerciseButton id={exercise.id} date={exercise.date}/> */}
                      {/* <p>Complete: {JSON.stringify(exercise.complete)}</p>  */}
                      {/* <p>User: {exercise.username}</p>  */}
                      <br></br>

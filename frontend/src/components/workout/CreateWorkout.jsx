@@ -49,22 +49,23 @@ export function CreateWorkout() {
     }
   }
 
-  async function finishWorkout() {
-    const data = await get_workout()
-    localStorage.setItem('WorkoutOpen', false)
-    //localStorage.setItem('counterEx',0)
-    console.log(data);
-    console.log('Workout finished successfully');
-  }
+  // async function finishWorkout() {
+  //   const data = await get_workout()
+  //   localStorage.setItem('WorkoutOpen', false)
+  //   //localStorage.setItem('counterEx',0)
+  //   console.log(data);
+  //   console.log('Workout finished successfully');
+  // }
 
   
   async function handleButtonClick(event) {
     console.log('Button clicked'); 
     event.preventDefault();
-    if (!localStorage.getItem('WorkoutOpen')) {
+    console.log(localStorage.getItem('WorkoutOpen'))
+    if (localStorage.getItem('WorkoutOpen')) {
       createWorkout(); 
     } else {
-      finishWorkout(); 
+      createWorkout(); 
       alert('Workout already created')
     }
 
