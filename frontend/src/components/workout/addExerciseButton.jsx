@@ -6,6 +6,8 @@ function AddExerciseButton(props) {
   const [detailsOn, setDetailsOn] = useState(false);
 
   const handleClick = () => {
+    console.log(detailsOn)
+    console.log(props.exercise)
     setDetailsOn(true);
   };
 
