@@ -2,25 +2,28 @@ import pytest
 import json
 from unittest.mock import MagicMock
 from lib.workout_repository import WorkoutRepository
+from lib.workout import Workout
 
 def test_my_workouts_with_entries():
     db_connection = MagicMock()
     repository = WorkoutRepository(db_connection)
     username = "test_user"
     mock_rows = [
-        {
-            "user_username": "test_user",
-            "date": "2024-10-24",
-            "exercise_list": "[]",  
-            "complete": False
-        },
-        {
-            "user_username": "test_user",
-            "date": "2024-10-25",
-            "exercise_list": "[]",
-            "complete": True
-        }
-    ]
+    {
+        "id": 1,  # Add this line
+        "user_username": "test_user",
+        "date": "2024-10-24",
+        "exercise_list": "[]",
+        "complete": False
+    },
+    {
+        "id": 2,  # Add this line
+        "user_username": "test_user",
+        "date": "2024-10-25",
+        "exercise_list": "[]",
+        "complete": True
+    }
+]
     db_connection.execute = MagicMock(return_value=mock_rows)
     workouts = repository.my_workouts(username)
     assert len(workouts) == 2
@@ -42,22 +45,33 @@ def test_my_workouts_no_entries():
     assert result == "No workouts found!"
     
 
+
+
 def test_update_workout_existing():
     db_connection = MagicMock()
     repository = WorkoutRepository(db_connection)
-    mock_workout = [
-        {
-            "user_username": "Testy",
-            "date": "2024-10-24",
-            "exercise_list": "[]",  
-            "complete": False
-        }
-    ]
-    repository.my_workouts = MagicMock(return_value=mock_workout)
-    exercise = {"name": "Push-Up", "reps": 10} 
+    
+    # Create a mock Workout object
+    mock_workout = Workout("Testy")
+    mock_workout.id = 1
+    mock_workout.date = "2024-10-24"
+    mock_workout.exercise_list = "[]"
+    mock_workout.complete = False
+    
+    # Mock the my_workouts method to return a list with the mock Workout object
+    repository.my_workouts = MagicMock(return_value=[mock_workout])
+    
+    # Create the exercise dictionary as required by the update_workout method
+    exercise = {"user_username": "Testy", "exercise": {"name": "Push-Up", "reps": 10}}
+    
+    # Call the update_workout method
     response = repository.update_workout(exercise)
+    
+    # Check the response
     assert response == "Workout Updated"
+    
+    # Ensure the execute method was called with the correct parameters
     db_connection.execute.assert_called_once_with(
-        'UPDATE workouts SET exercise_list = exercise_list || %s::jsonb WHERE user_username = %s', 
-        [json.dumps([exercise]), "Testy"]
-    )
+        'UPDATE workouts SET exercise_list = exercise_list || %s::jsonb WHERE user_username = %s AND id=%s', 
+        [json.dumps([exercise["exercise"]]), "Testy", 1]
+    )    
