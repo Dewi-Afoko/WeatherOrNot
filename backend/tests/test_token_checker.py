@@ -95,5 +95,5 @@ def test_protected_route_with_no_auth_header(client):
     assert response.status_code == 401
     assert response.get_json() == {"message": "Authorization header missing or invalid"}
 
-if __name__ == '__main__':
-    pytest.main()
+# if __name__ == '__main__':
+#     pytest.main()
