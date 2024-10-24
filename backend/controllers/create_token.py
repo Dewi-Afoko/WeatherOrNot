@@ -1,13 +1,13 @@
 import jwt
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone  # Import timezone
 
 # Load the secret key from environment variable 
 SECRET_KEY = os.getenv('JWT_SECRET', 'your_default_secret_key')
 
 
 def generate_token(username):
-    now = datetime.utcnow()
+    now = datetime.now(tz=timezone.utc)  # Use timezone-aware UTC
     payload = {
         'user_id': username,
         'iat': now,  # Issued at time

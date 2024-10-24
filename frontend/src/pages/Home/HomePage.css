@@ -3,8 +3,22 @@
   flex-direction: column;
 }
 
-h1{
+h6 {
+  font-size: 80px;
+  text-transform: uppercase;
   font-family: Lato, sans-serif;
+  letter-spacing: -3px;
+  transition: 700ms ease;
+  font-variation-settings: "wght" 311;
+  margin-bottom: 0.8rem;
+  color: rgb(252, 252, 252);
+  outline: none;
+  text-align: center;
+}
+
+h6:hover {
+  font-variation-settings: "wght" 582; 
+  letter-spacing: 1px;
 }
 
 body {
@@ -22,9 +36,7 @@ body {
   color: #fff;
 }
 
-h1 {
-  margin-bottom: 20px;
-}
+
 
 /* Animation property */
 .button {

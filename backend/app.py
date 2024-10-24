@@ -2,6 +2,9 @@ import os
 import psycopg2
 import requests
 from flask_sqlalchemy import SQLAlchemy
+
+import json
+
 from datetime import datetime
 from functools import wraps
 from dotenv import load_dotenv
@@ -220,6 +223,30 @@ def update_workout():
 #         # Log the exception or handle it as necessary
 #         print(f"An error occurred: {e}")
 #         return jsonify({"error": "Failed to fetch data from the API"}), 500
+
+@app.route('/get_workouts', methods=['POST'])
+def return_workouts():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    details = repository.my_workouts(data['username'])
+    details2=[]
+    for workout in details: 
+        details2.append(workout.to_dict())
+    
+    print(details2)
+    return jsonify(details2),201
+
+@app.route('/workouts-delete', methods=['DELETE'])
+def delete_workout():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    print(data)
+    details = repository.delete_workout(data['id'])
+    return jsonify(details),204
+
+
 
 @app.route('/post_exercises', methods=['POST'])
 def post_exercises():

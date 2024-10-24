@@ -1,5 +1,5 @@
 import  { useEffect, useRef, useState } from "react";
-import "./title.scss"; // Assuming you have your CSS animations here
+import "./title3.scss"; // Assuming you have your CSS animations here
 
 const RotatingText = () => {
   const wordsRef = useRef(null);  // UseRef for the container of the words

@@ -1,0 +1,46 @@
+/* Button Container Styles */
+.form-container2 {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Center buttons vertically */
+    margin-top: 20px; /* Add space from the top */
+    gap: 20px; /* Space between buttons */
+}
+
+/* Button Styles */
+button {
+    background-color: #17c0fd; /* Button color */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    color: white; /* Text color */
+    padding: 15px 30px; /* Padding for a larger button */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Full width, change this to a smaller value if you want fixed button sizes */
+}
+
+/* Button Hover Effect */
+button:hover {
+    background-color: #1abc9c; /* Darker color on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+/* Button Focus Effect */
+button:focus {
+    outline: none; /* Remove the default outline */
+    box-shadow: 0 0 0 3px rgba(23, 192, 253, 0.5); /* Focus ring */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .form-container2 {
+        flex-direction: column; /* Stack buttons vertically on smaller screens */
+        gap: 10px; /* Reduced space between buttons */
+    }
+
+    button {
+        width: 100%; /* Full width on small screens */
+    }
+}
