@@ -22,7 +22,7 @@ function AddExerciseButton(props) {
             <span className="close" onClick={handleClose}>&times;</span>
             <h3>Exercise details</h3>
             {/* Directly pass the string value of exercise to UpdateWorkout */}
-            <UpdateWorkout exercise={props.exercise}/>
+            <UpdateWorkout close={handleClose} exercise={props.exercise}/>
           </div>
         </div>
       )}

@@ -159,3 +159,28 @@ export async function update_workout(exercise) {
    const data = await response.json();
    return data;
  }
+
+ // Delete a workout
+export async function delete_workout(id) {
+  const payload = {
+    id: id
+  };
+
+  const requestOptions = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      // Authorization: `Bearer ${token}` #TODO Integrate tokens
+    },
+    body: JSON.stringify(payload),
+  };
+
+  const response = await fetch(`${BACKEND_URL}/workouts-delete`, requestOptions);
+
+  if (response.status !== 204) {
+    throw new Error("Unable to delete workout");
+  }
+
+  const data = await response.json();
+  return data;
+}

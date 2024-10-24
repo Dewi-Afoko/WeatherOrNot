@@ -5,20 +5,19 @@ import { useNavigate } from "react-router-dom";
 export function UpdateWorkout(props) {
     const [loading, setLoading] = useState(['']);  
     const [reps, setReps] = useState(['']); 
-    const [counterEx, setCounterEx] = useState(0)
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
+      
     async function handleSubmit(event) {
         event.preventDefault(); 
         try {
             const workout = { 
                 exercise: props.exercise,  
                 loading:loading,  
-                 reps:reps   
+                reps:reps   
                 };  
             console.log(workout)   
             await update_workout(workout);
-            setCounterEx(counterEx +1)
-            localStorage.setItem('counterEx', counterEx)  
+            props.close()
             //navigate(0); 
         } catch (err) {
             console.error(err);  

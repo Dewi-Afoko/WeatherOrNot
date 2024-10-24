@@ -2,6 +2,7 @@
 import { get_workout } from "../../services/addDetails"
 import { useEffect, useState } from "react"
 // import Exercise from "../../components/Exercise"
+import DeleteExerciseButton from "../../components/workout/deleteWorkoutButton"
 
 export function Workouts() {
    const workoutOpen = localStorage.getItem('WorkoutOpen')
@@ -34,6 +35,7 @@ export function Workouts() {
                   <div key={index}>
                      <br></br>
                      <h3>{exercise.date}</h3> 
+                     <DeleteExerciseButton id={exercise.id}/>
                      {/* <p>Complete: {JSON.stringify(exercise.complete)}</p>  */}
                      {/* <p>User: {exercise.username}</p>  */}
                      <br></br>
@@ -51,7 +53,7 @@ export function Workouts() {
                            )
                         })}
                      </ul>
-
+                        
                      <hr />  
                   </div> 
                ); 

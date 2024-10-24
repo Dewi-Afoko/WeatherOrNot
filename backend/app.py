@@ -152,7 +152,6 @@ def return_workouts():
     connection = get_flask_database_connection(app)
     repository = WorkoutRepository(connection)
     data = request.get_json()
-    print(f'HEEEEE {data}')
     details = repository.my_workouts(data['username'])
     details2=[]
     for workout in details: 
@@ -161,6 +160,14 @@ def return_workouts():
     print(details2)
     return jsonify(details2),201
 
+@app.route('/workouts-delete', methods=['DELETE'])
+def delete_workout():
+    connection = get_flask_database_connection(app)
+    repository = WorkoutRepository(connection)
+    data = request.get_json()
+    print(data)
+    details = repository.delete_workout(data['id'])
+    return jsonify(details),204
 
 
 @app.route('/post_exercises', methods=['POST'])
