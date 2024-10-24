@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import 'survey-core/defaultV2.min.css';
 import { Model } from 'survey-core';
 import { Survey } from 'survey-react-ui';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const surveyJson = {
   title: "Workout Preferences",
@@ -16,14 +16,10 @@ const surveyJson = {
       name: "civilwar",
       title: "How many days a week can you workout?",
       choices: [
-        {"value": "begginer", 
-        "text" :"1-2"} ,
-        {"value": "intermediate", 
-        "text" :"3-4"} ,
-        {"value": "expert", 
-        "text" :"5-6"} 
-      ],
-
+        { "value": "beginner", "text": "1-2" },
+        { "value": "intermediate", "text": "3-4" },
+        { "value": "expert", "text": "5-6" }
+      ]
     }]
   }, {
     elements: [{
@@ -32,14 +28,10 @@ const surveyJson = {
       title: "How comfortable are you with using gym equipment?",
       choicesOrder: "random",
       choices: [
-        {"value": "begginer", 
-          "text" :"Never use it"} ,
-          {"value": "intermediate", 
-          "text" :"I've tried some equipment"} ,
-          {"value": "expert", 
-          "text" :"I'm comfortable with most equipment"} 
-      ],
-
+        { "value": "beginner", "text": "Never use it" },
+        { "value": "intermediate", "text": "I've tried some equipment" },
+        { "value": "expert", "text": "I'm comfortable with most equipment" }
+      ]
     }]
   }, {
     elements: [{
@@ -48,31 +40,22 @@ const surveyJson = {
       title: "How would you rate your overall fitness level?",
       choicesOrder: "random",
       choices: [
-        {"value": "begginer", 
-          "text" :"I'm just starting out"} ,
-          {"value": "intermediate", 
-          "text" :"I exercise consistently"} ,
-          {"value": "expert", 
-          "text" :"I'm very experienced and fit"} 
-      ],
-
+        { "value": "beginner", "text": "I'm just starting out" },
+        { "value": "intermediate", "text": "I exercise consistently" },
+        { "value": "expert", "text": "I'm very experienced and fit" }
+      ]
     }]
-  },
-  {
+  }, {
     elements: [{
       type: "radiogroup",
       name: "magnacarta",
       title: "How much time can you dedicate to each workout?",
       choicesOrder: "random",
       choices: [
-        {"value": "begginer", 
-          "text" :"20-30 minutes"} ,
-          {"value": "intermediate", 
-          "text" :"30-45 minutes"} ,
-          {"value": "expert", 
-          "text" :"45-60+ minutes"} 
-      ],
-
+        { "value": "beginner", "text": "20-30 minutes" },
+        { "value": "intermediate", "text": "30-45 minutes" },
+        { "value": "expert", "text": "45-60+ minutes" }
+      ]
     }]
   }, {
     elements: [{
@@ -81,14 +64,10 @@ const surveyJson = {
       title: "How intense do you want your workouts to feel?",
       choicesOrder: "random",
       choices: [
-        {"value": "begginer", 
-          "text" :"Light, minimal workout"} ,
-          {"value": "intermediate", 
-          "text" :"Moderate"} ,
-          {"value": "expert", 
-          "text" :"High intensity"} 
-      ],
-
+        { "value": "beginner", "text": "Light, minimal workout" },
+        { "value": "intermediate", "text": "Moderate" },
+        { "value": "expert", "text": "High intensity" }
+      ]
     }]
   }, {
     elements: [{
@@ -97,14 +76,10 @@ const surveyJson = {
       title: "What is your current strength level?",
       choicesOrder: "random",
       choices: [
-        {"value": "begginer", 
-          "text" :"I can't lift heavy weights yet"} ,
-          {"value": "intermediate", 
-          "text" :"I can lift moderate weights for 8-12 reps"} ,
-          {"value": "expert", 
-          "text" :"I can lift heavy weights for a few reps"} 
-      ],
-
+        { "value": "beginner", "text": "I can't lift heavy weights yet" },
+        { "value": "intermediate", "text": "I can lift moderate weights for 8-12 reps" },
+        { "value": "expert", "text": "I can lift heavy weights for a few reps" }
+      ]
     }]
   }, {
     elements: [{
@@ -113,29 +88,23 @@ const surveyJson = {
       title: "What type of exercise are you comfortable with?",
       choicesOrder: "random",
       choices: [
-        {"value": "begginer", 
-          "text" :"Low impact"} ,
-          {"value": "intermediate", 
-          "text" :"A mix of low and high impact"} ,
-          {"value": "expert", 
-          "text" :"High impact and intense"} 
-      ],
-
+        { "value": "beginner", "text": "Low impact" },
+        { "value": "intermediate", "text": "A mix of low and high impact" },
+        { "value": "expert", "text": "High impact and intense" }
+      ]
     }]
-  },
-],
-  completedHtml: "Thank you for entering your preferences, we'll take them into account when recommeding exercises.",
+  }],
+  completedHtml: "Thank you for entering your preferences, we'll take them into account when recommending exercises.",
 };
 
-function Questions()  {
-
-
+function Questions() {
   const survey = new Model(surveyJson);
-  survey.onComplete.add(function(sender){
+  
+  survey.onComplete.add(function(sender) {
     let beginnerPoints = 0;
     let intermediatePoints = 0;
     let advancedPoints = 0;
-  
+
     const answers = sender.data;
     
     for (let key in answers) {
@@ -148,7 +117,6 @@ function Questions()  {
         advancedPoints++;
       }
     }
-  
 
     let fitnessLevel = 'beginner';
     if (intermediatePoints > beginnerPoints && intermediatePoints > advancedPoints) {
@@ -156,15 +124,19 @@ function Questions()  {
     } else if (advancedPoints > beginnerPoints && advancedPoints > intermediatePoints) {
       fitnessLevel = 'expert';
     }
-  
 
-      localStorage.setItem('preferences',fitnessLevel)
-    
+    localStorage.setItem('preferences', fitnessLevel);
   });
 
-
   return (
-      <Survey model={survey} id="surveyContainer" />      
+    <div className="container mt-4">
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <h2 className="text-center mb-4">Workout Preferences Survey</h2>
+          <Survey model={survey} />
+        </div>
+      </div>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BackgroundAnimation from "../../components/BackgroundAnimation";
+
 import { signup } from "../../services/authentication";
 import './signup.css'
 export function SignupPage() {
@@ -60,9 +60,7 @@ export function SignupPage() {
         </div>
       </div>
   
-      <div id="background">
-        <BackgroundAnimation />
-      </div>
+
     </>
   );
 }

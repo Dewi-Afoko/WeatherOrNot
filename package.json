@@ -11,5 +11,8 @@
   },
   "engines": {
     "npm": "YOU ARE IN THE WRONG DIRECTORY! cd to api or frontend folder to run this command"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3"
   }
 }

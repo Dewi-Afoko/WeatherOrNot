@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './userdetails.css'
 import {addDetails} from '../services/addDetails'
 import { user_details } from "../services/addDetails";
-//import BackgroundAnimation from "../../components/BackgroundAnimation";
+
 
 export function UserDetails() {
   const [currentFirstName, setCurrentFirstName]=useState('')

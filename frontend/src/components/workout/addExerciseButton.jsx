@@ -1,13 +1,11 @@
-import  { useState } from 'react';
-import './addExerciseButton.css';
+import { useState } from 'react';
+import { Modal, Button } from 'react-bootstrap';
 import { UpdateWorkout } from './updateWorkout';
 
 function AddExerciseButton(props) {
   const [detailsOn, setDetailsOn] = useState(false);
 
   const handleClick = () => {
-    console.log(detailsOn)
-    console.log(props.exercise)
     setDetailsOn(true);
   };
 
@@ -17,17 +15,22 @@ function AddExerciseButton(props) {
 
   return (
     <>
-      <button className='test-button1' onClick={handleClick}>Add exercise to current workout</button>
-      {detailsOn && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleClose}>&times;</span>
-            <h3>Exercise details</h3>
-            {/* Directly pass the string value of exercise to UpdateWorkout */}
-            <UpdateWorkout close={handleClose} exercise={props.exercise}/>
-          </div>
-        </div>
-      )}
+      <Button variant="primary" onClick={handleClick}>
+        Add exercise to current workout
+      </Button>
+      <Modal show={detailsOn} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Exercise details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdateWorkout close={handleClose} exercise={props.exercise} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

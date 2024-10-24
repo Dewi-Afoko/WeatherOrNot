@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BackgroundAnimation from "../../components/BackgroundAnimation";
+
 import { login } from "../../services/authentication";
 import './loginpage.css'
 export function LoginPage() {
@@ -44,9 +44,7 @@ export function LoginPage() {
   return (
     
     <>
-      <div id="background">
-        <BackgroundAnimation />
-      </div>
+
 
       <div className="login-page">
         <div className="form-container">

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getNewExercises } from "../../services/exercises";
 
+
 export function GenerateExercises() {
     const navigate = useNavigate();
 
@@ -123,7 +124,7 @@ export function GenerateExercises() {
                     <h3 className="text-center fw-bold">Try these exercises:</h3>
                     <Row>
                         {exercises.map((exercise, index) => (
-                            <Col xs={12} md={6} lg={4} className="mb-4">
+                            <Col xs={12} md={6} lg={4} key={index} className="mb-4">
                                 <Exercise
                                     key={index}
                                     name={exercise.name}
