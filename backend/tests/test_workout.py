@@ -75,9 +75,13 @@ def test_complete_workout_in_planning_mode():
 
 def test_equal_objects():
     # Setup
-    workout1 = Workout("Morning Workout", False)
-    workout2 = Workout("Morning Workout", False)
+    workout1 = Workout("test_workout", False)
+    workout2 = Workout("test_workout", False)
 
     # Act & Assert
     assert workout1 == workout2  # These should be equal
 
+def test_repr():
+    workout1 = Workout("test_workout", False)
+    expected_repr = "Workout(Y/m/d%, [], False, test_workout)"
+    assert repr(workout1) == expected_repr
