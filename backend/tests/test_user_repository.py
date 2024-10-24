@@ -1,7 +1,9 @@
-import pytest
 from lib.user_repository import UserRepository
 from lib.user import User
 import bcrypt
+import pytest
+from unittest.mock import MagicMock
+from datetime import datetime
 
 def test_empty_db_is_empty(db_connection):
     db_connection.seed("seeds/users.sql")
@@ -135,7 +137,4 @@ def test_delete_exercise_from_list(db_connection):
     exercise_list = repository.find_favourite_exercises('Username_Test')
     assert exercise_list[0] == 'Exercise_Test_1'
     assert exercise_list[1] == 'Exercise_Test_3'
-
-
-
 

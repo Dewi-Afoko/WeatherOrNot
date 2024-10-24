@@ -52,8 +52,6 @@ class UserRepository:
 
     def add_details(self, username, first_name, last_name, dob, height, weight):
         current_user = self.find_by_username(username)
-
-        print(f'Hereeee{[ username, first_name, last_name, dob, height, weight]}')
         if len(first_name) > 1:
             self._connection.execute("UPDATE users SET first_name = %s WHERE username = %s", [first_name, current_user.username])
         if len(last_name) > 1:

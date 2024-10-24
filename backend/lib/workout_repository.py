@@ -6,6 +6,7 @@ class WorkoutRepository:
     def __init__(self, connection):
         self._connection = connection
 
+
     def save_workout(self, workout):
         self._connection.execute("INSERT INTO workouts (date, exercise_list, complete, user_username) VALUES (%s, %s, %s, %s)", [workout['date'], '[]', workout['complete'], workout['user_username']])
         return "Workout created!"
