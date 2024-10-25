@@ -15,9 +15,9 @@ export function UserPage() {
     <>
         <Container fluid className="mt-5 bg-light">
 
-            <Row>
-        <Col lg={5} className="p-3 text-end">
-            <h1 className="display-6 mb-0">Welcome {username}</h1>
+    <Row className="text-start me-auto">
+        <Col lg={5} className="bg-white w-100 text-end text-muted">
+            <h4 className="mb-1 fw-light pr-5">Welcome {username}</h4>
         </Col>
     </Row>
 

@@ -18,8 +18,10 @@ const Layout = ({ children }) => {
   const shouldHideHeader = hideHeaderPaths.includes(location.pathname);
   return (
     <>
-      {!shouldHideHeader && <Header />} {/* Show header unless it's a restricted path */}
-      {children}
+      <div className="main-content">
+        {!shouldHideHeader && <Header />} {/* Show header unless it's a restricted path */}
+        {children}
+      </div>
     </>
   );
 };
