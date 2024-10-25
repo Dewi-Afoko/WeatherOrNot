@@ -1,10 +1,17 @@
+.custom-form #submit {
+  background-color: black;
+  border: 1px solid black;
+  width: 80%;
+  margin-bottom: 20px;;
+}
+
+
 
 /* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 
 body, html {
   display: flex; 
@@ -13,109 +20,104 @@ body, html {
   margin: 0; 
   padding: 0; 
   height: 100%; 
-} */
+}
 
 .login-page {
-  top:30px;
-  right:150px;
-  display: flex; /* Use flexbox for layout */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100vh; /* Full viewport height */
-  position: relative; /* Allow absolute positioning of children if necessary */
-  z-index: 10; /* Ensure it's above the background */
+  top: 30px;
+  right: 150px;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+  position: relative; 
+  z-index: 10; 
 }
 
-/* Styling for the form container */
 .form-container { 
-  max-width: 400px; /* Maximum width */
-  width: 100%; /* Full width */
-  padding: 20px; /* Inner padding */
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly more opaque for visibility */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  z-index: 20; /* Ensure it's above the background */
+  max-width: 400px; 
+  width: 100%; 
+  padding: 20px; 
+  background-color: rgba(255, 255, 255, 0.9); 
+  border-radius: 10px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  z-index: 20; 
 }
 
-
-/* Title styling */
 .form-container h2 {
-  text-align: center; /* Center the title text */
+  text-align: center; 
   font-size: 24px;
   font-weight: bold;
   color: #333; 
-  margin-bottom: 20px; /* Space below title */
+  margin-bottom: 20px; 
 }
 
-/* Input field styling */
 .form-container input[type="text"],
 .form-container input[type="password"] {
-  width: 100%; /* Full width of input fields */
-  padding: 10px; /* Inner padding */
-  margin-bottom: 15px; /* Space below input fields */
-  border: 1px solid #ccc; /* Border style */
-  border-radius: 5px; /* Rounded corners */
-  box-sizing: border-box; /* Include padding in width */
-  font-size: 16px; /* Font size */
+  width: 100%; 
+  padding: 10px; 
+  margin-bottom: 15px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+  box-sizing: border-box; 
+  font-size: 16px; 
 }
 
-/* Submit button styling */
 .form-container input[type="submit"] {
-  width: 100%; /* Full width of submit button */
-  padding: 10px; /* Inner padding */
-  background-color: #007bff; /* Background color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  color: white; /* Text color */
-  font-size: 16px; /* Font size */
-  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; 
+  padding: 10px; 
+  background-color: #007bff; 
+  border: none; 
+  border-radius: 5px; 
+  color: white; 
+  font-size: 16px; 
+  cursor: pointer; 
 }
 
 .form-container input[type="submit"]:hover {
-  background-color: #0056b3; /* Darker background on hover */
+  background-color: #0056b3; 
 }
 
 .form-container label {
-  display: block; /* Block display for labels */
-  margin-bottom: 8px; /* Space below labels */
-  font-weight: bold; /* Bold labels */
+  display: block; 
+  margin-bottom: 8px; 
+  font-weight: bold; 
 }
 
 #background {
-  position: fixed; /* Stays in the background */
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  z-index: 1; /* Behind the form */
+  width: 100%; 
+  height: 100%; 
+  z-index: 1; 
 }
 
 .popup-overlay {
-  position: fixed; /* Fixed position for overlay */
+  position: fixed; 
   top: 0;
   left: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  display: flex; /* Flex for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  z-index: 1000; /* Above other content */
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  z-index: 1000; 
 }
 
 .popup-content {
-  background-color: white; /* Background for popup */
-  padding: 20px; /* Inner padding */
-  border-radius: 10px; /* Rounded corners */
-  text-align: center; /* Center text */
+  background-color: white; 
+  padding: 20px; 
+  border-radius: 10px; 
+  text-align: center; 
 }
 
 .popup-content img {
-  width: 150px; /* Adjust size of the GIF */
-  height: auto; /* Maintain aspect ratio */
+  width: 150px; 
+  height: auto; 
 }
 
 .popup-content p {
-  margin-top: 10px; /* Space above paragraph */
-  font-size: 18px; /* Font size */
-}
+  margin-top: 10px; 
+  font-size: 18px; 
+} */

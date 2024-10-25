@@ -31,7 +31,7 @@ export function WeightTracker() {
 
     return (
         <>    
-            <Card className="p-4 shadow bg-light">
+            <Card className="p-4 shadow " border="0">
                 <Card.Body>
                     <Card.Title className="display-6 pb-2">Weight Tracker</Card.Title>
                         <hr/>

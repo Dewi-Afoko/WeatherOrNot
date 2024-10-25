@@ -37,8 +37,8 @@ export function WeightLog() {
 
     return (
       <>    
-        <Card className="p-4 shadow bg-light">
-          <Card.Body className="bg-light">
+        <Card className="p-4 shadow " border="0">
+          <Card.Body className="">
             <Card.Title className="display-6 pb-2">Weight Gauge</Card.Title>
 
       { currentWeight &&( <GaugeComponent

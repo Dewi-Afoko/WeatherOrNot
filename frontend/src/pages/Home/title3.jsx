@@ -52,15 +52,15 @@ const RotatingText = () => {
     <div className="rotating-text">
       <p>
         {/* Static text that doesn't change */}
-        <span className="static-text">Today I want to focus on my...</span>
+        <span className="static-text lead">Today I want to focus on my...</span>
         
         {/* Rotating words */}
         <span className="word-container" ref={wordsRef}>
           <span className="word alizarin">BICEPS</span>
           <span className="word wisteria">TRICEPS</span>
-          <span className="word peter-river">FACE</span>
+          <span className="word peter-river">CHEST</span>
           <span className="word emerald">LEGS</span>
-          <span className="word sun-flower">HAIR</span>
+          <span className="word sun-flower">BACK</span>
         </span>
       </p>
     </div>
