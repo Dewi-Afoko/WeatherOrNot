@@ -71,7 +71,10 @@ class UserRepository:
         if not user or not user.weight:  # Check if the user or weight data is None
             return []  # Return an empty list if there are no weight entries
         user_weight = user.weight
-        weight_date = user.weight_date
+        weight_date = []
+        for entry in user.weight_date:
+            item = entry[-5: :].strip("/")
+            weight_date.append(item)
         if len(user_weight)==1 :
             return [user_weight]
         if len(user_weight)>1 :
