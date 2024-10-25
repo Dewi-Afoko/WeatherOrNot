@@ -13,7 +13,7 @@ import { getNewExercises } from "../../services/exercises";
 export function GenerateExercises() {
     const navigate = useNavigate();
 
-    const [choices, setChoices] = useState({'muscle': "", 'difficulty': "", 'eeuipment': ""})
+    const [choices, setChoices] = useState({'muscle': "", 'difficulty': "", 'equipment': ""})
 
     // Managing state for exercises output
     const [exercises, setExercises] = useState([]);
@@ -85,7 +85,7 @@ export function GenerateExercises() {
         </Card.Body>
       </Card>
     </Col>
-    <Col xs={12} className="mb-2">
+    {/* <Col xs={12} className="mb-2">
       <Card>
         <Card.Body>
           <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Equipment</Card.Title>
@@ -95,7 +95,7 @@ export function GenerateExercises() {
           />
         </Card.Body>
       </Card>
-    </Col>
+    </Col> */}
     <Col xs={12} className="mb-2">
       <Card>
         <Card.Body>
@@ -113,46 +113,6 @@ export function GenerateExercises() {
   </div>
 </Form>
 
-            {/* <Form onSubmit={handleSubmit}>
-                <Row className="mb-3 text-center">
-                    <Col xs={12} md={4}>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Difficulty</Card.Title>
-                                <ChooseDifficulty
-                                    difficulty={difficulty}
-                                    setDifficulty={setDifficulty}
-                                />
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xs={12} md={4}>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Equipment</Card.Title>
-                                <ChooseEquipment
-                                    equipment={equipment}
-                                    setEquipment={setEquipment}
-                                />
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xs={12} md={4}>
-                        <Card>
-                            <Card.Body>
-                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Muscle</Card.Title>
-                                <ChooseMuscle
-                                    muscle={muscle}
-                                    setMuscle={setMuscle}
-                                />
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-                <div className="text-center">
-                    <GenerateButton />
-                </div>
-            </Form> */}
             <br />
 
             {exercises.length > 0 && (
@@ -160,15 +120,15 @@ export function GenerateExercises() {
                     <div className="selected-choices text-center p-3 mb-4 bg-light rounded shadow-sm">
                         <h4 className="mb-3 text-secondary">You Selected:</h4>
                         <Row>
-                            <Col xs={12} md={4} className="mb-2">
+                            <Col xs={12} md={6} className="mb-2">
                                 <strong>Muscle:</strong> {formatDisplayOutput(exercises[0].muscle)}
                             </Col>
-                            <Col xs={12} md={4} className="mb-2">
+                            <Col xs={12} md={6} className="mb-2">
                                 <strong>Difficulty:</strong> {formatDisplayOutput(exercises[0].difficulty)}
                             </Col>
-                            <Col xs={12} md={4} className="mb-2">
+                            {/* <Col xs={12} md={4} className="mb-2">
                                 <strong>Equipment:</strong> {formatDisplayOutput(exercises[0].equipment)}
-                            </Col>
+                            </Col> */}
                         </Row>
                     </div>
                     <Row>
