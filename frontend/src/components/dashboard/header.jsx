@@ -72,12 +72,12 @@
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap"; // Importing Bootstrap components
 import './header.css'; // Optional if you're adding additional styles
-
+import AnimatedHeadline from "./titleHeader";
 const Header = () => {
   return (
     <Navbar bg="light" variant="light" expand="lg" fixed="top" className="px-4">
       <Navbar.Brand as={NavLink} to="/user">
-        WeatherOrNot
+       <AnimatedHeadline/>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
