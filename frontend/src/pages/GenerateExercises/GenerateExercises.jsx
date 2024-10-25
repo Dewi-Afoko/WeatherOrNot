@@ -160,7 +160,7 @@ export function GenerateExercises() {
                     <div className="selected-choices text-center p-3 mb-4 bg-light rounded shadow-sm">
                         <h4 className="mb-3 text-secondary">You Selected:</h4>
                         <Row>
-                            <Col xs={12} md={4} className="mb-2" text-success>
+                            <Col xs={12} md={4} className="mb-2">
                                 <strong>Muscle:</strong> {formatDisplayOutput(exercises[0].muscle)}
                             </Col>
                             <Col xs={12} md={4} className="mb-2">
