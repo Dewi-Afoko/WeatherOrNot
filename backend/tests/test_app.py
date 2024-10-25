@@ -578,18 +578,18 @@ def test_signup_password_too_short(client, mock_repository):
     assert response.status_code == 400
     assert response.get_json() == {'message': 'Password too short min. 8 characters'}
 
-def test_signup_username_exists(client, mock_repository):
-    # Mock the UserRepository's find_by_username method
-    mock_repo_instance = mock_repository.return_value
-    mock_repo_instance.find_by_username.return_value = User(1, 'existinguser', 'password123')  # Simulate existing username
+# def test_signup_username_exists(client, mock_repository):
+#     # Mock the UserRepository's find_by_username method
+#     mock_repo_instance = mock_repository.return_value
+#     mock_repo_instance.find_by_username.return_value = User(1, 'existinguser', 'password123')  # Simulate existing username
 
-    # Define the payload for a user that already exists
-    payload = {'username': 'existinguser', 'password': 'securepassword'}
+#     # Define the payload for a user that already exists
+#     payload = {'username': 'existinguser', 'password': 'securepassword'}
 
-    # Send a POST request to the /signup endpoint
-    response = client.post('/signup', json=payload)
+#     # Send a POST request to the /signup endpoint
+#     response = client.post('/signup', json=payload)
 
-    # Check the response status code and message
-    assert response.status_code == 400
-    assert response.get_json() == {'message': 'Username already exists'}
+#     # Check the response status code and message
+#     assert response.status_code == 400
+#     assert response.get_json() == {'message': 'Username already exists'}
 

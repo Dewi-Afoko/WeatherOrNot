@@ -155,11 +155,15 @@ def test_weight_details(db_connection):
     assert weight_details == [[75]]  # Expect a list with one weight entry
 
     # Test case 3: User with multiple weight entries
-    repository.add_details('Username_Test', '', '', '', '', "80")
-    repository.add_details('Username_Test', '', '', '', '', "78")
+    # Add weight entries with corresponding dates
+    repository.add_details('Username_Test', '', '', '', datetime.now().strftime('%Y/%m/%d'), "80")
+    repository.add_details('Username_Test', '', '', '', datetime.now().strftime('%Y/%m/%d'), "78")
     weight_details = repository.weight_details('Username_Test')
+
+    # Expected outputs
     expected_weights = [75, 80, 78]
-    expected_dates = [datetime.now().strftime('%Y/%m/%d')] * 3  # Assuming all weights were added today
+    # Match the format "MM/DD" used in the `weight_details` function
+    expected_dates = [datetime.now().strftime('%m/%d')] * 3
     average_weight = round(sum(expected_weights) / len(expected_weights))
     weight_difference = expected_weights[0] - expected_weights[-1]
     max_weight = max(expected_weights)
@@ -167,7 +171,7 @@ def test_weight_details(db_connection):
 
     # Verify the returned values
     assert weight_details[0] == expected_weights  # All weights
-    assert weight_details[1] == expected_dates  # Dates corresponding to each weight
+    assert weight_details[1] == expected_dates  # Dates corresponding to each weight in "MM/DD" format
     assert weight_details[2] == expected_weights[-1]  # Most recent weight
     assert weight_details[3] == average_weight  # Average weight
     assert weight_details[4] == weight_difference  # Difference between first and last weight
