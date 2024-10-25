@@ -23,7 +23,7 @@ function FavouriteList() {
     return (
         <>
             <Card className="p-4 shadow " border="0">
-            <Card.Body>
+            <Card.Body style={{ maxHeight: '300px', overflowY: 'auto' }}>
                 <Card.Title className="display-6">My Favourites</Card.Title>
                 <hr className="" />
                 <div className="favorites-list">
