@@ -18,7 +18,7 @@ function ChooseDifficulty(props) {
       <Row className="">
         {difficultyOptions.map((difficultyOption, index) => {
           return (
-            <Col xs={6} md={4} className="m-2" key={index}>
+            <Col xs={6} md={4} className="" key={index}>
               <RadioSelector
                 id={difficultyOption}
                 value={difficultyOption}

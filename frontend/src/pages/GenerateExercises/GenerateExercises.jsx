@@ -75,7 +75,48 @@ export function GenerateExercises() {
             <div className="text-center my-4">
                 <h1 className="display-4  text-primary">Workout Generator</h1>
             </div>
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} className="mx-auto" style={{ maxWidth: '500px' }}>
+  <Row className="mb-3 text-center flex-column">
+    <Col xs={12} className="mb-2"> {/* Add margin between cards */}
+      <Card>
+        <Card.Body>
+          <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Difficulty</Card.Title>
+          <ChooseDifficulty
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
+          />
+        </Card.Body>
+      </Card>
+    </Col>
+    <Col xs={12} className="mb-2">
+      <Card>
+        <Card.Body>
+          <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Equipment</Card.Title>
+          <ChooseEquipment
+            equipment={equipment}
+            setEquipment={setEquipment}
+          />
+        </Card.Body>
+      </Card>
+    </Col>
+    <Col xs={12} className="mb-2">
+      <Card>
+        <Card.Body>
+          <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Muscle</Card.Title>
+          <ChooseMuscle
+            muscle={muscle}
+            setMuscle={setMuscle}
+          />
+        </Card.Body>
+      </Card>
+    </Col>
+  </Row>
+  <div className="text-center">
+    <GenerateButton />
+  </div>
+</Form>
+
+            {/* <Form onSubmit={handleSubmit}>
                 <Row className="mb-3 text-center">
                     <Col xs={12} md={4}>
                         <Card>
@@ -114,7 +155,7 @@ export function GenerateExercises() {
                 <div className="text-center">
                     <GenerateButton />
                 </div>
-            </Form>
+            </Form> */}
             <br />
 
             {exercises.length > 0 && (

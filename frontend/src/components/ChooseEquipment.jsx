@@ -26,7 +26,7 @@ function ChooseEquipment(props) {
       <Row className="">
         {equipmentOptions.map((equipmentOption, index) => {
           return (
-            <Col xs={6} md={4} className="m-2" key={index}>
+            <Col xs={6} md={4} className="" key={index}>
               <RadioSelector
                 id={equipmentOption}
                 value={equipmentOption}
