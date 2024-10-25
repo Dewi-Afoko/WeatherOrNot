@@ -2,7 +2,7 @@
 // import { Link, useNavigate } from "react-router-dom";
 // import AnimatedHeadline from "./title";
 // import './header.css';
-// import { CreateWorkout } from "../workout/CreateWorkout";
+import { CreateWorkout } from "../workout/CreateWorkout";
 // const Header = () => {
  
 //     const [showPopup, setShowPopup] = useState(false); 
@@ -82,6 +82,7 @@ const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ms-auto">
+        <CreateWorkout/>
           <Nav.Link as={NavLink} to="/generate_exercises" activeClassName="active-link">
             Workout Generator
           </Nav.Link>
