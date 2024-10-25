@@ -29,10 +29,10 @@ function ChooseMuscle(props) {
 
   return (
     <Form.Group>
-      <Row>
+      <Row className="">
         {muscleOptions.map((muscleOption, index) => {
           return (
-            <Col xs={6} md={4} className="m-2" key={index}> {/* Adjust column size and spacing */}
+            <Col xs={6} md={4} className="m-2 text-center" key={index}> {/* Adjust column size and spacing */}
               <RadioSelector
                 id={muscleOption}
                 value={muscleOption}

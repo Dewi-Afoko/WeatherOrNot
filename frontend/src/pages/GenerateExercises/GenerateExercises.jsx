@@ -68,14 +68,14 @@ export function GenerateExercises() {
     return (
         <Container className="justify-content-center">
             <div className="text-center my-4">
-                <h1 className="display-4  text-success">Workout Generator</h1>
+                <h1 className="display-4  text-primary">Workout Generator</h1>
             </div>
             <Form onSubmit={handleSubmit}>
                 <Row className="mb-3 text-center">
                     <Col xs={12} md={4}>
                         <Card>
                             <Card.Body>
-                            <Card.Title className="display-6 pb-2 text-secondary">Choose Muscle</Card.Title>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Muscle</Card.Title>
                                 <ChooseMuscle
                                     muscle={muscle}
                                     setMuscle={setMuscle}
@@ -85,20 +85,24 @@ export function GenerateExercises() {
                     </Col>
                     <Col xs={12} md={4}>
                         <Card>
-                            <h3 className="fw-bold text-secondary mb-3 text-center">Choose Difficulty</h3>
-                            <ChooseDifficulty
-                                difficulty={difficulty}
-                                setDifficulty={setDifficulty}
-                            />
+                            <Card.Body>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Difficulty</Card.Title>
+                                <ChooseDifficulty
+                                    difficulty={difficulty}
+                                    setDifficulty={setDifficulty}
+                                />
+                            </Card.Body>
                         </Card>
                     </Col>
                     <Col xs={12} md={4}>
                         <Card>
-                            <h3 className="fw-bold text-secondary mb-3 text-center">Choose Equipment</h3>
-                            <ChooseEquipment
-                                equipment={equipment}
-                                setEquipment={setEquipment}
-                            />
+                            <Card.Body>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Equipment</Card.Title>
+                                <ChooseEquipment
+                                    equipment={equipment}
+                                    setEquipment={setEquipment}
+                                />
+                            </Card.Body>
                         </Card>
                     </Col>
                 </Row>
@@ -111,7 +115,7 @@ export function GenerateExercises() {
             {exercises.length > 0 && (
                 <div className="my-5">
                     <div className="selected-choices text-center p-3 mb-4 bg-light rounded shadow-sm">
-                        <h4 className="mb-3">You Selected:</h4>
+                        <h4 className="mb-3 text-secondary">You Selected:</h4>
                         <Row>
                             <Col xs={12} md={4} className="mb-2" text-success>
                                 <strong>Muscle:</strong> {formatDisplayOutput(exercises[0].muscle)}
@@ -124,8 +128,8 @@ export function GenerateExercises() {
                             </Col>
                         </Row>
                     </div>
-                    <h3 className="text-center fw-bold">Try these exercises:</h3>
                     <Row>
+                    <h3 className="display-6 text-center mb-2">Try these exercises:</h3>
                         {exercises.map((exercise, index) => (
                             <Col xs={12} md={6} lg={4} key={index} className="mb-4">
                                 <Exercise

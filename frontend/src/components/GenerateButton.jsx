@@ -4,8 +4,8 @@ import './GenerateButton.css'; // Importing custom styles
 function GenerateButton() {
   return (
     <>
-      <Button variant="success" size="lg" type="submit" className="generate-button fw-bold">
-        GENERATE
+      <Button variant="primary" size="lg" type="submit" className="generate-button fw-bold btn-primary">
+        -GENERATE-
       </Button>
     </>
   );

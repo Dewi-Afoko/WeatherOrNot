@@ -68,23 +68,32 @@
 
 
 // header.jsx
-import { Link } from "react-router-dom";
+// header.jsx
+import { NavLink } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap"; // Importing Bootstrap components
 import './header.css'; // Optional if you're adding additional styles
 
 const Header = () => {
   return (
     <Navbar bg="light" variant="light" expand="lg" fixed="top" className="px-4">
-      <Navbar.Brand as={Link} to="/user">
+      <Navbar.Brand as={NavLink} to="/user">
         WeatherOrNot
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/generate_exercises">Workout Generator</Nav.Link>
-          <Nav.Link as={Link} to="/workouts">My Workouts</Nav.Link>
-          <Nav.Link as={Link} to="/user">My Profile</Nav.Link>
-          <Nav.Link as={Link} to="/login">Log Out</Nav.Link>
+        <Nav className="ms-auto">
+          <Nav.Link as={NavLink} to="/generate_exercises" activeClassName="active-link">
+            Workout Generator
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/workouts" activeClassName="active-link">
+            My Workouts
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/user" activeClassName="active-link">
+            My Profile
+          </Nav.Link>
+          <Nav.Link as={NavLink} to="/login" activeClassName="active-link">
+            Log Out
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -92,4 +101,5 @@ const Header = () => {
 };
 
 export default Header;
+
 

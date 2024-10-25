@@ -61,7 +61,7 @@ function Exercise(props) {
         <Card className="mb-4 shadow-sm text-center">
             <Card.Body>
 
-                <Card.Title className="text-success fw-bold" style={{ cursor: 'pointer' }} onClick={props.onClick}>
+                <Card.Title className="text-primary fw-bold" style={{ cursor: 'pointer' }} onClick={props.onClick}>
                     {formatDisplayOutput(props.name)}
                 </Card.Title>
                 

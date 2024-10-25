@@ -1,4 +1,5 @@
 import RadioSelector from "./RadioSelector";
+import { Form, Row, Col } from "react-bootstrap";
 
 function ChooseEquipment(props) {
 
@@ -7,31 +8,31 @@ function ChooseEquipment(props) {
     'dumbbell',
     'machine',
     'other'
-
-  ]
+  ];
 
   const handleChange = (event) => {
-    props.setEquipment(event.target.value)
-  }
+    props.setEquipment(event.target.value);
+  };
 
   return (
-    <div>
-      {/* <form> */}
+    <Form.Group>
+      <Row className="">
         {equipmentOptions.map((equipmentOption, index) => {
           return (
-            <RadioSelector
-              key={index}
-              id={equipmentOption}
-              value={equipmentOption}
-              name="equipment_group"
-              checked={props.equipment === equipmentOption}
-              onChange={handleChange}
-            />
-          )
+            <Col xs={6} md={4} className="m-2" key={index}>
+              <RadioSelector
+                id={equipmentOption}
+                value={equipmentOption}
+                name="equipment_group"
+                checked={props.equipment === equipmentOption}
+                onChange={handleChange}
+              />
+            </Col>
+          );
         })}
-      {/* </form> */}
-    </div>
+      </Row>
+    </Form.Group>
   );
 }
-  
+
 export default ChooseEquipment;

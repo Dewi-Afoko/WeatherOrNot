@@ -1,4 +1,5 @@
 import RadioSelector from "./RadioSelector";
+import { Form, Row, Col } from "react-bootstrap";
 
 function ChooseDifficulty(props) {
 
@@ -6,30 +7,31 @@ function ChooseDifficulty(props) {
     'beginner',
     'intermediate',
     'expert'
-  ]
+  ];
 
   const handleChange = (event) => {
-    props.setDifficulty(event.target.value)
-  }
+    props.setDifficulty(event.target.value);
+  };
 
   return (
-    <div>
-      {/* <form> */}
+    <Form.Group>
+      <Row className="">
         {difficultyOptions.map((difficultyOption, index) => {
           return (
-            <RadioSelector
-              key={index}
-              id={difficultyOption}
-              value={difficultyOption}
-              name="difficulty_group"
-              checked={props.difficulty === difficultyOption}
-              onChange={handleChange}
-            />
-          )
+            <Col xs={6} md={4} className="m-2" key={index}>
+              <RadioSelector
+                id={difficultyOption}
+                value={difficultyOption}
+                name="difficulty_group"
+                checked={props.difficulty === difficultyOption}
+                onChange={handleChange}
+              />
+            </Col>
+          );
         })}
-      {/* </form> */}
-    </div>
+      </Row>
+    </Form.Group>
   );
 }
-  
+
 export default ChooseDifficulty;
