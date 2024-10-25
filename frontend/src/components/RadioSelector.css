@@ -1,28 +1,27 @@
-/* Hide the actual radio buttons */
+/* Hide the actual radio buttons and remove layout offset */
 .custom-radio .form-check-input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /* Style the label as regular clickable text */
-  .custom-radio .form-check-label {
-    display: inline-block;
-    padding: 5px 0;
-    font-size: 16px;
-    cursor: pointer;
-    color: black; /* Default text color (black) */
-    transition: color 0.3s ease, font-weight 0.3s ease; /* Smooth transition */
-  }
-  
-  /* Highlight the label only when the radio button is selected */
-  .custom-radio .form-check-input:checked ~ .form-check-label {
-    color: #28a745; /* Turn green when selected */
-    font-weight: bold; /* Make the selected text bold */
-  }
-  
-  /* Add a subtle hover effect for emphasis */
-  .custom-radio .form-check-label:hover {
-    text-decoration: underline; /* Underline on hover */
-  }
-  
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  left: 0; /* Align to left to avoid offset */
+}
+
+/* Style the label as regular clickable text */
+.custom-radio .form-check-label {
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  color: black; /* Default text color (black) */
+  transition: color 0.3s ease, font-weight 0.3s ease; /* Smooth transition */
+}
+
+/* Highlight the label only when the radio button is selected */
+.custom-radio .form-check-input:checked ~ .form-check-label {
+  color: var(--bs-primary); /* Turn green when selected */
+  font-weight: bold; /* Make the selected text bold */
+}
+
+/* Add a subtle hover effect for emphasis */
+.custom-radio .form-check-label:hover {
+  text-decoration: underline; /* Underline on hover */
+}

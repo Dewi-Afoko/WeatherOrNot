@@ -58,10 +58,10 @@ function Exercise(props) {
     
     return (
 
-        <Card className="mb-4 shadow-sm">
+        <Card className="mb-4 shadow-sm text-center">
             <Card.Body>
 
-                <Card.Title className="text-success fw-bold" style={{ cursor: 'pointer' }} onClick={props.onClick}>
+                <Card.Title className="text-primary fw-bold" style={{ cursor: 'pointer' }} onClick={props.onClick}>
                     {formatDisplayOutput(props.name)}
                 </Card.Title>
                 
@@ -73,11 +73,13 @@ function Exercise(props) {
                     </ul>
                 </Card.Text>
 
-                <div className="d-flex justify-content-center">
+
+                <div className="d-flex flex-column align-items-center">
+                    {/* Favourite Button */}
                     <Button 
                         variant="light" 
                         onClick={handleAddFavouriteClick}
-                        className="d-flex align-items-center" 
+                        className="d-flex align-items-center mb-3 btn-sm" 
                     >
                         {like ? "Remove Favourite" : "Add Favourite"}
                         <FontAwesomeIcon
@@ -85,10 +87,12 @@ function Exercise(props) {
                             style={{ color: like ? 'pink' : 'grey', marginLeft: '5px' }}
                         />
                     </Button>
-            <AddExerciseButton exercise={props.exercise}/>
+
+                    {/* Add to Workout Button */}
                 </div>
 
             </Card.Body>
+                <AddExerciseButton exercise={props.exercise} />
         </Card>
     );
 

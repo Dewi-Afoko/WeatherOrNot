@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form } from "react-bootstrap"; // Import Bootstrap components
+import { Container, Row, Col, Form, Card } from "react-bootstrap"; // Import Bootstrap components
 import GenerateButton from "../../components/GenerateButton";
 import ChooseMuscle from "../../components/ChooseMuscle";
 import ChooseDifficulty from "../../components/ChooseDifficulty";
@@ -7,6 +7,7 @@ import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getNewExercises } from "../../services/exercises";
+
 
 
 export function GenerateExercises() {
@@ -65,32 +66,44 @@ export function GenerateExercises() {
     };
 
     return (
-        <Container>
+        <Container className="justify-content-center">
             <div className="text-center my-4">
-                <h1 className="display-4 fw-bold text-success">Exercise Generator</h1>
+                <h1 className="display-4  text-primary">Workout Generator</h1>
             </div>
             <Form onSubmit={handleSubmit}>
-                <Row className="mb-3">
+                <Row className="mb-3 text-center">
                     <Col xs={12} md={4}>
-                        <h3 className="fw-bold text-secondary mb-3">Choose Muscle</h3>
-                        <ChooseMuscle
-                            muscle={muscle}
-                            setMuscle={setMuscle}
-                        />
+                        <Card>
+                            <Card.Body>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Muscle</Card.Title>
+                                <ChooseMuscle
+                                    muscle={muscle}
+                                    setMuscle={setMuscle}
+                                />
+                            </Card.Body>
+                        </Card>
                     </Col>
                     <Col xs={12} md={4}>
-                        <h3 className="fw-bold text-secondary mb-3">Choose Difficulty</h3>
-                        <ChooseDifficulty
-                            difficulty={difficulty}
-                            setDifficulty={setDifficulty}
-                        />
+                        <Card>
+                            <Card.Body>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Difficulty</Card.Title>
+                                <ChooseDifficulty
+                                    difficulty={difficulty}
+                                    setDifficulty={setDifficulty}
+                                />
+                            </Card.Body>
+                        </Card>
                     </Col>
                     <Col xs={12} md={4}>
-                        <h3 className="fw-bold text-secondary mb-3">Choose Equipment</h3>
-                        <ChooseEquipment
-                            equipment={equipment}
-                            setEquipment={setEquipment}
-                        />
+                        <Card>
+                            <Card.Body>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Equipment</Card.Title>
+                                <ChooseEquipment
+                                    equipment={equipment}
+                                    setEquipment={setEquipment}
+                                />
+                            </Card.Body>
+                        </Card>
                     </Col>
                 </Row>
                 <div className="text-center">
@@ -98,17 +111,11 @@ export function GenerateExercises() {
                 </div>
             </Form>
             <br />
-            {exercises.length < 1 && (
-                <div>
-                    <h6 className="text-center fw-bold text-danger">Sorry, no exercises match your criteria.</h6>
-                    <h6 className="text-center fw-bold text-danger">Please try a different combination.</h6>
-                </div>
-            )}
 
             {exercises.length > 0 && (
                 <div className="my-5">
                     <div className="selected-choices text-center p-3 mb-4 bg-light rounded shadow-sm">
-                        <h4 className="mb-3">You Selected:</h4>
+                        <h4 className="mb-3 text-secondary">You Selected:</h4>
                         <Row>
                             <Col xs={12} md={4} className="mb-2" text-success>
                                 <strong>Muscle:</strong> {formatDisplayOutput(exercises[0].muscle)}
@@ -121,8 +128,8 @@ export function GenerateExercises() {
                             </Col>
                         </Row>
                     </div>
-                    <h3 className="text-center fw-bold">Try these exercises:</h3>
                     <Row>
+                    <h3 className="display-6 text-center mb-2">Try these exercises:</h3>
                         {exercises.map((exercise, index) => (
                             <Col xs={12} md={6} lg={4} key={index} className="mb-4">
                                 <Exercise
@@ -145,31 +152,4 @@ export function GenerateExercises() {
         </Container>
     );
 }
-
-//             {exercises.length > 0 &&
-//             <div>
-//                 <h3>Try these exercises:</h3>
-//                 {exercises.map((exercise, index) => {
-//                     // console.log('exercise', exercise);
-//                     return(
-//                         <Exercise
-//                             key={index}
-//                             name={exercise.name}
-//                             type={exercise.type}
-//                             muscle={exercise.muscle}
-//                             equipment={exercise.equipment}
-//                             difficulty={exercise.difficulty}
-//                             instructions={exercise.instructions}
-//                             user = {user}
-//                             exercise = {exercise}
-//                             onClick={() => handleViewExerciseDetails(exercise)}
-
-//                             // formatDisplayOutput={formatDisplayOutput}
-//                         />
-//                     )
-//                 })}
-//             </div>}
-//         </>
-//     )
-// }
 

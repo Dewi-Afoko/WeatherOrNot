@@ -18,7 +18,7 @@ function RadioSelector(props) {
       checked={props.checked}
       onChange={props.onChange}
       label={formatDisplayOutput(props.value)} // Format the label output
-      className="custom-radio"
+      className="custom-radio text-center"
     />
   );
 }

@@ -16,7 +16,7 @@ function AddExerciseButton(props) {
   return (
     <>
       <Button variant="primary" onClick={handleClick}>
-        Add exercise to current workout
+        Add to current workout
       </Button>
       <Modal show={detailsOn} onHide={handleClose}>
         <Modal.Header closeButton>
