@@ -1,10 +1,10 @@
 //import { useNavigate } from "react-router-dom";
 import { add_workout } from "../../services/addDetails";
 //import AddExerciseButton from "./addExerciseButton";
-import { useState , useEffect} from "react";
+import { useState } from "react";
 import './createworkout.css';
 import { Button } from 'react-bootstrap';
-import { get_workout } from "../../services/addDetails";
+// import { get_workout } from "../../services/addDetails";
 
 // TODO: Switch so that button says "Start a new workout" or "Currently adding to workout: {id/name/date}" as function of button automatically adds exercise to most recently created in DB.
 
@@ -67,7 +67,7 @@ export function CreateWorkout() {
       createWorkout(); 
     } else {
       createWorkout(); 
-      alert('Workout already created')
+      // alert('Workout already created')
     }
 
     
