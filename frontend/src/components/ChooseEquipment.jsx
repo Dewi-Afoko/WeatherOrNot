@@ -4,7 +4,10 @@ function ChooseEquipment(props) {
 
   const equipmentOptions = [
     'barbell',
-    'machine'
+    'dumbbell',
+    'machine',
+    'other'
+
   ]
 
   const handleChange = (event) => {

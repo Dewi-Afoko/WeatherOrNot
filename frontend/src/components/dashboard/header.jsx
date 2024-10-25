@@ -81,7 +81,7 @@ const Header = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/generate_exercises">Get Exercises</Nav.Link>
+          <Nav.Link as={Link} to="/generate_exercises">Workout Generator</Nav.Link>
           <Nav.Link as={Link} to="/workouts">My Workouts</Nav.Link>
           <Nav.Link as={Link} to="/user">My Profile</Nav.Link>
           <Nav.Link as={Link} to="/login">Log Out</Nav.Link>

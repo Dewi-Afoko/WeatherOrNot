@@ -1,4 +1,4 @@
-import { Container, Row, Col, Form } from "react-bootstrap"; // Import Bootstrap components
+import { Container, Row, Col, Form, Card } from "react-bootstrap"; // Import Bootstrap components
 import GenerateButton from "../../components/GenerateButton";
 import ChooseMuscle from "../../components/ChooseMuscle";
 import ChooseDifficulty from "../../components/ChooseDifficulty";
@@ -7,6 +7,7 @@ import Exercise from "../../components/Exercise";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getNewExercises } from "../../services/exercises";
+
 
 
 export function GenerateExercises() {
@@ -67,30 +68,38 @@ export function GenerateExercises() {
     return (
         <Container className="justify-content-center">
             <div className="text-center my-4">
-                <h1 className="display-4 fw-bold text-success">Exercise Generator</h1>
+                <h1 className="display-4  text-success">Workout Generator</h1>
             </div>
             <Form onSubmit={handleSubmit}>
-                <Row className="mb-3">
+                <Row className="mb-3 text-center">
                     <Col xs={12} md={4}>
-                        <h3 className="fw-bold text-secondary mb-3">Choose Muscle</h3>
-                        <ChooseMuscle
-                            muscle={muscle}
-                            setMuscle={setMuscle}
-                        />
+                        <Card>
+                            <Card.Body>
+                            <Card.Title className="display-6 pb-2 text-secondary">Choose Muscle</Card.Title>
+                                <ChooseMuscle
+                                    muscle={muscle}
+                                    setMuscle={setMuscle}
+                                />
+                            </Card.Body>
+                        </Card>
                     </Col>
                     <Col xs={12} md={4}>
-                        <h3 className="fw-bold text-secondary mb-3">Choose Difficulty</h3>
-                        <ChooseDifficulty
-                            difficulty={difficulty}
-                            setDifficulty={setDifficulty}
-                        />
+                        <Card>
+                            <h3 className="fw-bold text-secondary mb-3 text-center">Choose Difficulty</h3>
+                            <ChooseDifficulty
+                                difficulty={difficulty}
+                                setDifficulty={setDifficulty}
+                            />
+                        </Card>
                     </Col>
                     <Col xs={12} md={4}>
-                        <h3 className="fw-bold text-secondary mb-3">Choose Equipment</h3>
-                        <ChooseEquipment
-                            equipment={equipment}
-                            setEquipment={setEquipment}
-                        />
+                        <Card>
+                            <h3 className="fw-bold text-secondary mb-3 text-center">Choose Equipment</h3>
+                            <ChooseEquipment
+                                equipment={equipment}
+                                setEquipment={setEquipment}
+                            />
+                        </Card>
                     </Col>
                 </Row>
                 <div className="text-center">

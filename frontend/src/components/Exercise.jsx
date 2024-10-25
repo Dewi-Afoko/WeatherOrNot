@@ -79,7 +79,7 @@ function Exercise(props) {
                     <Button 
                         variant="light" 
                         onClick={handleAddFavouriteClick}
-                        className="d-flex align-items-center mb-3" 
+                        className="d-flex align-items-center mb-3 btn-sm" 
                     >
                         {like ? "Remove Favourite" : "Add Favourite"}
                         <FontAwesomeIcon
@@ -89,10 +89,10 @@ function Exercise(props) {
                     </Button>
 
                     {/* Add to Workout Button */}
-                    <AddExerciseButton exercise={props.exercise} />
                 </div>
 
             </Card.Body>
+                <AddExerciseButton exercise={props.exercise} />
         </Card>
     );
 
