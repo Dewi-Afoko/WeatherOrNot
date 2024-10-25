@@ -3,6 +3,7 @@ import { add_workout } from "../../services/addDetails";
 //import AddExerciseButton from "./addExerciseButton";
 import { useState , useEffect} from "react";
 import './createworkout.css';
+import { Button } from 'react-bootstrap';
 import { get_workout } from "../../services/addDetails";
 
 // TODO: Switch so that button says "Start a new workout" or "Currently adding to workout: {id/name/date}" as function of button automatically adds exercise to most recently created in DB.
@@ -89,14 +90,18 @@ export function CreateWorkout() {
 
   return (
     <>
-
       <div className="form-container2">
+  <Button type="button" size="sm" onClick={handleButtonClick}>
+    {isWorkoutOpen ? `Status: Currently Building Workout` : "Create Workout"}
+  </Button>
+</div>
+      {/* <div className="form-container2">
         <button type="button" onClick={handleButtonClick}>
           <label htmlFor={isWorkoutOpen ? "Create Workout" : "In progress"}>
             {isWorkoutOpen ? `Status: Currently Building Workout` : "Create Workout"}
           </label>
         </button>
-      </div>
+      </div> */}
       {errorMessage && (errorMessage)}
     </>
   );
