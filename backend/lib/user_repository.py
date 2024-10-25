@@ -68,6 +68,8 @@ class UserRepository:
     
     def weight_details(self,username):
         user = self.find_by_username(username)
+        if not user or not user.weight:  # Check if the user or weight data is None
+            return []  # Return an empty list if there are no weight entries
         user_weight = user.weight
         weight_date = user.weight_date
         if len(user_weight)==1 :

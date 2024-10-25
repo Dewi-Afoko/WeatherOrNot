@@ -1,13 +1,12 @@
 from lib.workout import Workout
+import json
+
 
 def test_construct():
     workout = Workout("test_workout", False)
     assert workout.user_username == "test_workout"
     assert workout.planning_mode == False
 
-######### FOR THE BELOW TESTS TO PASS - ADD_EXERCISE IN WORKOUT.PY SHOULD READ 
-#  if len(self.exercise_list) == 0 or self.exercise_list[-1]['complete'] == True or self.planning_mode == True:
-######### OLD correct code commented out in workout.py
 def test_add_exercise():
     workout = Workout("test_workout", False)
     exercise = type('Exercise', (object,), {'name': 'test_exercise'})()
@@ -85,3 +84,15 @@ def test_repr():
     workout1 = Workout("test_workout", False)
     expected_repr = "Workout(Y/m/d%, [], False, test_workout)"
     assert repr(workout1) == expected_repr
+
+def test_to_json():
+    workout = Workout("test_workout", False)
+    expected_json = json.dumps({
+        "date": workout.date,
+        "exercise_list": workout.exercise_list,
+        "complete": workout.complete,
+        "user_username": workout.user_username,
+        "planning_mode": workout.planning_mode,
+    }, default=lambda o: o.__dict__)
+    assert workout.toJson() == expected_json
+

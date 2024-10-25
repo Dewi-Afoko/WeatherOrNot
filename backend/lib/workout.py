@@ -9,7 +9,6 @@ class Workout:
         self.planning_mode = planning #TODO: Implement planning mode, means no need to complete exercises and "template" created in DB.
 
     def add_exercise(self, exercise):
-        # if self.exercise_list[-1]['complete'] == True or len(self.exercise_list) == 0 or self.planning_mode == True:
         if len(self.exercise_list) == 0 or self.exercise_list[-1]['complete'] == True or self.planning_mode == True:
             self.exercise_list.append(
             {
@@ -42,6 +41,7 @@ class Workout:
 
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__)
+    
     def to_dict(self):
         return {
             "id": self.id,
@@ -50,6 +50,7 @@ class Workout:
             "date":self.date,
             "complete":self.complete
             }
+    
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
     
