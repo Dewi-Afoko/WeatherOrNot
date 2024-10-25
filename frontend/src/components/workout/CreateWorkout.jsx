@@ -95,6 +95,7 @@ export function CreateWorkout() {
     {isWorkoutOpen ? `Status: Currently Building Workout` : "Create Workout"}
   </Button>
 </div>
+
       {/* <div className="form-container2">
         <button type="button" onClick={handleButtonClick}>
           <label htmlFor={isWorkoutOpen ? "Create Workout" : "In progress"}>
