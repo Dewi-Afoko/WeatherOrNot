@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 import { signup } from "../../services/authentication";
 import './signup.css'
+
+import { Card, Form, Button } from 'react-bootstrap';
+
+
 export function SignupPage() {
   const [Username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +37,50 @@ export function SignupPage() {
 
   return (
     <>
-     <div className="signup-page">
+    <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+      <Card className="shadow-lg" style={{ width: '400px' }}>
+        <Card.Body>
+          <h2 className="m-4 text-center">Sign up</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="signupUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={Username}
+                placeholder="Enter username"
+                onChange={handleUsernameChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="signupPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={handlePasswordChange}
+                aria-describedby="passwordHelpBlock"
+              />
+            </Form.Group>
+
+            <div className="d-flex justify-content-center">
+              <Button
+                role="submit-button"
+                id="submit"
+                variant="primary"
+                type="submit"
+              >
+                Submit
+              </Button>
+            </div>
+          </Form>
+          <p className="m-4 text-muted text-center">
+            Already have an account <a href="/login" className="">Login</a>
+          </p>
+        </Card.Body>
+      </Card>
+    </div>
+     {/* <div className="signup-page">
      <div className="form-container">
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
@@ -58,7 +105,7 @@ export function SignupPage() {
       {error && <div>
         {error}</div>}
         </div>
-      </div>
+      </div> */}
   
 
     </>

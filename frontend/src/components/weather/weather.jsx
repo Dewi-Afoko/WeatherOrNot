@@ -85,7 +85,7 @@ function GfGWeatherApp() {
     }
 	return (
 		<>
-		<Card className="p-4 shadow custom-card bg-light">
+		<Card className="p-4 shadow custom-card " border="0">
             <Card.Body>
                 <Card.Title className="display-6">Want to workout outside?</Card.Title>
                 <Card.Subtitle className="pb-2">

@@ -13,7 +13,7 @@ export function UserPage() {
 
   return (
     <>
-        <Container fluid className="mt-5">
+        <Container fluid className="mt-5 bg-light">
 
             <Row>
         <Col lg={5} className="p-3 text-end">

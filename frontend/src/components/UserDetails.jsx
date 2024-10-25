@@ -91,9 +91,9 @@ if (!token) {
 
   return (
     <>
-            <Card className="shadow bg-light">
+            <Card className="p-2 shadow " border="0">
                 <Card.Body>
-                    <h2 className="text-center">USER PROFILE DETAILS</h2>
+                <Card.Title className="display-6 pb-2 text-center">User Details</Card.Title>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="FirstName" className="form-label">First Name: {currentFirstName}</label>

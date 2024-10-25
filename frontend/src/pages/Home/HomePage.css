@@ -1,4 +1,15 @@
-.home {
+.no-link {
+  color: inherit; /* Inherits the color from its parent */
+  text-decoration: none; /* Removes the underline */
+}
+
+.no-link:hover {
+  text-decoration: underline; /* Optional: Adds underline on hover */
+  color: white;
+}
+
+
+/* .home {
   display: flex;
   flex-direction: column;
 }
@@ -37,17 +48,15 @@ body {
 }
 
 
-
-/* Animation property */
 .button {
   display: inline-block;
   margin: 10px;
   padding: 10px 20px;
   
-  /* Animation */
+
   animation: wiggle 2s linear infinite;
 
-  /* Position and size */
+
   height: 4em;
   width: 7em;
   background: linear-gradient(to bottom, #555, #333);
@@ -60,11 +69,11 @@ body {
   text-decoration: none;
   line-height: 4em;
 
-  /* Transform settings for animation */
+
   transform-origin: 50% 5em;
 }
 
-/* Keyframes for wiggle animation */
+
 @keyframes wiggle {
   0%, 7% {
     transform: rotateZ(0);
@@ -91,6 +100,6 @@ body {
 
 .button:hover {
   background: linear-gradient(to bottom, #666, #444);
-}
+} */
 
 

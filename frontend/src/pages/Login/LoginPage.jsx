@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 
 import { login } from "../../services/authentication";
 import './loginpage.css'
+
+import { Card, Form, Button } from 'react-bootstrap';
+
 export function LoginPage() {
 
   
@@ -44,9 +47,52 @@ export function LoginPage() {
   return (
     
     <>
+<div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+      <Card className="shadow-lg" style={{ width: '400px' }}>
+        <Card.Body>
+          <h2 className="m-4 text-center">Login</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="loginUsername">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                value={username}
+                placeholder="Enter username"
+                onChange={handleUsernameChange}
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="loginPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                value={Password}
+                onChange={handlePasswordChange}
+                aria-describedby="passwordHelpBlock"
+              />
+            </Form.Group>
+
+            <div className="d-flex justify-content-center">
+              <Button
+                role="submit-button"
+                id="submit"
+                variant="primary"
+                type="submit"
+              >
+                Submit
+              </Button>
+            </div>
+          </Form>
+          <p className="m-4 text-muted text-center">
+            Don't have an account? <a href="/signup" className="">Sign up</a>
+          </p>
+        </Card.Body>
+      </Card>
+    </div>
 
 
-      <div className="login-page">
+      {/* <div className="login-page">
         <div className="form-container">
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>
@@ -70,7 +116,7 @@ export function LoginPage() {
           </form>
           {error && <div className="error">{error}</div>}
         </div>
-      </div>
+      </div> */}
 
       {showPopup && (
         <div className="popup-overlay">

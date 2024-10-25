@@ -44,7 +44,7 @@ export function WeightChart() {
 
     return (
         <>
-        <Card className="p-4 bg-light shadow">
+        <Card className="p-4 shadow " border="0">
             <Card.Body>
                 <Card.Title className="display-6 pb-2">Weight Chart</Card.Title>
                 {graphData.length > 0 && (
