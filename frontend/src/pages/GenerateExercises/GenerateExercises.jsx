@@ -43,9 +43,6 @@ export function GenerateExercises() {
                     setExercises(data); // returns all the exercises if less than 4 available
                 }
                 localStorage.setItem("exercise_list", JSON.stringify(exercises)); // stores only the exercises displayed to user (rather than full data array)
-                localStorage.setItem("currentMuscle", muscle)
-                localStorage.setItem("currentdifficulty", difficulty)
-                localStorage.setItem("currentequipment", equipment)
                 setMuscle(""); 
                 setDifficulty(""); 
                 setEquipment("");
