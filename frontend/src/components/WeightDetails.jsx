@@ -1,10 +1,7 @@
-
+import { Card } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { weight_details } from '../services/addDetails';
-
 import GaugeComponent from 'react-gauge-component';
-
-
 import './weightdetails.css'
 
 export function WeightLog() {
@@ -39,7 +36,11 @@ export function WeightLog() {
     
 
     return (
-<>     <div className='weightRule'>
+      <>    
+        <Card className="p-4 shadow " border="0">
+          <Card.Body className="">
+            <Card.Title className="display-6 pb-2">Weight Gauge</Card.Title>
+
       { currentWeight &&( <GaugeComponent
           type="semicircle"
           arc={{
@@ -93,8 +94,8 @@ export function WeightLog() {
           value={currentWeight}
           minValue={minGauge}
           maxValue={maxGauge}
-        />)}</div>
-        <div className="stats-container">
+        />)}
+        {/* <div className="stats-container">
 
         <h4>Weight Tracker</h4>
 
@@ -103,8 +104,9 @@ export function WeightLog() {
         <h3>Weight difference since 1st input: {weightDifference !== null ? weightDifference : 'Loading...'}kg</h3>
         <h3>Max weight: {maxWeight !== null ? maxWeight : 'Loading...'}kg</h3>
         <h3>Min weight: {minWeight !== null ? minWeight : 'Loading...'}kg</h3>
-        </div>
-
+        </div> */}
+</Card.Body>
+</Card>
         </>
     );
 }

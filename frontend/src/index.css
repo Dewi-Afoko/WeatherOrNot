@@ -1,4 +1,4 @@
-.App {
+/* .App {
   font-family: sans-serif;
   text-align: center;
 }
@@ -22,9 +22,8 @@ body {
   display: none;
 }
 
-/* Ensure header is on top */
 header {
-  position: relative; /* Position the header relative to the page */
-  z-index: 10; /* Ensure it is on top of the background */
-  background-color: rgba(255, 255, 255, 0.8); /* Optional: make it semi-transparent to see the background */
-}
+  position: relative;
+  z-index: 10; 
+  background-color: rgba(255, 255, 255, 0.8); 
+} */

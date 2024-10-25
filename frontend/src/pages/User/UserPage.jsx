@@ -1,50 +1,68 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import GfGWeatherApp from "../../components/weather/weather";
 import { UserDetails } from "../../components/UserDetails";
 import WeightLog from "../../components/WeightDetails";
-// import PreferenceTest from "../../components/preferencesTest";
-import './userpage.css';
-
-
-
-
-
-
+import { Container, Row, Col } from 'react-bootstrap';
 import WeightChart from "../../components/WeightChart";
 import FavouriteList from "../../components/FavouriteList";
-
+import WeightTracker from "../../components/WeightTracker";
+import './userpage.css';
 
 export function UserPage() {
-  // const [ test, settest]= useState(false)
-  // const navigate = useNavigate();
 
-  // const token = localStorage.getItem("token");
-  // if (!token) {
-  //   navigate("/login");
-  //   return;
-  // }
-  // const handleclick = ()=>{
-  //   settest(true)
-  // }
-  // const handleClose = () => {
-  //   settest(false);
-  // };
+  const username = localStorage.getItem('username')
 
   return (
-  
+    <>
+        <Container fluid className="mt-5 bg-light">
 
-    <div className="main-container">
-      <FavouriteList />
-      <UserDetails />
-      <WeightLog />
-      <div className="weightChart"><WeightChart/>
+            <Row>
+        <Col lg={5} className="p-3 text-end">
+            <h1 className="display-6 mb-0">Welcome {username}</h1>
+        </Col>
+    </Row>
+
+            <Row className="mt-4 d-flex align-items-stretch">
+                <Col md={4} className="text-center p-4">
+                    <WeightTracker/>
+                </Col>
+                <Col md={4} className="text-center p-4">
+                <WeightChart/>
+                </Col>
+                <Col md={4} className="p-4">
+                <UserDetails />
+                
+                </Col>
+            </Row>
+
+            <Row className="mt-4 d-flex align-items-stretch">
+                <Col md={4} className="text-center p-4">
+                <WeightLog />
+                </Col>
+                <Col md={4} className="text-center p-4">
+                <GfGWeatherApp/>
+                </Col>
+                <Col md={4} className="text-center p-4">
+                <FavouriteList />
+                </Col>
+            </Row>
+        </Container>
+    
+        <div className="">
+      {/* <FavouriteList /> */}
+      {/* <UserDetails /> */}
+      {/* <WeightLog /> */}
+      {/* <WeightChart/> */}
+      {/* <GfGWeatherApp/> */}
+
+      {/* <div className="weightChart"> */}
       {/* <button className='test-button' onClick={handleclick}>Workout Preferences Test </button>
       {test && (<PreferenceTest onClose={handleClose}/>)}
       <div className="weatherbox"> */}
-      <GfGWeatherApp/>
-      </div>
+      
+      {/* </div> */}
       
     </div>
+    
+    </>
   );
 }

@@ -1,17 +1,16 @@
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #222;
-}
+// body {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100vh;
+//   background: #222;
+// }
 
 .rotating-text {
   font-family: Lato, sans-serif;
   font-weight: 600;
   font-size: 36px;
-  color: white;
   display: inline-flex; /* Align static text and rotating words side by side */
   align-items: center;
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { weight_details } from "../services/adddetails";
 import { VictoryChart, VictoryScatter, VictoryTheme, VictoryTooltip, VictoryAnimation } from 'victory';
+import { Card } from 'react-bootstrap';
 
 import './weightdetails.css';
 
@@ -43,28 +44,35 @@ export function WeightChart() {
 
     return (
         <>
-        {graphData.length > 0 && (
-            <VictoryChart
-                theme={VictoryTheme.material}
-                domain={{ x: [0, weightArray.length], y: [minWeight - 25, maxWeight + 25] }}
-                style={{
-                    parent: { backgroundColor: "#000" }  // Set black background for the chart
-                }}
-            >
-                <VictoryScatter
-                animate={{
-                    duration: 2000,
-                    onLoad: { duration: 1000 }
-                }}
-                style={{ data: { fill: "#c43a31" } }}
-                size={9}
-                data={graphData} 
-                labels={({ datum }) => `Weight: ${datum.y} kg, 
-                Date: ${datum.x}`} 
-                labelComponent={<VictoryTooltip flyoutStyle={{ fill: "white" }}/>}
-                />
-            </VictoryChart>
-        )}
+        <Card className="p-4 shadow " border="0">
+            <Card.Body>
+                <Card.Title className="display-6 pb-2">Weight Chart</Card.Title>
+                {graphData.length > 0 && (
+                    <VictoryChart
+                        theme={VictoryTheme.material}
+                        domain={{ x: [0, weightArray.length], y: [minWeight - 25, maxWeight + 25] }}
+                        style={{
+                            parent: { backgroundColor: "#cfcfcf" } // Set background for the chart
+                        }}
+                    >
+                        <VictoryScatter
+                            animate={{
+                                duration: 2000,
+                                onLoad: { duration: 1000 }
+                            }}
+                            style={{ data: { fill: "#c43a31" } }}
+                            size={9}
+                            data={graphData} 
+                            labels={({ datum }) => `Weight: ${datum.y} kg, Date: ${datum.x}`} 
+                            labelComponent={<VictoryTooltip flyoutStyle={{ fill: "black" }} />}
+                        />
+                    </VictoryChart>
+                )}
+                {graphData.length === 0 && (
+                    <p>No data available to display the chart.</p>
+                )}
+            </Card.Body>
+        </Card>
         </>
     );
 }

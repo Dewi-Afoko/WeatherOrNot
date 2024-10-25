@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getFavourites } from '../services/exercises';
 import './FavouriteList.css'
+import { Card } from 'react-bootstrap';
 
 function FavouriteList() {
     const [favourites, setFavourites] = useState([]);
@@ -20,15 +21,31 @@ function FavouriteList() {
     }, []); 
 
     return (
+        <>
+            <Card className="p-4 shadow " border="0">
+            <Card.Body>
+                <Card.Title className="display-6">My Favourites</Card.Title>
+                <hr className="" />
+                <div className="favorites-list">
+                    {favourites.map((favorite, index) => (
+                        <div key={index}>
+                            <p className="mb-2">{favorite}</p>
+                            {index < favourites.length - 1 && <hr className="" />} 
+                        </div>
+                    ))}
+                </div>
+            </Card.Body>
+        </Card>
+        </>
 
-        <div className="favourite-container">
-            <h3>Favourite List</h3>
-            <ul>
-                {favourites.map((favourite, index) => (
-                    <li key={index}>{favourite}</li>
-                ))}
-            </ul>
-        </div>
+        // <div className="favourite-container">
+        //     <h3>Favourite List</h3>
+        //     <ul>
+        //         {favourites.map((favourite, index) => (
+        //             <li key={index}>{favourite}</li>
+        //         ))}
+        //     </ul>
+        // </div>
     );
 }
 
