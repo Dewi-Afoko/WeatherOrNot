@@ -13,6 +13,8 @@ import { getNewExercises } from "../../services/exercises";
 export function GenerateExercises() {
     const navigate = useNavigate();
 
+    const [choices, setChoices] = useState({'muscle': "", 'difficulty': "", 'eeuipment': ""})
+
     // Managing state for exercises output
     const [exercises, setExercises] = useState([]);
     const [muscle, setMuscle] = useState("");
@@ -41,6 +43,9 @@ export function GenerateExercises() {
                     setExercises(data); // returns all the exercises if less than 4 available
                 }
                 localStorage.setItem("exercise_list", JSON.stringify(exercises)); // stores only the exercises displayed to user (rather than full data array)
+                localStorage.setItem("currentMuscle", muscle)
+                localStorage.setItem("currentdifficulty", difficulty)
+                localStorage.setItem("currentequipment", equipment)
                 setMuscle(""); 
                 setDifficulty(""); 
                 setEquipment("");
@@ -75,17 +80,6 @@ export function GenerateExercises() {
                     <Col xs={12} md={4}>
                         <Card>
                             <Card.Body>
-                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Muscle</Card.Title>
-                                <ChooseMuscle
-                                    muscle={muscle}
-                                    setMuscle={setMuscle}
-                                />
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xs={12} md={4}>
-                        <Card>
-                            <Card.Body>
                                 <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Difficulty</Card.Title>
                                 <ChooseDifficulty
                                     difficulty={difficulty}
@@ -101,6 +95,17 @@ export function GenerateExercises() {
                                 <ChooseEquipment
                                     equipment={equipment}
                                     setEquipment={setEquipment}
+                                />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title className="fw-bold pb-2 text-secondary text-center">Choose Muscle</Card.Title>
+                                <ChooseMuscle
+                                    muscle={muscle}
+                                    setMuscle={setMuscle}
                                 />
                             </Card.Body>
                         </Card>
@@ -129,7 +134,7 @@ export function GenerateExercises() {
                         </Row>
                     </div>
                     <Row>
-                    <h3 className="display-6 text-center mb-2">Try these exercises:</h3>
+                    <h3 className="display-6 text-center mb-4">Try these exercises:</h3>
                         {exercises.map((exercise, index) => (
                             <Col xs={12} md={6} lg={4} key={index} className="mb-4">
                                 <Exercise

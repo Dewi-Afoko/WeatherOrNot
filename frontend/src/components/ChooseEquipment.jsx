@@ -7,6 +7,13 @@ function ChooseEquipment(props) {
     'barbell',
     'dumbbell',
     'machine',
+    'other',
+    'barbell',
+    'body only',
+    'cable',
+    'e-z curl_bar',
+    'none',
+    'kettlebells',
     'other'
   ];
 
